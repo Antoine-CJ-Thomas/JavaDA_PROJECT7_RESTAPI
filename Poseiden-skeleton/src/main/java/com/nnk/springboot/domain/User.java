@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "users")
 public class User {
+	
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
@@ -17,6 +18,10 @@ public class User {
     private String fullname;
     @NotBlank(message = "Role is mandatory")
     private String role;
+
+	public User() {
+		
+	}
 
     public Integer getId() {
         return id;

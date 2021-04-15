@@ -4,10 +4,7 @@ import java.security.Timestamp;
 
 import javax.persistence.*;
 
-import org.springframework.stereotype.Component;
-
 @Entity
-@Component
 @Table(name = "bidlist")
 public class Bid {
 	// TODO: Map columns in data table BIDLIST with corresponding java fields

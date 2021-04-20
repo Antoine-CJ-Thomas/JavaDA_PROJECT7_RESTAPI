@@ -1,5 +1,7 @@
 package com.nnk.springboot.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
@@ -31,7 +33,23 @@ public class RatingRepository implements RatingRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = null;
+        String query 	
+		
+			= "INSERT INTO "
+			
+				+ "rating ("
+				
+					+ "moodysRating,"
+					+ "sandPRating,"
+					+ "fitchRating,"
+					+ "orderNumber) "
+					
+				+ "VALUES ("
+			
+					+ "'" + rating.getMoodysRating() + "',"
+					+ "'" + rating.getSandPRating() + "',"
+					+ "'" + rating.getFitchRating() + "',"
+					+ "'" + rating.getOrderNumber() + "');";
         
         queryList.add(query);
         
@@ -45,13 +63,47 @@ public class RatingRepository implements RatingRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = null;
+        String query = "SELECT * FROM rating WHERE Id=" + id + ";";
         
         queryList.add(query);
         
-        dataBaseConfigurationInterface.executeQuery(queryList);
+		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
+		
+		Rating rating = new Rating();
+		
+    	try {
+
+			if (resultSet.next()) {
+
+				rating.setId(resultSet.getInt("Id"));
+				rating.setMoodysRating(resultSet.getString("moodysRating"));
+				rating.setSandPRating(resultSet.getString("sandPRating"));
+				rating.setFitchRating(resultSet.getString("fitchRating"));
+				rating.setOrderNumber(resultSet.getInt("orderNumber"));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+            
+		} finally {
+			
+			try {
+				
+				if (resultSet != null) {
+					
+					resultSet.close();
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			dataBaseConfigurationInterface.close();
+	    }
         
-		return null;
+		return rating;
 	}
 
 	@Override
@@ -60,13 +112,49 @@ public class RatingRepository implements RatingRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = null;
+        String query = "SELECT * FROM rating";
         
         queryList.add(query);
         
-        dataBaseConfigurationInterface.executeQuery(queryList);
+		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
+		
+		ArrayList<Rating> ratingList = new ArrayList<Rating>();
+		
+    	try {
+
+			if (resultSet.next()) {
+				
+				ratingList.add(new Rating());
+
+				ratingList.get(ratingList.size()-1).setId(resultSet.getInt("Id"));
+				ratingList.get(ratingList.size()-1).setMoodysRating(resultSet.getString("moodysRating"));
+				ratingList.get(ratingList.size()-1).setSandPRating(resultSet.getString("sandPRating"));
+				ratingList.get(ratingList.size()-1).setFitchRating(resultSet.getString("fitchRating"));
+				ratingList.get(ratingList.size()-1).setOrderNumber(resultSet.getInt("orderNumber"));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+            
+		} finally {
+			
+			try {
+				
+				if (resultSet != null) {
+					
+					resultSet.close();
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			dataBaseConfigurationInterface.close();
+	    }
         
-		return null;
+		return ratingList;
 	}
 
 	@Override
@@ -75,8 +163,19 @@ public class RatingRepository implements RatingRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = null;
-        
+        String query 	
+		
+			= "INSERT rating "
+			
+				+ "SET "
+				
+					+ "moodysRating=" + "'" + rating.getMoodysRating() + "',"
+					+ "sandPRating=" + "'" + rating.getSandPRating() + "',"
+					+ "fitchRating=" + "'" + rating.getFitchRating() + "',"
+					+ "orderNumber=" + "" + rating.getOrderNumber() + ");"
+		
+    			+ "WHERE Id=" + id + ";";
+		
         queryList.add(query);
         
         dataBaseConfigurationInterface.executeUpdate(queryList);
@@ -89,7 +188,7 @@ public class RatingRepository implements RatingRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = null;
+        String query = "DELETE FROM rating WHERE Id= " + id + ";";
         
         queryList.add(query);
         

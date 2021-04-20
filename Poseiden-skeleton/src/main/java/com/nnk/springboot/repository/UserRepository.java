@@ -47,11 +47,10 @@ public class UserRepository implements UserRepositoryInterface {
         queryList.add(query);
         
         dataBaseConfigurationInterface.executeUpdate(queryList);
-		
 	}
 
 	@Override
-	public User selectUser(User user, String username) {
+	public User selectUser(String username) {
 		logger.info("selectUser");
 		
         ArrayList<String> queryList = new ArrayList<String>();
@@ -61,6 +60,8 @@ public class UserRepository implements UserRepositoryInterface {
         queryList.add(query);
         
 		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
+		
+		User user = new User();
 		
     	try {
 
@@ -74,6 +75,7 @@ public class UserRepository implements UserRepositoryInterface {
 			}
 
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
             
 		} finally {
@@ -106,9 +108,43 @@ public class UserRepository implements UserRepositoryInterface {
         
         queryList.add(query);
         
-        dataBaseConfigurationInterface.executeQuery(queryList);
+		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
+		
+		User user = new User();
+		
+    	try {
+
+			if (resultSet.next()) {
+
+				user.setId(resultSet.getInt("Id"));
+				user.setUsername(resultSet.getString("username"));
+				user.setPassword(resultSet.getString("password"));
+				user.setFullname(resultSet.getString("fullname"));
+				user.setRole(resultSet.getString("role"));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+            
+		} finally {
+			
+			try {
+				
+				if (resultSet != null) {
+					
+					resultSet.close();
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			dataBaseConfigurationInterface.close();
+	    }
         
-		return null;
+		return user;
 	}
 
 	@Override
@@ -121,9 +157,45 @@ public class UserRepository implements UserRepositoryInterface {
         
         queryList.add(query);
         
-        dataBaseConfigurationInterface.executeQuery(queryList);
+		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
+		
+		ArrayList<User> userList = new ArrayList<User>();
+		
+    	try {
+
+			if (resultSet.next()) {
+				
+				userList.add(new User());
+
+				userList.get(userList.size()-1).setId(resultSet.getInt("Id"));
+				userList.get(userList.size()-1).setUsername(resultSet.getString("username"));
+				userList.get(userList.size()-1).setPassword(resultSet.getString("password"));
+				userList.get(userList.size()-1).setFullname(resultSet.getString("fullname"));
+				userList.get(userList.size()-1).setRole(resultSet.getString("role"));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+            
+		} finally {
+			
+			try {
+				
+				if (resultSet != null) {
+					
+					resultSet.close();
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			dataBaseConfigurationInterface.close();
+	    }
         
-		return null;
+		return userList;
 	}
 
 	@Override
@@ -146,7 +218,6 @@ public class UserRepository implements UserRepositoryInterface {
         queryList.add(query);
         
         dataBaseConfigurationInterface.executeUpdate(queryList);
-		
 	}
 
 	@Override
@@ -160,6 +231,5 @@ public class UserRepository implements UserRepositoryInterface {
         queryList.add(query);
         
         dataBaseConfigurationInterface.executeUpdate(queryList);
-		
 	}
 }

@@ -8,7 +8,7 @@ public interface UserRepositoryInterface {
 
 	public void insertUser(User user);
 
-	public User selectUser(User user, String username);
+	public User selectUser(String username);
 	
 	public User selectUser(Integer id);
 	

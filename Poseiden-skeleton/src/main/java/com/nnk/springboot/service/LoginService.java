@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repository.UserRepository;
 import com.nnk.springboot.repository.UserRepositoryInterface;
 
@@ -24,6 +23,6 @@ public class LoginService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		return userRepositoryInterface.selectUser(new User(), username);
+		return userRepositoryInterface.selectUser(username);
 	}
 }

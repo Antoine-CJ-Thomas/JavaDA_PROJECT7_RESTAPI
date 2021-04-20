@@ -1,5 +1,7 @@
 package com.nnk.springboot.repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
@@ -31,7 +33,25 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = null;
+        String query 	
+		
+			= "INSERT INTO "
+			
+				+ "curvepoint ("
+				
+					+ "CurveId,"
+					+ "asOfDate,"
+					+ "term,"
+					+ "value,"
+					+ "creationDate) "
+					
+				+ "VALUES ("
+			
+					+ " " + curvePoint.getCurveId() + ","
+					+ "'" + curvePoint.getAsOfDate() + "',"
+					+ "'" + curvePoint.getTerm() + "',"
+					+ " " + curvePoint.getValue() + ","
+					+ " " + curvePoint.getCreationDate() + ");";
         
         queryList.add(query);
         
@@ -45,13 +65,48 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = null;
+        String query = "SELECT * FROM rating WHERE Id=" + id + ";";
         
         queryList.add(query);
         
-        dataBaseConfigurationInterface.executeQuery(queryList);
+		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
+		
+		CurvePoint curvePoint = new CurvePoint();
+		
+    	try {
+
+			if (resultSet.next()) {
+
+				curvePoint.setId(resultSet.getInt("Id"));
+				curvePoint.setCurveId(resultSet.getInt("CurveId"));
+				curvePoint.setAsOfDate(resultSet.getTimestamp("asOfDate"));
+				curvePoint.setTerm(resultSet.getDouble("term"));
+				curvePoint.setValue(resultSet.getDouble("value"));
+				curvePoint.setCreationDate(resultSet.getTimestamp("creationDate"));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+            
+		} finally {
+			
+			try {
+				
+				if (resultSet != null) {
+					
+					resultSet.close();
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			dataBaseConfigurationInterface.close();
+	    }
         
-		return null;
+		return curvePoint;
 	}
 
 	@Override
@@ -59,14 +114,51 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 		logger.info("selectCurvePointList");
 		
         ArrayList<String> queryList = new ArrayList<String>();
-        
-        String query = null;
+
+        String query = "SELECT * FROM curvepoint";
         
         queryList.add(query);
         
-        dataBaseConfigurationInterface.executeQuery(queryList);
+		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
+
+		ArrayList<CurvePoint> curvePointList = new ArrayList<CurvePoint>();
+		
+    	try {
+
+			if (resultSet.next()) {
+				
+				curvePointList.add(new CurvePoint());
+
+				curvePointList.get(curvePointList.size()-1).setId(resultSet.getInt("Id"));
+				curvePointList.get(curvePointList.size()-1).setCurveId(resultSet.getInt("CurveId"));
+				curvePointList.get(curvePointList.size()-1).setAsOfDate(resultSet.getTimestamp("asOfDate"));
+				curvePointList.get(curvePointList.size()-1).setTerm(resultSet.getDouble("term"));
+				curvePointList.get(curvePointList.size()-1).setValue(resultSet.getDouble("value"));
+				curvePointList.get(curvePointList.size()-1).setCreationDate(resultSet.getTimestamp("creationDate"));
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+            
+		} finally {
+			
+			try {
+				
+				if (resultSet != null) {
+					
+					resultSet.close();
+				}
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			dataBaseConfigurationInterface.close();
+	    }
         
-		return null;
+		return curvePointList;
 	}
 
 	@Override
@@ -75,7 +167,19 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = null;
+        String query 	
+		
+			= "UPDATE curvepoint "
+			
+				+ "SET "
+				
+					+ "CurveId=" + "" + curvePoint.getCurveId() + ","
+					+ "asOfDate=" + "'" + curvePoint.getAsOfDate() + "',"
+					+ "term=" + "" + curvePoint.getTerm() + ","
+					+ "value=" + "" + curvePoint.getValue() + ","
+					+ "creationDate=" + "" + curvePoint.getCreationDate() + ");"
+		
+    			+ "WHERE Id=" + id + ";";
         
         queryList.add(query);
         
@@ -89,7 +193,7 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = null;
+        String query = "DELETE FROM curvepoint WHERE Id= " + id + ";";
         
         queryList.add(query);
         

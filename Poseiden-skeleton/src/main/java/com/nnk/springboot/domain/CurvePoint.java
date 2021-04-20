@@ -1,6 +1,7 @@
 package com.nnk.springboot.domain;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 
 import javax.persistence.*;
 

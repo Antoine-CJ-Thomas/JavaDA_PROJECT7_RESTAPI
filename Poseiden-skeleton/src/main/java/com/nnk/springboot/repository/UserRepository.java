@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
-import com.nnk.springboot.configuration.DataBaseConfigurationeMySql;
+import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.User;
 
 @Component
@@ -24,7 +24,7 @@ public class UserRepository implements UserRepositoryInterface {
 	public UserRepository() {
 		logger.info("UserRepository");
 		
-		dataBaseConfigurationInterface = new DataBaseConfigurationeMySql();
+		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
 
 	@Override
@@ -81,12 +81,16 @@ public class UserRepository implements UserRepositoryInterface {
 			try {
 				
 				if (resultSet != null) {
+					
 					resultSet.close();
 				}
 				
 			} catch (SQLException e) {
+				
 				e.printStackTrace();
 			}
+			
+			dataBaseConfigurationInterface.close();
 	    }
         
 		return user;

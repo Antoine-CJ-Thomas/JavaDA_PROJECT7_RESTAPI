@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
-import com.nnk.springboot.configuration.DataBaseConfigurationeMySql;
+import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.Trade;
 
 @Component
@@ -22,7 +22,7 @@ public class TradeRepository implements TradeRepositoryInterface {
 	public TradeRepository() {
 		logger.info("TradeRepository");
 		
-		dataBaseConfigurationInterface = new DataBaseConfigurationeMySql();
+		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
 
 	@Override

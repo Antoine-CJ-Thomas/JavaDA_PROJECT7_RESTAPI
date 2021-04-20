@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DataBaseConfigurationeMySql implements DataBaseConfigurationInterface {
+public class DataBaseConfigurationMySql implements DataBaseConfigurationInterface {
 
     private static final Logger logger = LogManager.getLogger("DataBaseConfigurationMySql");
 
@@ -24,7 +24,11 @@ public class DataBaseConfigurationeMySql implements DataBaseConfigurationInterfa
 	private String user;
 	private String password;
 
-	public DataBaseConfigurationeMySql() {
+	private Connection connection;
+	private Statement statement;
+	private ResultSet resultSet;
+
+	public DataBaseConfigurationMySql() {
 
 		Properties properties = new Properties();
 
@@ -50,8 +54,8 @@ public class DataBaseConfigurationeMySql implements DataBaseConfigurationInterfa
 	@Override
 	public void executeUpdate(ArrayList<String> queryList) {
 
-		Connection connection = null;
-		Statement statement = null;
+		connection = null;
+		statement = null;
 
 		try {
 
@@ -67,25 +71,31 @@ public class DataBaseConfigurationeMySql implements DataBaseConfigurationInterfa
 			
 			connection.commit();
 
-		} catch (SQLException e) {
+		} catch (SQLException e1) {
 			
-	        logger.error(e);
-	        
-			rollbackTransaction(connection);
+	        logger.error(e1);
+
+			if (connection != null) {
+
+				try {
+					
+					connection.rollback();
+					
+				} catch (SQLException e2) {
+					
+			        logger.error(e2);
+				}
+			}
 			
-		} finally {
-			
-			closeStatement(statement);
-			closeConnection(connection);
 		}
 	}
 
 	@Override
 	public ResultSet executeQuery(ArrayList<String> queryList) {
 
-		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
+		connection = null;
+		statement = null;
+		resultSet = null;
 
 		try {
 
@@ -99,54 +109,52 @@ public class DataBaseConfigurationeMySql implements DataBaseConfigurationInterfa
 				resultSet = statement.executeQuery(query);
 			}
 
-		} catch (SQLException e) {
+		} catch (SQLException e1) {
 			
-	        logger.error(e);
-	        
-			rollbackTransaction(connection);
-			
-		} finally {
-			
-//			closeStatement(statement);
-//			closeConnection(connection);
+	        logger.error(e1);
+
+			if (connection != null) {
+
+				try {
+					
+					connection.rollback();
+					
+				} catch (SQLException e2) {
+					
+			        logger.error(e2);
+				}
+			}
 		}
 		
 		return resultSet;
 	}
-	
-	private void rollbackTransaction(Connection connection) {
 
-		if (connection != null) {
-
-			try {
-				connection.rollback();
-			} catch (SQLException e) {
-		        logger.error(e);
-			}
-		}
-	}
-	
-	private void closeStatement(Statement statement) {
+	@Override
+	public void close() {
 
 		if (statement != null) {
 
 			try {
+				
 				statement.close();
+				
 			} catch (SQLException e) {
+				
 		        logger.error(e);
 			}
 		}
-	}
-	
-	private void closeConnection(Connection connection) {
 
 		if (connection != null) {
 
 			try {
+				
 				connection.close();
+				
 			} catch (SQLException e) {
+				
 		        logger.error(e);
 			}
 		}
+		
 	}
 }

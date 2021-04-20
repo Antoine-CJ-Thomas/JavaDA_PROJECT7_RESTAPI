@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
-import com.nnk.springboot.configuration.DataBaseConfigurationeMySql;
+import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.Bid;
 
 @Component
@@ -22,7 +22,7 @@ public class BidRepository implements BidRepositoryInterface {
 	public BidRepository() {
 		logger.info("BidRepository");
 		
-		dataBaseConfigurationInterface = new DataBaseConfigurationeMySql();
+		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
 
 	@Override

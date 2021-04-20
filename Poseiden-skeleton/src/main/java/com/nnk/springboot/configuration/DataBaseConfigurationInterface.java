@@ -7,4 +7,5 @@ public interface DataBaseConfigurationInterface {
 
     public void executeUpdate(ArrayList<String> queryList);
     public ResultSet executeQuery(ArrayList<String> queryList);
+    public void close();
 }

@@ -30,15 +30,15 @@ public class DataBaseConfigurationeMySql implements DataBaseConfigurationInterfa
 
 		try {
 
-			InputStream inputStream = new FileInputStream("src/main/resources/jdbc.properties");
+			InputStream inputStream = new FileInputStream("src/main/resources/application.properties");
 
 			if (inputStream != null) {
 
 				properties.load(inputStream);
 
-				this.url = properties.getProperty("mysql.url");
-				this.user = properties.getProperty("mysql.user");
-				this.password = properties.getProperty("mysql.password");
+				url = properties.getProperty("spring.datasource.url");
+				user = properties.getProperty("spring.datasource.username");
+				password = properties.getProperty("spring.datasource.password");
 			}
 
 		} catch (IOException e) {
@@ -107,8 +107,8 @@ public class DataBaseConfigurationeMySql implements DataBaseConfigurationInterfa
 			
 		} finally {
 			
-			closeStatement(statement);
-			closeConnection(connection);
+//			closeStatement(statement);
+//			closeConnection(connection);
 		}
 		
 		return resultSet;

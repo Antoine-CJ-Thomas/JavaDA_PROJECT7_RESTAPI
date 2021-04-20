@@ -1,11 +1,18 @@
 package com.nnk.springboot.domain;
 
+import java.io.Serializable;
+import java.util.Collection;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name = "users")
-public class User {
+@SuppressWarnings("serial")
+public class User implements Serializable, UserDetails {
 	
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -62,4 +69,29 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }

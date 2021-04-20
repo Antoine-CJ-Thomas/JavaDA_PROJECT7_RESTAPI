@@ -9,7 +9,10 @@ import javax.persistence.*;
 public class Bid {
 	// TODO: Map columns in data table BIDLIST with corresponding java fields
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer BidListId;
+    
 	private String account;
 	private String type;
 	private Double bidQuantity;

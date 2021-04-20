@@ -7,6 +7,8 @@ import com.nnk.springboot.domain.User;
 public interface UserRepositoryInterface {
 
 	public void insertUser(User user);
+
+	public User selectUser(User user, String username);
 	
 	public User selectUser(Integer id);
 	

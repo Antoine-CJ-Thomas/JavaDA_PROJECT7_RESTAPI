@@ -4,6 +4,8 @@ import com.nnk.springboot.domain.Rule;
 import com.nnk.springboot.service.RuleService;
 import com.nnk.springboot.service.RuleServiceInterface;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,63 +19,74 @@ import javax.validation.Valid;
 
 @Controller
 public class RuleController {
-    // TODO: Inject RuleName service
-	
+	// TODO: Inject RuleName service
+
+	private static final Logger logger = LogManager.getLogger("RuleController");
+
 	@Autowired
 	private RuleServiceInterface ruleServiceInterface;
-	
+
 	public RuleController() {
-		
+		logger.info("RuleController");
+
 		ruleServiceInterface = new RuleService();
 	}
 
-    @RequestMapping("/ruleName/list")
-    public String home(Model model) {
-        // TODO: find all RuleName, add to model
-    	
-    	model.addAttribute("ruleList", ruleServiceInterface.readRuleList());
-    	
-        return "ruleName/list";
-    }
+	@RequestMapping("/rule/list")
+	public String home(Model model) {
+		logger.info("home");
+		// TODO: find all RuleName, add to model
 
-    @GetMapping("/ruleName/add")
-    public String addRuleForm(Rule rule) {
-        return "ruleName/add";
-    }
+		model.addAttribute("ruleList", ruleServiceInterface.readRuleList());
 
-    @PostMapping("/ruleName/validate")
-    public String validate(@Valid Rule rule, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return RuleName list
-    	
-    	ruleServiceInterface.createRule(rule);
-    	
-        return "ruleName/add";
-    }
+		return "rule/list";
+	}
 
-    @GetMapping("/ruleName/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get RuleName by Id and to model then show to the form
+	@GetMapping("/rule/add")
+	public String addRuleForm(Rule rule) {
+		logger.info("addRuleForm");
 
-    	model.addAttribute("rule", ruleServiceInterface.readRule(id));
-    	
-        return "ruleName/update";
-    }
+		return "rule/add";
+	}
 
-    @PostMapping("/ruleName/update/{id}")
-    public String updateRule(@PathVariable("id") Integer id, @Valid Rule rule, BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
-    	
-    	ruleServiceInterface.updateRule(id, rule);
-    	
-        return "redirect:/ruleName/list";
-    }
+	@PostMapping("/rule/validate")
+	public String validate(@Valid Rule rule, BindingResult result, Model model) {
+		logger.info("validate");
+		// TODO: check data valid and save to db, after saving return RuleName list
 
-    @GetMapping("/ruleName/delete/{id}")
-    public String deleteRule(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
-    	
-    	ruleServiceInterface.deleteRule(id);
-    	
-        return "redirect:/ruleName/list";
-    }
+		ruleServiceInterface.createRule(rule);
+
+		return "rule/add";
+	}
+
+	@GetMapping("/rule/update/{id}")
+	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+		logger.info("showUpdateForm");
+		// TODO: get RuleName by Id and to model then show to the form
+
+		model.addAttribute("rule", ruleServiceInterface.readRule(id));
+
+		return "rule/update";
+	}
+
+	@PostMapping("/rule/update/{id}")
+	public String updateRule(@PathVariable("id") Integer id, @Valid Rule rule, BindingResult result, Model model) {
+		logger.info("updateRule");
+		// TODO: check required fields, if valid call service to update RuleName and
+		// return RuleName list
+
+		ruleServiceInterface.updateRule(id, rule);
+
+		return "redirect:/rule/list";
+	}
+
+	@GetMapping("/rule/delete/{id}")
+	public String deleteRule(@PathVariable("id") Integer id, Model model) {
+		logger.info("deleteRule");
+		// TODO: Find RuleName by Id and delete the RuleName, return to Rule list
+
+		ruleServiceInterface.deleteRule(id);
+
+		return "redirect:/rule/list";
+	}
 }

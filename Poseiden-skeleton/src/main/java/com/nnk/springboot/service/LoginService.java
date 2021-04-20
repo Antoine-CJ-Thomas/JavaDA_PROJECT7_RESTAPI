@@ -23,8 +23,6 @@ public class LoginService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-		userRepositoryInterface = new UserRepository();
 		
 		return userRepositoryInterface.selectUser(new User(), username);
 	}

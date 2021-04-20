@@ -3,7 +3,7 @@ package com.nnk.springboot.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "rulename")
+@Table(name = "rule")
 public class Rule {
 	// TODO: Map columns in data table RULENAME with corresponding java fields
 

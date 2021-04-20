@@ -13,7 +13,6 @@ import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
 import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.Bid;
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.domain.bid;
 
 @Component
 public class BidRepository implements BidRepositoryInterface {

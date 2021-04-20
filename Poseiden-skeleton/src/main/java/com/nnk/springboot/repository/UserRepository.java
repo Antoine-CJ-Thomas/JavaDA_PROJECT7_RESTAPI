@@ -35,14 +35,21 @@ public class UserRepository implements UserRepositoryInterface {
         
         String query 	
 		
-			= "INSERT INTO users (username,password,fullname,role) VALUES ("
+			= "INSERT INTO "
 			
-				+ "'" + user.getUsername() + "',"
-				+ "'" + user.getPassword() + "',"
-				+ "'" + user.getFullname() + "',"
-				+ "'" + user.getRole() + "'"
+				+ "users ("
 				
-        	+ ");";
+					+ "username,"
+					+ "password,"
+					+ "fullname,"
+					+ "role) "
+				
+				+ "VALUES ("
+			
+					+ "'" + user.getUsername() + "',"
+					+ "'" + user.getPassword() + "',"
+					+ "'" + user.getFullname() + "',"
+					+ "'" + user.getRole() + "');";
         
         queryList.add(query);
         
@@ -206,14 +213,23 @@ public class UserRepository implements UserRepositoryInterface {
         
         String query 	
 		
-		= "INSERT INTO users (username,password,fullname,role) VALUES ("
+		= "UPDATE INTO "
 		
-			+ "'" + user.getUsername() + "',"
-			+ "'" + user.getPassword() + "',"
-			+ "'" + user.getFullname() + "',"
-			+ "'" + user.getRole() + "'"
+			+ "users ("
 			
-    	+ ") WHERE Id=" + id + ";";
+				+ "username,"
+				+ "password,"
+				+ "fullname,"
+				+ "role) "
+			
+			+ "VALUES ("
+		
+				+ "'" + user.getUsername() + "',"
+				+ "'" + user.getPassword() + "',"
+				+ "'" + user.getFullname() + "',"
+				+ "'" + user.getRole() + "') "
+			
+    		+ "WHERE Id=" + id + ";";
         
         queryList.add(query);
         

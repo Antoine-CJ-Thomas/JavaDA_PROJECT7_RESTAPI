@@ -38,9 +38,7 @@ public class TradeRepository implements TradeRepositoryInterface {
 			= "INSERT INTO "
 			
 				+ "trade ("
-		
-					+ "TradeId,"
-					
+							
 					+ "account,"
 					+ "type,"
 					+ "buyQuantity,"
@@ -66,16 +64,14 @@ public class TradeRepository implements TradeRepositoryInterface {
 					+ "side) "
 				
 				+ "VALUES ("
-		
-					+ "'" + trade.getTradeId() + "',"
-	
+			
 					+ "'" + trade.getAccount() + "',"
 					+ "'" + trade.getType() + "',"
-					+ "'" + trade.getBuyQuantity() + "',"
-					+ "'" + trade.getSellQuantity() + "',"
-					+ "'" + trade.getBuyPrice() + "',"
+					+ " " + trade.getBuyQuantity() + ","
+					+ " " + trade.getSellQuantity() + ","
+					+ " " + trade.getBuyPrice() + ","
 					
-					+ "'" + trade.getSellPrice() + "',"
+					+ " " + trade.getSellPrice() + ","
 					+ "'" + trade.getTradeDate() + "',"
 					+ "'" + trade.getSecurity() + "',"
 					+ "'" + trade.getStatus() + "',"
@@ -91,9 +87,7 @@ public class TradeRepository implements TradeRepositoryInterface {
 					+ "'" + trade.getDealName() + "',"
 					+ "'" + trade.getDealType() + "',"
 					+ "'" + trade.getSourceListId() + "',"
-					+ "'" + trade.getSide() + "') "
-				
-        	+ ");";
+					+ "'" + trade.getSide() + "');";
         
         queryList.add(query);
         
@@ -248,65 +242,35 @@ public class TradeRepository implements TradeRepositoryInterface {
         
         String query 	
 		
-		= "INSERT INTO "
+		= "UPDATE trade "
 		
-			+ "trade ("
-		
-				+ "TradeId,"
+			+ "SET "
+						
+				+ "account=" + "'" + trade.getAccount() + "',"
+				+ "type=" + "'" + trade.getType() + "',"
+				+ "buyQuantity=" + " " + trade.getBuyQuantity() + ","
+				+ "sellQuantity=" + " " + trade.getSellQuantity() + ","
+				+ "buyPrice=" + " " + trade.getBuyPrice() + ","
 				
-				+ "account,"
-				+ "type,"
-				+ "buyQuantity,"
-				+ "sellQuantity,"
-				+ "buyPrice,"
+				+ "sellPrice=" + "'" + trade.getSellPrice() + "',"
+				+ "tradeDate=" + "'" + trade.getTradeDate() + "',"
+				+ "security=" + "'" + trade.getSecurity() + "',"
+				+ "status=" + "'" + trade.getStatus() + "',"
+				+ "trader=" + "'" + trade.getTrader() + "',"
 				
-				+ "sellPrice,"
-				+ "tradeDate,"
-				+ "security,"
-				+ "status,"
-				+ "trader,"
+				+ "benchmark=" + " " + trade.getBenchmark() + ","
+				+ "book=" + "'" + trade.getBook() + "',"
+				+ "creationName=" + "'" + trade.getCreationName() + "',"
+				+ "creationDate=" + "'" + trade.getCreationDate() + "',"
+				+ "revisionName=" + "'" + trade.getRevisionName() + "',"
 				
-				+ "benchmark,"
-				+ "book,"
-				+ "creationName,"
-				+ "creationDate,"
-				+ "revisionName,"
-				
-				+ "revisionDate,"
-				+ "dealName,"
-				+ "dealType,"
-				+ "sourceListId,"
-				+ "side) "
-				
-			+ "VALUES ("
-		
-				+ "'" + trade.getTradeId() + "',"
-
-				+ "'" + trade.getAccount() + "',"
-				+ "'" + trade.getType() + "',"
-				+ "'" + trade.getBuyQuantity() + "',"
-				+ "'" + trade.getSellQuantity() + "',"
-				+ "'" + trade.getBuyPrice() + "',"
-				
-				+ "'" + trade.getSellPrice() + "',"
-				+ "'" + trade.getTradeDate() + "',"
-				+ "'" + trade.getSecurity() + "',"
-				+ "'" + trade.getStatus() + "',"
-				+ "'" + trade.getTrader() + "',"
-				
-				+ "'" + trade.getBenchmark() + "',"
-				+ "'" + trade.getBook() + "',"
-				+ "'" + trade.getCreationName() + "',"
-				+ "'" + trade.getCreationDate() + "',"
-				+ "'" + trade.getRevisionName() + "',"
-				
-				+ "'" + trade.getRevisionDate() + "',"
-				+ "'" + trade.getDealName() + "',"
-				+ "'" + trade.getDealType() + "',"
-				+ "'" + trade.getSourceListId() + "',"
-				+ "'" + trade.getSide() + "') "
+				+ "revisionDate=" + "'" + trade.getRevisionDate() + "',"
+				+ "dealName=" + "'" + trade.getDealName() + "',"
+				+ "dealType=" + "'" + trade.getDealType() + "',"
+				+ "sourceListId=" + "'" + trade.getSourceListId() + "',"
+				+ "side=" + "'" + trade.getSide() + "'"
 			
-    	+ "WHERE Id=" + id + ";";
+    		+ "WHERE Id=" + id + ";";
         
         queryList.add(query);
         

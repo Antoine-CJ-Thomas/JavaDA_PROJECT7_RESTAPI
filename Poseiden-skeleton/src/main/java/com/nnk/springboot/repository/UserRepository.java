@@ -213,22 +213,15 @@ public class UserRepository implements UserRepositoryInterface {
         
         String query 	
 		
-		= "UPDATE INTO "
+		= "UPDATE users "
 		
-			+ "users ("
+			+ "SET "
 			
-				+ "username,"
-				+ "password,"
-				+ "fullname,"
-				+ "role) "
-			
-			+ "VALUES ("
+				+ "username=" + "'" + user.getUsername() + "',"
+				+ "password=" + "'" + user.getPassword() + "',"
+				+ "fullname=" + "'" + user.getFullname() + "',"
+				+ "role=" + "'" + user.getRole() + "'"
 		
-				+ "'" + user.getUsername() + "',"
-				+ "'" + user.getPassword() + "',"
-				+ "'" + user.getFullname() + "',"
-				+ "'" + user.getRole() + "') "
-			
     		+ "WHERE Id=" + id + ";";
         
         queryList.add(query);

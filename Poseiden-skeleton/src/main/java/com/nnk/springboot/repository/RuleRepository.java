@@ -173,7 +173,7 @@ public class RuleRepository implements RuleRepositoryInterface {
         
         String query 	
 		
-			= "INSERT rule "
+			= "UPDATE rule "
 			
 				+ "SET "
 				

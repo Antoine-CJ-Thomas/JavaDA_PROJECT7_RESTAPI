@@ -165,7 +165,7 @@ public class RatingRepository implements RatingRepositoryInterface {
         
         String query 	
 		
-			= "INSERT rating "
+			= "UPDATE rating "
 			
 				+ "SET "
 				

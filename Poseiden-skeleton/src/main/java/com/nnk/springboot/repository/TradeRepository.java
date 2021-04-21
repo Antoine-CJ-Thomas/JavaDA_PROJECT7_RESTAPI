@@ -41,53 +41,13 @@ public class TradeRepository implements TradeRepositoryInterface {
 							
 					+ "account,"
 					+ "type,"
-					+ "buyQuantity,"
-					+ "sellQuantity,"
-					+ "buyPrice,"
-					
-					+ "sellPrice,"
-					+ "tradeDate,"
-					+ "security,"
-					+ "status,"
-					+ "trader,"
-					
-					+ "benchmark,"
-					+ "book,"
-					+ "creationName,"
-					+ "creationDate,"
-					+ "revisionName,"
-					
-					+ "revisionDate,"
-					+ "dealName,"
-					+ "dealType,"
-					+ "sourceListId,"
-					+ "side) "
+					+ "buyQuantity) "
 				
 				+ "VALUES ("
 			
 					+ "'" + trade.getAccount() + "',"
 					+ "'" + trade.getType() + "',"
-					+ " " + trade.getBuyQuantity() + ","
-					+ " " + trade.getSellQuantity() + ","
-					+ " " + trade.getBuyPrice() + ","
-					
-					+ " " + trade.getSellPrice() + ","
-					+ "'" + trade.getTradeDate() + "',"
-					+ "'" + trade.getSecurity() + "',"
-					+ "'" + trade.getStatus() + "',"
-					+ "'" + trade.getTrader() + "',"
-					
-					+ "'" + trade.getBenchmark() + "',"
-					+ "'" + trade.getBook() + "',"
-					+ "'" + trade.getCreationName() + "',"
-					+ "'" + trade.getCreationDate() + "',"
-					+ "'" + trade.getRevisionName() + "',"
-					
-					+ "'" + trade.getRevisionDate() + "',"
-					+ "'" + trade.getDealName() + "',"
-					+ "'" + trade.getDealType() + "',"
-					+ "'" + trade.getSourceListId() + "',"
-					+ "'" + trade.getSide() + "');";
+					+ " " + trade.getBuyQuantity() + ");";
         
         queryList.add(query);
         
@@ -99,8 +59,8 @@ public class TradeRepository implements TradeRepositoryInterface {
 		logger.info("selectTrade");
 		
         ArrayList<String> queryList = new ArrayList<String>();
-        
-        String query = null;
+
+        String query = "SELECT * FROM trade WHERE TradeId=" + id + ";";
         
         queryList.add(query);
         
@@ -168,8 +128,8 @@ public class TradeRepository implements TradeRepositoryInterface {
 		logger.info("selectTradeList");
 		
         ArrayList<String> queryList = new ArrayList<String>();
-        
-        String query = null;
+
+        String query = "SELECT * FROM trade";
         
         queryList.add(query);
         
@@ -248,29 +208,9 @@ public class TradeRepository implements TradeRepositoryInterface {
 						
 				+ "account=" + "'" + trade.getAccount() + "',"
 				+ "type=" + "'" + trade.getType() + "',"
-				+ "buyQuantity=" + " " + trade.getBuyQuantity() + ","
-				+ "sellQuantity=" + " " + trade.getSellQuantity() + ","
-				+ "buyPrice=" + " " + trade.getBuyPrice() + ","
-				
-				+ "sellPrice=" + "'" + trade.getSellPrice() + "',"
-				+ "tradeDate=" + "'" + trade.getTradeDate() + "',"
-				+ "security=" + "'" + trade.getSecurity() + "',"
-				+ "status=" + "'" + trade.getStatus() + "',"
-				+ "trader=" + "'" + trade.getTrader() + "',"
-				
-				+ "benchmark=" + " " + trade.getBenchmark() + ","
-				+ "book=" + "'" + trade.getBook() + "',"
-				+ "creationName=" + "'" + trade.getCreationName() + "',"
-				+ "creationDate=" + "'" + trade.getCreationDate() + "',"
-				+ "revisionName=" + "'" + trade.getRevisionName() + "',"
-				
-				+ "revisionDate=" + "'" + trade.getRevisionDate() + "',"
-				+ "dealName=" + "'" + trade.getDealName() + "',"
-				+ "dealType=" + "'" + trade.getDealType() + "',"
-				+ "sourceListId=" + "'" + trade.getSourceListId() + "',"
-				+ "side=" + "'" + trade.getSide() + "'"
+				+ "buyQuantity=" + " " + trade.getBuyQuantity() + " "
 			
-    		+ "WHERE Id=" + id + ";";
+    		+ "WHERE TradeId=" + id + ";";
         
         queryList.add(query);
         

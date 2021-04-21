@@ -4,6 +4,8 @@ package com.nnk.springboot.domain;
 import java.sql.Timestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "trade")
@@ -14,8 +16,11 @@ public class Trade {
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer tradeId;
 
+    @NotBlank(message = "Account Part is mandatory")
 	private String account;
+    @NotBlank(message = "Type Part is mandatory")
 	private String type;
+    @NotNull(message = "Buy Quantity Part is mandatory")
 	private Double buyQuantity;
 	private Double sellQuantity;
 	private Double buyPrice;

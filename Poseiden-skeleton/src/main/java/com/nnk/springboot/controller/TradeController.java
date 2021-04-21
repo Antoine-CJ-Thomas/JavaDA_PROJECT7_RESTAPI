@@ -39,24 +39,29 @@ public class TradeController {
 
 		model.addAttribute("tradeList", tradeServiceInterface.readTradeList());
 
-		return "trade/list";
+		return "/trade/list.html";
 	}
 
 	@GetMapping("/trade/add")
 	public String addTrade(Trade trade) {
 		logger.info("addTrade");
 
-		return "trade/add";
+		return "/trade/add.html";
 	}
 
 	@PostMapping("/trade/validate")
-	public String validate(@Valid Trade trade, BindingResult result, Model model) {
+	public String validate(@Valid Trade trade, BindingResult bindingResult, Model model) {
 		logger.info("validate");
 		// TODO: check data valid and save to db, after saving return Trade list
 
-		tradeServiceInterface.createTrade(trade);
+		if (bindingResult.hasErrors() == false) {
 
-		return "trade/add";
+			tradeServiceInterface.createTrade(trade);
+
+			return "redirect:/trade/list";
+		}
+
+		return "/trade/add.html";
 	}
 
 	@GetMapping("/trade/update/{id}")
@@ -64,20 +69,25 @@ public class TradeController {
 		logger.info("showUpdateForm");
 		// TODO: get Trade by Id and to model then show to the form
 
-		model.addAttribute("tradeList", tradeServiceInterface.readTrade(id));
+		model.addAttribute("trade", tradeServiceInterface.readTrade(id));
 
-		return "trade/update";
+		return "/trade/update.html";
 	}
 
 	@PostMapping("/trade/update/{id}")
-	public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade, BindingResult result, Model model) {
+	public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade, BindingResult bindingResult, Model model) {
 		logger.info("updateTrade");
 		// TODO: check required fields, if valid call service to update Trade and return
 		// Trade list
 
-		tradeServiceInterface.updateTrade(id, trade);
+		if (bindingResult.hasErrors() == false) {
 
-		return "redirect:/trade/list";
+			tradeServiceInterface.updateTrade(id, trade);
+
+			return "redirect:/trade/list";
+		}
+
+		return "/trade/update.html";
 	}
 
 	@GetMapping("/trade/delete/{id}")

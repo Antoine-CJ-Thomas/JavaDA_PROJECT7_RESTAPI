@@ -98,6 +98,6 @@ public class RatingController {
 
 		ratingServiceInterface.deleteRating(id);
 
-		return "/redirect:/rating/list.html";
+		return "/redirect:/rating/list";
 	}
 }

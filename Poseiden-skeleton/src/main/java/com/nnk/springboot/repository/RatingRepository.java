@@ -122,7 +122,7 @@ public class RatingRepository implements RatingRepositoryInterface {
 		
     	try {
 
-			if (resultSet.next()) {
+    		while (resultSet.next()) {
 				
 				ratingList.add(new Rating());
 

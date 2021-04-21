@@ -121,7 +121,7 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 		
     	try {
 
-			if (resultSet.next()) {
+    		while (resultSet.next()) {
 				
 				curvePointList.add(new CurvePoint());
 

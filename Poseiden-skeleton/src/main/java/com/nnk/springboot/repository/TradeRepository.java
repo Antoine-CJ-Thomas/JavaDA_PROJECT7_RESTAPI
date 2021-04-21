@@ -179,7 +179,7 @@ public class TradeRepository implements TradeRepositoryInterface {
 		
     	try {
 
-			if (resultSet.next()) {
+    		while (resultSet.next()) {
 				
 				tradeList.add(new Trade());
 

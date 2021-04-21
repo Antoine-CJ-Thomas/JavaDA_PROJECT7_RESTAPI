@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
 import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.Bid;
-import com.nnk.springboot.domain.User;
 
 @Component
 public class BidRepository implements BidRepositoryInterface {
@@ -38,7 +37,7 @@ public class BidRepository implements BidRepositoryInterface {
 		
 			= "INSERT INTO "
 			
-				+ "bid ("
+				+ "bidlist ("
 			
 					+ "account,"
 					+ "type,"
@@ -106,7 +105,7 @@ public class BidRepository implements BidRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = "SELECT * FROM bid WHERE Id='" + id + "';";
+        String query = "SELECT * FROM bidlist WHERE BidListId='" + id + "';";
         
         queryList.add(query);
         
@@ -177,7 +176,7 @@ public class BidRepository implements BidRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = "SELECT * FROM bid";
+        String query = "SELECT * FROM bidlist";
         
         queryList.add(query);
         
@@ -187,7 +186,7 @@ public class BidRepository implements BidRepositoryInterface {
 		
     	try {
 
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 				
 				bidList.add(new Bid());
 
@@ -252,7 +251,7 @@ public class BidRepository implements BidRepositoryInterface {
         
         String query 	
 		
-		= "UPDATE bid "
+		= "UPDATE bidlist "
 		
 			+ "SET "
 			
@@ -282,7 +281,7 @@ public class BidRepository implements BidRepositoryInterface {
 			
 				+ "side=" + "'" + bid.getSide() + "'"
 		
-    		+ "WHERE Id=" + id + ";";
+    		+ "WHERE BidListId=" + id + ";";
         
         queryList.add(query);
         
@@ -296,7 +295,7 @@ public class BidRepository implements BidRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = "DELETE FROM bid WHERE Id= " + id + ";";
+        String query = "DELETE FROM bidlist WHERE BidListId= " + id + ";";
         
         queryList.add(query);
         

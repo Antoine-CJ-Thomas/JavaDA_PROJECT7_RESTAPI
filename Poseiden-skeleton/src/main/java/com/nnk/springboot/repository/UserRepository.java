@@ -170,7 +170,7 @@ public class UserRepository implements UserRepositoryInterface {
 		
     	try {
 
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 				
 				userList.add(new User());
 

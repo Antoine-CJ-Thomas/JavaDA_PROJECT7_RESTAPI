@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        
 	        .and()
 	        .logout()
-	            .logoutUrl("/logout")
+	            .logoutUrl("/app-logout")
 	            .logoutSuccessUrl("/")
 	            .invalidateHttpSession(true)
 

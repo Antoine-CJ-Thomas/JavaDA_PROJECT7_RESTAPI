@@ -7,6 +7,7 @@ import com.nnk.springboot.service.UserServiceInterface;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,9 +39,7 @@ public class UserController {
 	@RequestMapping("/user/list")
 	public String home(Model model) {
 		logger.info("home");
-		/*
-		 * model.addAttribute("users", userRepository.findAll());
-		 */
+
 		model.addAttribute("userList", userServiceInterface.readUserList());
 
 		return "user/list";
@@ -54,20 +53,17 @@ public class UserController {
 	}
 
 	@PostMapping("/user/validate")
-	public String validate(@Valid User user, BindingResult result, Model model) {
+	public String validate(@Valid User user, BindingResult bindingResult, Model model) {
 		logger.info("validate");
-		/*
-		 * if (!result.hasErrors()) {
-		 * 
-		 * BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		 * 
-		 * user.setPassword(encoder.encode(user.getPassword()));
-		 * userRepository.save(user); model.addAttribute("users",
-		 * userRepository.findAll());
-		 * 
-		 * return "redirect:/user/list"; }
-		 */
-		userServiceInterface.createUser(user);
+
+		if (bindingResult.hasErrors() == false) {
+
+			user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+
+			userServiceInterface.createUser(user);
+
+			return "redirect:/user/list";
+		}
 
 		return "user/add";
 	}
@@ -75,12 +71,6 @@ public class UserController {
 	@GetMapping("/user/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		logger.info("showUpdateForm");
-		/*
-		 * User user = userRepository.findById(id).orElseThrow(() -> new
-		 * IllegalArgumentException("Invalid user Id:" + id));
-		 * 
-		 * user.setPassword(""); model.addAttribute("user", user);
-		 */
 
 		model.addAttribute("user", userServiceInterface.readUser(id));
 
@@ -90,30 +80,24 @@ public class UserController {
 	@PostMapping("/user/update/{id}")
 	public String updateUser(@PathVariable("id") Integer id, @Valid User user, BindingResult result, Model model) {
 		logger.info("updateUser");
-		/*
-		 * if (result.hasErrors()) { return "user/update"; }
-		 * 
-		 * BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		 * 
-		 * user.setPassword(encoder.encode(user.getPassword())); user.setId(id);
-		 * userRepository.save(user); model.addAttribute("users",
-		 * userRepository.findAll());
-		 */
-		userServiceInterface.updateUser(id, user);
 
-		return "redirect:/user/list";
+		if (result.hasErrors() == false) {
+
+			user.setId(id);
+			user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+
+			userServiceInterface.updateUser(id, user);
+
+			return "redirect:/user/list";
+		}
+
+		return "user/update";
 	}
 
 	@GetMapping("/user/delete/{id}")
 	public String deleteUser(@PathVariable("id") Integer id, Model model) {
 		logger.info("deleteUser");
-		/*
-		 * User user = userRepository.findById(id).orElseThrow(() -> new
-		 * IllegalArgumentException("Invalid user Id:" + id));
-		 * 
-		 * userRepository.delete(user); model.addAttribute("users",
-		 * userRepository.findAll());
-		 */
+		
 		userServiceInterface.deleteUser(id);
 
 		return "redirect:/user/list";

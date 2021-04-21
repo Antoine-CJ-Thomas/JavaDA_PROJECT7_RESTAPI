@@ -32,61 +32,71 @@ public class RuleController {
 		ruleServiceInterface = new RuleService();
 	}
 
-	@RequestMapping("/rule/list")
+	@RequestMapping("/ruleName/list")
 	public String home(Model model) {
 		logger.info("home");
 		// TODO: find all RuleName, add to model
 
 		model.addAttribute("ruleList", ruleServiceInterface.readRuleList());
 
-		return "rule/list";
+		return "/ruleName/list.html";
 	}
 
-	@GetMapping("/rule/add")
+	@GetMapping("/ruleName/add")
 	public String addRuleForm(Rule rule) {
 		logger.info("addRuleForm");
 
-		return "rule/add";
+		return "/ruleName/add.html";
 	}
 
-	@PostMapping("/rule/validate")
-	public String validate(@Valid Rule rule, BindingResult result, Model model) {
+	@PostMapping("/ruleName/validate")
+	public String validate(@Valid Rule rule, BindingResult bindingResult, Model model) {
 		logger.info("validate");
 		// TODO: check data valid and save to db, after saving return RuleName list
 
-		ruleServiceInterface.createRule(rule);
+		if (bindingResult.hasErrors() == false) {
 
-		return "rule/add";
+			ruleServiceInterface.createRule(rule);
+
+			return "redirect:/ruleName/list";
+		}
+
+		return "/ruleName/add.html";
 	}
 
-	@GetMapping("/rule/update/{id}")
+	@GetMapping("/ruleName/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		logger.info("showUpdateForm");
 		// TODO: get RuleName by Id and to model then show to the form
 
 		model.addAttribute("rule", ruleServiceInterface.readRule(id));
 
-		return "rule/update";
+		return "/ruleName/update.html";
 	}
 
-	@PostMapping("/rule/update/{id}")
-	public String updateRule(@PathVariable("id") Integer id, @Valid Rule rule, BindingResult result, Model model) {
+	@PostMapping("/ruleName/update/{id}")
+	public String updateRule(@PathVariable("id") Integer id, @Valid Rule rule, BindingResult bindingResult, Model model) {
 		logger.info("updateRule");
 		// TODO: check required fields, if valid call service to update RuleName and
 		// return RuleName list
 
-		ruleServiceInterface.updateRule(id, rule);
+		if (bindingResult.hasErrors() == false) {
 
-		return "redirect:/rule/list";
+			ruleServiceInterface.updateRule(id, rule);
+
+			return "redirect:/ruleName/list";
+		}
+
+		return "/ruleName/update.html";
 	}
 
-	@GetMapping("/rule/delete/{id}")
+	@GetMapping("/ruleName/delete/{id}")
 	public String deleteRule(@PathVariable("id") Integer id, Model model) {
 		logger.info("deleteRule");
 		// TODO: Find RuleName by Id and delete the RuleName, return to Rule list
 
 		ruleServiceInterface.deleteRule(id);
 
-		return "redirect:/rule/list";
+		return "redirect:/ruleName/list";
 	}
 }

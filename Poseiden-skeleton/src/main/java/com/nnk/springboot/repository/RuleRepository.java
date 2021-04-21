@@ -37,7 +37,7 @@ public class RuleRepository implements RuleRepositoryInterface {
 		
 			= "INSERT INTO "
 			
-				+ "rule ("
+				+ "rulename ("
 				
 					+ "name,"
 					+ "description,"
@@ -67,7 +67,7 @@ public class RuleRepository implements RuleRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = "SELECT * FROM rule WHERE Id=" + id + ";";
+        String query = "SELECT * FROM rulename WHERE Id=" + id + ";";
         
         queryList.add(query);
         
@@ -118,7 +118,7 @@ public class RuleRepository implements RuleRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = "SELECT * FROM rule";
+        String query = "SELECT * FROM rulename";
         
         queryList.add(query);
         
@@ -128,7 +128,7 @@ public class RuleRepository implements RuleRepositoryInterface {
 		
     	try {
 
-			if (resultSet.next()) {
+			while (resultSet.next()) {
 				
 				ruleList.add(new Rule());
 
@@ -173,7 +173,7 @@ public class RuleRepository implements RuleRepositoryInterface {
         
         String query 	
 		
-			= "UPDATE rule "
+			= "UPDATE rulename "
 			
 				+ "SET "
 				
@@ -182,7 +182,7 @@ public class RuleRepository implements RuleRepositoryInterface {
 					+ "json=" + "'" + rule.getJson() + "',"
 					+ "template=" + "'" + rule.getTemplate() + "',"
 					+ "sqlStr=" + "'" + rule.getSqlStr() + "',"
-					+ "sqlPart=" + "'" + rule.getSqlPart() + "');"
+					+ "sqlPart=" + "'" + rule.getSqlPart() + "' "
 		
     			+ "WHERE Id=" + id + ";";
 		
@@ -198,7 +198,7 @@ public class RuleRepository implements RuleRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = "DELETE FROM rule WHERE Id= " + id + ";";
+        String query = "DELETE FROM rulename WHERE Id= " + id + ";";
         
         queryList.add(query);
         

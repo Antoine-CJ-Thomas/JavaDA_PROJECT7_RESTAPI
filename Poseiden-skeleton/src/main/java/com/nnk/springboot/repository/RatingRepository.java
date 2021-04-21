@@ -172,7 +172,7 @@ public class RatingRepository implements RatingRepositoryInterface {
 					+ "moodysRating=" + "'" + rating.getMoodysRating() + "',"
 					+ "sandPRating=" + "'" + rating.getSandPRating() + "',"
 					+ "fitchRating=" + "'" + rating.getFitchRating() + "',"
-					+ "orderNumber=" + "" + rating.getOrderNumber() + ");"
+					+ "orderNumber=" + "" + rating.getOrderNumber() + " "
 		
     			+ "WHERE Id=" + id + ";";
 		

@@ -39,24 +39,29 @@ public class RatingController {
 
 		model.addAttribute("ratingList", ratingServiceInterface.readRatingList());
 
-		return "rating/list";
+		return "/rating/list.html";
 	}
 
 	@GetMapping("/rating/add")
 	public String addRatingForm(Rating rating) {
 		logger.info("addRatingForm");
 
-		return "rating/add";
+		return "/rating/add.html";
 	}
 
 	@PostMapping("/rating/validate")
-	public String validate(@Valid Rating rating, BindingResult result, Model model) {
+	public String validate(@Valid Rating rating, BindingResult bindingResult, Model model) {
 		logger.info("validate");
 		// TODO: check data valid and save to db, after saving return Rating list
 
-		ratingServiceInterface.createRating(rating);
+		if (bindingResult.hasErrors() == false) {
 
-		return "rating/add";
+			ratingServiceInterface.createRating(rating);
+
+			return "redirect:/rating/list";
+		}
+
+		return "/rating/add.html";
 	}
 
 	@GetMapping("/rating/update/{id}")
@@ -66,19 +71,24 @@ public class RatingController {
 
 		model.addAttribute("rating", ratingServiceInterface.readRating(id));
 
-		return "rating/update";
+		return "/rating/update.html";
 	}
 
 	@PostMapping("/rating/update/{id}")
-	public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating, BindingResult result,
+	public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating, BindingResult bindingResult,
 			Model model) {
 		logger.info("updateRating");
 		// TODO: check required fields, if valid call service to update Rating and
 		// return Rating list
 
-		ratingServiceInterface.updateRating(id, rating);
+		if (bindingResult.hasErrors() == false) {
 
-		return "redirect:/rating/list";
+			ratingServiceInterface.updateRating(id, rating);
+
+			return "redirect:/rating/list";
+		}
+
+		return "/rating/update.html";
 	}
 
 	@GetMapping("/rating/delete/{id}")
@@ -88,6 +98,6 @@ public class RatingController {
 
 		ratingServiceInterface.deleteRating(id);
 
-		return "redirect:/rating/list";
+		return "/redirect:/rating/list.html";
 	}
 }

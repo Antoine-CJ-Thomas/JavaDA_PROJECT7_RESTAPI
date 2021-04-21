@@ -40,18 +40,14 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 				+ "curvepoint ("
 				
 					+ "CurveId,"
-					+ "asOfDate,"
 					+ "term,"
-					+ "value,"
-					+ "creationDate) "
+					+ "value)"
 					
 				+ "VALUES ("
 			
 					+ " " + curvePoint.getCurveId() + ","
-					+ "'" + curvePoint.getAsOfDate() + "',"
 					+ "'" + curvePoint.getTerm() + "',"
-					+ " " + curvePoint.getValue() + ","
-					+ " " + curvePoint.getCreationDate() + ");";
+					+ " " + curvePoint.getValue() + ");";
         
         queryList.add(query);
         
@@ -65,7 +61,7 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
-        String query = "SELECT * FROM rating WHERE Id=" + id + ";";
+        String query = "SELECT * FROM curvepoint WHERE Id=" + id + ";";
         
         queryList.add(query);
         
@@ -174,10 +170,8 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 				+ "SET "
 				
 					+ "CurveId=" + "" + curvePoint.getCurveId() + ","
-					+ "asOfDate=" + "'" + curvePoint.getAsOfDate() + "',"
 					+ "term=" + "" + curvePoint.getTerm() + ","
-					+ "value=" + "" + curvePoint.getValue() + ","
-					+ "creationDate=" + "" + curvePoint.getCreationDate() + ");"
+					+ "value=" + "" + curvePoint.getValue() + ""
 		
     			+ "WHERE Id=" + id + ";";
         

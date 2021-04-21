@@ -37,26 +37,31 @@ public class CurvePointController {
 		logger.info("home");
 		// TODO: find all Curve Point, add to model
 
-		model.addAttribute("bidList", curvePointServiceInterface.readCurvePointList());
+		model.addAttribute("curvePointList", curvePointServiceInterface.readCurvePointList());
 
-		return "curvePoint/list";
+		return "/curvePoint/list.html";
 	}
 
 	@GetMapping("/curvePoint/add")
-	public String addCurvePointForm(CurvePoint bid) {
+	public String addCurvePointForm(CurvePoint curvePoint) {
 		logger.info("addCurvePointForm");
 
-		return "curvePoint/add";
+		return "/curvePoint/add.html";
 	}
 
 	@PostMapping("/curvePoint/validate")
-	public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
+	public String validate(@Valid CurvePoint curvePoint, BindingResult bindingResult, Model model) {
 		logger.info("validate");
 		// TODO: check data valid and save to db, after saving return Curve list
 
-		curvePointServiceInterface.createCurvePoint(curvePoint);
+		if (bindingResult.hasErrors() == false) {
 
-		return "curvePoint/add";
+			curvePointServiceInterface.createCurvePoint(curvePoint);
+
+			return "redirect:/curvePoint/list";
+		}
+
+		return "/curvePoint/add.html";
 	}
 
 	@GetMapping("/curvePoint/update/{id}")
@@ -66,19 +71,24 @@ public class CurvePointController {
 
 		model.addAttribute("curvePoint", curvePointServiceInterface.readCurvePoint(id));
 
-		return "curvePoint/update";
+		return "/curvePoint/update.html";
 	}
 
 	@PostMapping("/curvePoint/update/{id}")
-	public String updateCurvePoint(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint, BindingResult result,
+	public String updateCurvePoint(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint, BindingResult bindingResult,
 			Model model) {
 		logger.info("updateCurvePoint");
 		// TODO: check required fields, if valid call service to update Curve and return
 		// Curve list
 
-		curvePointServiceInterface.updateCurvePoint(id, curvePoint);
+		if (bindingResult.hasErrors() == false) {
 
-		return "redirect:/curvePoint/list";
+			curvePointServiceInterface.updateCurvePoint(id, curvePoint);
+
+			return "redirect:/curvePoint/list";
+		}
+
+		return "/curvePoint/update.html";
 	}
 
 	@GetMapping("/curvePoint/delete/{id}")

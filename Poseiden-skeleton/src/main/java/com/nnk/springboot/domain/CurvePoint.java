@@ -4,6 +4,7 @@ package com.nnk.springboot.domain;
 import java.sql.Timestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "curvepoint")
@@ -13,10 +14,12 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer id;
-    
+    @NotNull(message = "Curve ID is mandatory")
 	private Integer curveId;
 	private Timestamp asOfDate;
+	@NotNull(message = "Term is mandatory")
 	private Double term;
+    @NotNull(message = "Value is mandatory")
 	private Double value;
 	private Timestamp creationDate;
 

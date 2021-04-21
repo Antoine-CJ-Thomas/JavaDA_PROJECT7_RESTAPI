@@ -42,14 +42,14 @@ public class UserController {
 
 		model.addAttribute("userList", userServiceInterface.readUserList());
 
-		return "user/list";
+		return "/user/list.html";
 	}
 
 	@GetMapping("/user/add")
 	public String addUser(User user) {
 		logger.info("addUser");
 
-		return "user/add";
+		return "/user/add.html";
 	}
 
 	@PostMapping("/user/validate")
@@ -65,7 +65,7 @@ public class UserController {
 			return "redirect:/user/list";
 		}
 
-		return "user/add";
+		return "/user/add.html";
 	}
 
 	@GetMapping("/user/update/{id}")
@@ -74,7 +74,7 @@ public class UserController {
 
 		model.addAttribute("user", userServiceInterface.readUser(id));
 
-		return "user/update";
+		return "/user/update.html";
 	}
 
 	@PostMapping("/user/update/{id}")
@@ -91,7 +91,7 @@ public class UserController {
 			return "redirect:/user/list";
 		}
 
-		return "user/update";
+		return "/user/update.html";
 	}
 
 	@GetMapping("/user/delete/{id}")

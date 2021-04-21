@@ -39,24 +39,29 @@ public class BidController {
 
 		model.addAttribute("bidList", bidServiceInterface.readBidList());
 
-		return "bidList/list";
+		return "/bidList/list.html";
 	}
 
 	@GetMapping("/bidList/add")
 	public String addBidForm(Bid bid) {
 		logger.info("addBidForm");
 
-		return "bidList/add";
+		return "/bidList/add.html";
 	}
 
 	@PostMapping("/bidList/validate")
-	public String validate(@Valid Bid bid, BindingResult result, Model model) {
+	public String validate(@Valid Bid bid, BindingResult bindingResult, Model model) {
 		logger.info("validate");
 		// TODO: check data valid and save to db, after saving return bid list
 
-		bidServiceInterface.createBid(bid);
+		if (bindingResult.hasErrors() == false) {
+			
+			bidServiceInterface.createBid(bid);
 
-		return "bidList/add";
+			return "redirect:/bidList/list";
+		}
+
+		return "/bidList/add.html";
 	}
 
 	@GetMapping("/bidList/update/{id}")
@@ -66,18 +71,23 @@ public class BidController {
 
 		model.addAttribute("bid", bidServiceInterface.readBid(id));
 
-		return "bidList/update";
+		return "/bidList/update.html";
 	}
 
 	@PostMapping("/bidList/update/{id}")
-	public String updateBid(@PathVariable("id") Integer id, @Valid Bid bid, BindingResult result, Model model) {
+	public String updateBid(@PathVariable("id") Integer id, @Valid Bid bid, BindingResult bindingResult, Model model) {
 		logger.info("updateBid");
 		// TODO: check required fields, if valid call service to update Bid and return
 		// list Bid
 
-		bidServiceInterface.updateBid(id, bid);
+		if (bindingResult.hasErrors() == false) {
 
-		return "redirect:/bidList/list";
+			bidServiceInterface.updateBid(id, bid);
+
+			return "redirect:/bidList/list";
+		}
+
+		return "/bidList/update.html";
 	}
 
 	@GetMapping("/bidList/delete/{id}")

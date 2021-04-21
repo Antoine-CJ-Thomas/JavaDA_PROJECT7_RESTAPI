@@ -41,57 +41,13 @@ public class BidRepository implements BidRepositoryInterface {
 			
 					+ "account,"
 					+ "type,"
-					+ "bidQuantity,"
-					+ "askQuantity,"
-					+ "bid,"
-				
-					+ "ask,"
-					+ "benchmark,"
-					+ "bidListDate,"
-					+ "commentary,"
-					+ "security,"
-				
-					+ "status,"
-					+ "trader,"
-					+ "book,"
-					+ "creationName,"
-					+ "creationDate,"
-				
-					+ "revisionName,"
-					+ "revisionDate,"
-					+ "dealName,"
-					+ "dealType,"
-					+ "sourceListId,"
-				
-					+ "side) "
+					+ "bidQuantity)"
 				
 				+ "VALUES ("
 			
 					+ "'" + bid.getAccount() + "',"
 					+ "'" + bid.getType() + "',"
-					+ " " + bid.getBidQuantity() + ","
-					+ " " + bid.getAskQuantity() + ","
-					+ " " + bid.getBid() + ","
-				
-					+ " " + bid.getAsk() + ","
-					+ "'" + bid.getBenchmark() + "',"
-					+ "'" + bid.getBidListDate() + "',"
-					+ "'" + bid.getCommentary() + "',"
-					+ "'" + bid.getSecurity() + "',"
-				
-					+ "'" + bid.getStatus() + "',"
-					+ "'" + bid.getTrader() + "',"
-					+ "'" + bid.getBook() + "',"
-					+ "'" + bid.getCreationName() + "',"
-					+ "'" + bid.getCreationDate() + "',"
-				
-					+ "'" + bid.getRevisionName() + "',"
-					+ "'" + bid.getRevisionDate() + "',"
-					+ "'" + bid.getDealName() + "',"
-					+ "'" + bid.getDealType() + "',"
-					+ "'" + bid.getSourceListId() + "',"
-				
-					+ "'" + bid.getSide() + "');";
+					+ " " + bid.getBidQuantity() + ");";
         
         queryList.add(query);
         
@@ -117,7 +73,7 @@ public class BidRepository implements BidRepositoryInterface {
 
 			if (resultSet.next()) {
 
-				bid.setBidListId(resultSet.getInt("Id"));
+				bid.setBidListId(resultSet.getInt("BidListId"));
 				
 				bid.setAccount(resultSet.getString("account"));
 				bid.setType(resultSet.getString("type"));
@@ -190,17 +146,17 @@ public class BidRepository implements BidRepositoryInterface {
 				
 				bidList.add(new Bid());
 
-				bidList.get(bidList.size()-1).setBidListId(resultSet.getInt("Id"));
+				bidList.get(bidList.size()-1).setBidListId(resultSet.getInt("BidListId"));
 				
 				bidList.get(bidList.size()-1).setAccount(resultSet.getString("account"));
 				bidList.get(bidList.size()-1).setType(resultSet.getString("type"));
-				bidList.get(bidList.size()-1).setBidQuantity(resultSet.getDouble("bidList.get(bidList.size()-1)Quantity"));
+				bidList.get(bidList.size()-1).setBidQuantity(resultSet.getDouble("bidQuantity"));
 				bidList.get(bidList.size()-1).setAskQuantity(resultSet.getDouble("askQuantity"));
-				bidList.get(bidList.size()-1).setBid(resultSet.getDouble("bidList.get(bidList.size()-1)"));
+				bidList.get(bidList.size()-1).setBid(resultSet.getDouble("bid"));
 				
 				bidList.get(bidList.size()-1).setAsk(resultSet.getDouble("ask"));
 				bidList.get(bidList.size()-1).setBenchmark(resultSet.getString("benchmark"));
-				bidList.get(bidList.size()-1).setBidListDate(resultSet.getTimestamp("bidList.get(bidList.size()-1)ListDate"));
+				bidList.get(bidList.size()-1).setBidListDate(resultSet.getTimestamp("bidListDate"));
 				bidList.get(bidList.size()-1).setCommentary(resultSet.getString("commentary"));
 				bidList.get(bidList.size()-1).setSecurity(resultSet.getString("security"));
 				
@@ -257,29 +213,7 @@ public class BidRepository implements BidRepositoryInterface {
 			
 				+ "account=" + "'" + bid.getAccount() + "',"
 				+ "type=" + "'" + bid.getType() + "',"
-				+ "bidQuantity=" + "" + bid.getBidQuantity() + ","
-				+ "askQuantity=" + "" + bid.getAskQuantity() + ","
-				+ "bid=" + "" + bid.getBid() + ","
-			
-				+ "ask=" + "" + bid.getAsk() + ","
-				+ "benchmark=" + "'" + bid.getBenchmark() + "',"
-				+ "bidListDate=" + "'" + bid.getBidListDate() + "',"
-				+ "commentary=" + "'" + bid.getCommentary() + "',"
-				+ "security=" + "'" + bid.getSecurity() + "',"
-			
-				+ "status=" + "'" + bid.getStatus() + "',"
-				+ "trader=" + "'" + bid.getTrader() + "',"
-				+ "book=" + "'" + bid.getBook() + "',"
-				+ "creationName=" + "'" + bid.getCreationName() + "',"
-				+ "creationDate=" + "'" + bid.getCreationDate() + "',"
-			
-				+ "revisionName=" + "'" + bid.getRevisionName() + "',"
-				+ "revisionDate=" + "'" + bid.getRevisionDate() + "',"
-				+ "dealName=" + "'" + bid.getDealName() + "',"
-				+ "dealType=" + "'" + bid.getDealType() + "',"
-				+ "sourceListId=" + "'" + bid.getSourceListId() + "',"
-			
-				+ "side=" + "'" + bid.getSide() + "'"
+				+ "bidQuantity=" + "" + bid.getBidQuantity() + ""
 		
     		+ "WHERE BidListId=" + id + ";";
         

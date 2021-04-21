@@ -4,6 +4,8 @@ package com.nnk.springboot.domain;
 import java.sql.Timestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "bidlist")
@@ -13,10 +15,13 @@ public class Bid {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer BidListId;
-    
+    @NotBlank(message = "Account is mandatory")
 	private String account;
+    @NotBlank(message = "Type is mandatory")
 	private String type;
+    @NotNull(message = "Bid quantity is mandatory")
 	private Double bidQuantity;
+    
 	private Double askQuantity;
 	private Double bid;
 	

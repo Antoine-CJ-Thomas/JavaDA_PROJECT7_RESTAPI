@@ -74,7 +74,7 @@ public class UserRepository implements UserRepositoryInterface {
 
 			if (resultSet.next()) {
 
-				user.setId(resultSet.getInt("Id"));
+				user.setId(resultSet.getInt("id"));
 				user.setUsername(resultSet.getString("username"));
 				user.setPassword(resultSet.getString("password"));
 				user.setFullname(resultSet.getString("fullname"));
@@ -123,7 +123,7 @@ public class UserRepository implements UserRepositoryInterface {
 
 			if (resultSet.next()) {
 
-				user.setId(resultSet.getInt("Id"));
+				user.setId(resultSet.getInt("id"));
 				user.setUsername(resultSet.getString("username"));
 				user.setPassword(resultSet.getString("password"));
 				user.setFullname(resultSet.getString("fullname"));
@@ -174,7 +174,7 @@ public class UserRepository implements UserRepositoryInterface {
 				
 				userList.add(new User());
 
-				userList.get(userList.size()-1).setId(resultSet.getInt("Id"));
+				userList.get(userList.size()-1).setId(resultSet.getInt("id"));
 				userList.get(userList.size()-1).setUsername(resultSet.getString("username"));
 				userList.get(userList.size()-1).setPassword(resultSet.getString("password"));
 				userList.get(userList.size()-1).setFullname(resultSet.getString("fullname"));

@@ -12,7 +12,7 @@ public interface BidRepositoryInterface {
 	
 	public ArrayList<Bid> selectBidList();
 	
-	public void updatetBid(Integer id, Bid bid);
+	public void updateBid(Integer id, Bid bid);
 	
 	public void deleteBid(Integer id);
 }

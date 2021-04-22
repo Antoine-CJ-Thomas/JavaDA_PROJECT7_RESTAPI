@@ -6,7 +6,6 @@ import com.nnk.springboot.service.UserServiceInterface;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,24 +20,19 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 
-	private static final Logger logger = LogManager.getLogger("UserController");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-	@Autowired
 	private UserServiceInterface userServiceInterface;
 
-	/*
-	 * @Autowired private UserRepository userRepository;
-	 */
-
 	public UserController() {
-		logger.info("UserController");
+		logger.info("UserController()");
 
 		userServiceInterface = new UserService();
 	}
 
 	@RequestMapping("/user/list")
 	public String home(Model model) {
-		logger.info("home");
+		logger.info("home(" + model + ")");
 
 		model.addAttribute("userList", userServiceInterface.readUserList());
 
@@ -47,14 +41,14 @@ public class UserController {
 
 	@GetMapping("/user/add")
 	public String addUser(User user) {
-		logger.info("addUser");
+		logger.info("addUser(" + user + ")");
 
 		return "/user/add.html";
 	}
 
 	@PostMapping("/user/validate")
 	public String validate(@Valid User user, BindingResult bindingResult, Model model) {
-		logger.info("validate");
+		logger.info("validate(" + user + "," + bindingResult + "," + model + ")");
 
 		if (bindingResult.hasErrors() == false) {
 
@@ -70,7 +64,7 @@ public class UserController {
 
 	@GetMapping("/user/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		logger.info("showUpdateForm");
+		logger.info("showUpdateForm(" + id + "," + model + ")");
 
 		model.addAttribute("user", userServiceInterface.readUser(id));
 
@@ -78,10 +72,10 @@ public class UserController {
 	}
 
 	@PostMapping("/user/update/{id}")
-	public String updateUser(@PathVariable("id") Integer id, @Valid User user, BindingResult result, Model model) {
-		logger.info("updateUser");
+	public String updateUser(@PathVariable("id") Integer id, @Valid User user, BindingResult bindingResult, Model model) {
+		logger.info("updateUser(" + id + "," + user + "," + bindingResult + "," + model + ")");
 
-		if (result.hasErrors() == false) {
+		if (bindingResult.hasErrors() == false) {
 
 			user.setId(id);
 			user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
@@ -96,7 +90,7 @@ public class UserController {
 
 	@GetMapping("/user/delete/{id}")
 	public String deleteUser(@PathVariable("id") Integer id, Model model) {
-		logger.info("deleteUser");
+		logger.info("deleteUser(" + id + "," + model + ")");
 		
 		userServiceInterface.deleteUser(id);
 

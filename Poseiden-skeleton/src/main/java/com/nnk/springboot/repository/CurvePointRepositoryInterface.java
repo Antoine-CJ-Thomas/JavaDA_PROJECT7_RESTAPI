@@ -12,7 +12,7 @@ public interface CurvePointRepositoryInterface {
 	
 	public ArrayList<CurvePoint> selectCurvePointList();
 	
-	public void updatetCurvePoint(Integer id, CurvePoint curvePoint);
+	public void updateCurvePoint(Integer id, CurvePoint curvePoint);
 	
 	public void deleteCurvePoint(Integer id);
 }

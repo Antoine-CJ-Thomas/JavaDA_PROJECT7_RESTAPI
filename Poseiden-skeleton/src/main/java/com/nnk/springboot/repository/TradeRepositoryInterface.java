@@ -12,7 +12,7 @@ public interface TradeRepositoryInterface {
 	
 	public ArrayList<Trade> selectTradeList();
 	
-	public void updatetTrade(Integer id, Trade trade);
+	public void updateTrade(Integer id, Trade trade);
 	
 	public void deleteTrade(Integer id);
 }

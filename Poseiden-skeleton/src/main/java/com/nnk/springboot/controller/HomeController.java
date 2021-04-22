@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	private static final Logger logger = LogManager.getLogger("HomeController");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	@RequestMapping("/")
 	public String home(Model model) {
-		logger.info("home");
+		logger.info("home(" + model + ")");
 
 		return "/home.html";
 	}
 
 	@RequestMapping("/admin/home")
 	public String adminHome(Model model) {
-		logger.info("adminHome");
+		logger.info("adminHome(" + model + ")");
 
 		return "redirect:/bidList/list";
 	}

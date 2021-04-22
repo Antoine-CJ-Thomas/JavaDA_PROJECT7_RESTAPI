@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
@@ -16,20 +15,19 @@ import com.nnk.springboot.domain.CurvePoint;
 @Component
 public class CurvePointRepository implements CurvePointRepositoryInterface {
 
-	private static final Logger logger = LogManager.getLogger("CurvePointRepository");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-	@Autowired
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
 	
 	public CurvePointRepository() {
-		logger.info("CurvePointRepository");
+		logger.info("CurvePointRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
 
 	@Override
 	public void insertCurvePoint(CurvePoint curvePoint) {
-		logger.info("insertCurvePoint");
+		logger.info("insertCurvePoint(" + curvePoint + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -57,7 +55,7 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 
 	@Override
 	public CurvePoint selectCurvePoint(Integer id) {
-		logger.info("selectCurvePoint");
+		logger.info("selectCurvePoint(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -107,7 +105,7 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 
 	@Override
 	public ArrayList<CurvePoint> selectCurvePointList() {
-		logger.info("selectCurvePointList");
+		logger.info("selectCurvePointList()");
 		
         ArrayList<String> queryList = new ArrayList<String>();
 
@@ -158,8 +156,8 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 	}
 
 	@Override
-	public void updatetCurvePoint(Integer id, CurvePoint curvePoint) {
-		logger.info("updatetCurvePoint");
+	public void updateCurvePoint(Integer id, CurvePoint curvePoint) {
+		logger.info("updateCurvePoint(" + id + "," + curvePoint + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -183,7 +181,7 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 
 	@Override
 	public void deleteCurvePoint(Integer id) {
-		logger.info("deleteCurvePoint");
+		logger.info("deleteCurvePoint(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         

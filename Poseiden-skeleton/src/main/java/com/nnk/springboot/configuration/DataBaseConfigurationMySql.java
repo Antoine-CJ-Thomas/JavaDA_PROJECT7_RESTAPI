@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataBaseConfigurationMySql implements DataBaseConfigurationInterface {
 
-    private static final Logger logger = LogManager.getLogger("DataBaseConfigurationMySql");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private String url;
 	private String user;
@@ -29,6 +29,7 @@ public class DataBaseConfigurationMySql implements DataBaseConfigurationInterfac
 	private ResultSet resultSet;
 
 	public DataBaseConfigurationMySql() {
+		logger.info("DataBaseConfigurationMySql()");
 
 		Properties properties = new Properties();
 
@@ -46,13 +47,14 @@ public class DataBaseConfigurationMySql implements DataBaseConfigurationInterfac
 			}
 
 		} catch (IOException e) {
-			
-	        logger.error(e);
+
+			logger.error(e);
 		}
 	}
 
 	@Override
 	public void executeUpdate(ArrayList<String> queryList) {
+		logger.info("executeUpdate(" + queryList + ")");
 
 		connection = null;
 		statement = null;
@@ -63,35 +65,35 @@ public class DataBaseConfigurationMySql implements DataBaseConfigurationInterfac
 			statement = connection.createStatement();
 
 			connection.setAutoCommit(false);
-			
+
 			for (String query : queryList) {
 
 				statement.executeUpdate(query);
 			}
-			
+
 			connection.commit();
 
 		} catch (SQLException e1) {
-			
-	        logger.error(e1);
+
+			logger.error(e1);
 
 			if (connection != null) {
 
 				try {
-					
+
 					connection.rollback();
-					
+
 				} catch (SQLException e2) {
-					
-			        logger.error(e2);
+
+					logger.error(e2);
 				}
 			}
-			
 		}
 	}
 
 	@Override
 	public ResultSet executeQuery(ArrayList<String> queryList) {
+		logger.info("executeQuery(" + queryList + ")");
 
 		connection = null;
 		statement = null;
@@ -103,58 +105,58 @@ public class DataBaseConfigurationMySql implements DataBaseConfigurationInterfac
 			statement = connection.createStatement();
 
 			connection.setAutoCommit(false);
-			
+
 			for (String query : queryList) {
 
 				resultSet = statement.executeQuery(query);
 			}
 
 		} catch (SQLException e1) {
-			
-	        logger.error(e1);
+
+			logger.error(e1);
 
 			if (connection != null) {
 
 				try {
-					
+
 					connection.rollback();
-					
+
 				} catch (SQLException e2) {
-					
-			        logger.error(e2);
+
+					logger.error(e2);
 				}
 			}
 		}
-		
+
 		return resultSet;
 	}
 
 	@Override
 	public void close() {
+		logger.info("close()");
 
 		if (statement != null) {
 
 			try {
-				
+
 				statement.close();
-				
+
 			} catch (SQLException e) {
-				
-		        logger.error(e);
+
+				logger.error(e);
 			}
 		}
 
 		if (connection != null) {
 
 			try {
-				
+
 				connection.close();
-				
+
 			} catch (SQLException e) {
-				
-		        logger.error(e);
+
+				logger.error(e);
 			}
 		}
-		
 	}
 }

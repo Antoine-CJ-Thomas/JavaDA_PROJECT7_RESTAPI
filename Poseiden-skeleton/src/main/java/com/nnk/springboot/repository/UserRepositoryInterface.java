@@ -14,7 +14,7 @@ public interface UserRepositoryInterface {
 	
 	public ArrayList<User> selectUserList();
 	
-	public void updatetUser(Integer id, User user);
+	public void updateUser(Integer id, User user);
 	
 	public void deleteUser(Integer id);
 }

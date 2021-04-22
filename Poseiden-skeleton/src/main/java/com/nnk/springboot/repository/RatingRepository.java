@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
@@ -16,20 +15,19 @@ import com.nnk.springboot.domain.Rating;
 @Component
 public class RatingRepository implements RatingRepositoryInterface {
 
-	private static final Logger logger = LogManager.getLogger("RatingRepository");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-	@Autowired
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
 	
 	public RatingRepository() {
-		logger.info("RatingRepository");
+		logger.info("RatingRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
 
 	@Override
 	public void insertRating(Rating rating) {
-		logger.info("insertRating");
+		logger.info("insertRating(" + rating + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -59,7 +57,7 @@ public class RatingRepository implements RatingRepositoryInterface {
 
 	@Override
 	public Rating selectRating(Integer id) {
-		logger.info("selectRating");
+		logger.info("selectRating(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -108,7 +106,7 @@ public class RatingRepository implements RatingRepositoryInterface {
 
 	@Override
 	public ArrayList<Rating> selectRatingList() {
-		logger.info("selectRatingList");
+		logger.info("selectRatingList()");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -158,8 +156,8 @@ public class RatingRepository implements RatingRepositoryInterface {
 	}
 
 	@Override
-	public void updatetRating(Integer id, Rating rating) {
-		logger.info("updatetRating");
+	public void updateRating(Integer id, Rating rating) {
+		logger.info("updateRating(" + id + "," + rating + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -184,7 +182,7 @@ public class RatingRepository implements RatingRepositoryInterface {
 
 	@Override
 	public void deleteRating(Integer id) {
-		logger.info("deleteRating");
+		logger.info("deleteRating(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -193,6 +191,5 @@ public class RatingRepository implements RatingRepositoryInterface {
         queryList.add(query);
         
         dataBaseConfigurationInterface.executeUpdate(queryList);
-		
 	}
 }

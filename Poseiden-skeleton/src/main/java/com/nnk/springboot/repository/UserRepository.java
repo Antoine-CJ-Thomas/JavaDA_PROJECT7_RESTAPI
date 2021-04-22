@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
@@ -16,20 +15,19 @@ import com.nnk.springboot.domain.User;
 @Component
 public class UserRepository implements UserRepositoryInterface {
 
-	private static final Logger logger = LogManager.getLogger("UserRepository");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-	@Autowired
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
 	
 	public UserRepository() {
-		logger.info("UserRepository");
+		logger.info("UserRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
 
 	@Override
 	public void insertUser(User user) {
-		logger.info("insertUser");
+		logger.info("insertUser(" + user + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -58,7 +56,7 @@ public class UserRepository implements UserRepositoryInterface {
 
 	@Override
 	public User selectUser(String username) {
-		logger.info("selectUser");
+		logger.info("selectUser(" + username + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -107,7 +105,7 @@ public class UserRepository implements UserRepositoryInterface {
 
 	@Override
 	public User selectUser(Integer id) {
-		logger.info("selectUser");
+		logger.info("selectUser(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -156,7 +154,7 @@ public class UserRepository implements UserRepositoryInterface {
 
 	@Override
 	public ArrayList<User> selectUserList() {
-		logger.info("selectUserList");
+		logger.info("selectUserList()");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -206,8 +204,8 @@ public class UserRepository implements UserRepositoryInterface {
 	}
 
 	@Override
-	public void updatetUser(Integer id, User user) {
-		logger.info("updatetUser");
+	public void updateUser(Integer id, User user) {
+		logger.info("updateUser(" + id + "," + user + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -231,7 +229,7 @@ public class UserRepository implements UserRepositoryInterface {
 
 	@Override
 	public void deleteUser(Integer id) {
-		logger.info("deleteUser");
+		logger.info("deleteUser(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         

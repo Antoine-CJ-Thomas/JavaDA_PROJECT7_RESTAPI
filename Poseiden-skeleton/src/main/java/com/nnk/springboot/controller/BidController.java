@@ -6,7 +6,6 @@ import com.nnk.springboot.service.BidServiceInterface;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,23 +18,20 @@ import javax.validation.Valid;
 
 @Controller
 public class BidController {
-	// TODO: Inject Bid service
 
-	private static final Logger logger = LogManager.getLogger("BidController");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-	@Autowired
 	private BidServiceInterface bidServiceInterface;
 
 	public BidController() {
-		logger.info("BidController");
+		logger.info("BidController()");
 
 		bidServiceInterface = new BidService();
 	}
 
 	@RequestMapping("/bidList/list")
 	public String home(Model model) {
-		logger.info("home");
-		// TODO: call service find all bids to show to the view
+		logger.info("home(" + model + ")");
 
 		model.addAttribute("bidList", bidServiceInterface.readBidList());
 
@@ -44,18 +40,17 @@ public class BidController {
 
 	@GetMapping("/bidList/add")
 	public String addBidForm(Bid bid) {
-		logger.info("addBidForm");
+		logger.info("addBidForm(" + bid + ")");
 
 		return "/bidList/add.html";
 	}
 
 	@PostMapping("/bidList/validate")
 	public String validate(@Valid Bid bid, BindingResult bindingResult, Model model) {
-		logger.info("validate");
-		// TODO: check data valid and save to db, after saving return bid list
+		logger.info("validate(" + bid + "," + bindingResult + "," + model + ")");
 
 		if (bindingResult.hasErrors() == false) {
-			
+
 			bidServiceInterface.createBid(bid);
 
 			return "redirect:/bidList/list";
@@ -66,8 +61,7 @@ public class BidController {
 
 	@GetMapping("/bidList/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		logger.info("showUpdateForm");
-		// TODO: get Bid by Id and to model then show to the form
+		logger.info("showUpdateForm(" + id + "," + model + ")");
 
 		model.addAttribute("bid", bidServiceInterface.readBid(id));
 
@@ -76,9 +70,7 @@ public class BidController {
 
 	@PostMapping("/bidList/update/{id}")
 	public String updateBid(@PathVariable("id") Integer id, @Valid Bid bid, BindingResult bindingResult, Model model) {
-		logger.info("updateBid");
-		// TODO: check required fields, if valid call service to update Bid and return
-		// list Bid
+		logger.info("updateBid(" + id + "," + bid + "," + bindingResult + "," + model + ")");
 
 		if (bindingResult.hasErrors() == false) {
 
@@ -92,8 +84,7 @@ public class BidController {
 
 	@GetMapping("/bidList/delete/{id}")
 	public String deleteBid(@PathVariable("id") Integer id, Model model) {
-		logger.info("deleteBid");
-		// TODO: Find Bid by Id and delete the bid, return to Bid list
+		logger.info("deleteBid(" + id + "," + model + ")");
 
 		bidServiceInterface.deleteBid(id);
 

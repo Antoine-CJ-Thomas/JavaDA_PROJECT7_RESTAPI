@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
@@ -16,20 +15,19 @@ import com.nnk.springboot.domain.Rule;
 @Component
 public class RuleRepository implements RuleRepositoryInterface {
 
-	private static final Logger logger = LogManager.getLogger("RuleRepository");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-	@Autowired
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
 	
 	public RuleRepository() {
-		logger.info("RuleRepository");
+		logger.info("RuleRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
 
 	@Override
 	public void insertRule(Rule rule) {
-		logger.info("insertRule");
+		logger.info("insertRule(" + rule + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -58,12 +56,11 @@ public class RuleRepository implements RuleRepositoryInterface {
         queryList.add(query);
         
         dataBaseConfigurationInterface.executeUpdate(queryList);
-		
 	}
 
 	@Override
 	public Rule selectRule(Integer id) {
-		logger.info("selectRule");
+		logger.info("selectRule(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -114,7 +111,7 @@ public class RuleRepository implements RuleRepositoryInterface {
 
 	@Override
 	public ArrayList<Rule> selectRuleList() {
-		logger.info("selectRuleList");
+		logger.info("selectRuleList()");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -166,8 +163,8 @@ public class RuleRepository implements RuleRepositoryInterface {
 	}
 
 	@Override
-	public void updatetRule(Integer id, Rule rule) {
-		logger.info("updatetRule");
+	public void updateRule(Integer id, Rule rule) {
+		logger.info("updateRule(" + id + "," + rule + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -189,12 +186,11 @@ public class RuleRepository implements RuleRepositoryInterface {
         queryList.add(query);
         
         dataBaseConfigurationInterface.executeUpdate(queryList);
-		
 	}
 
 	@Override
 	public void deleteRule(Integer id) {
-		logger.info("deleteRule");
+		logger.info("deleteRule(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -203,6 +199,5 @@ public class RuleRepository implements RuleRepositoryInterface {
         queryList.add(query);
         
         dataBaseConfigurationInterface.executeUpdate(queryList);
-		
 	}
 }

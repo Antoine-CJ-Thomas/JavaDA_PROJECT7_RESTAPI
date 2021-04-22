@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
@@ -16,20 +15,19 @@ import com.nnk.springboot.domain.Bid;
 @Component
 public class BidRepository implements BidRepositoryInterface {
 
-	private static final Logger logger = LogManager.getLogger("BidRepository");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-	@Autowired
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
 	
 	public BidRepository() {
-		logger.info("BidRepository");
+		logger.info("BidRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
 
 	@Override
 	public void insertBid(Bid bid) {
-		logger.info("insertBid");
+		logger.info("insertBid(" + bid + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -57,7 +55,7 @@ public class BidRepository implements BidRepositoryInterface {
 
 	@Override
 	public Bid selectBid(Integer id) {
-		logger.info("selectBid");
+		logger.info("selectBid(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -128,7 +126,7 @@ public class BidRepository implements BidRepositoryInterface {
 
 	@Override
 	public ArrayList<Bid> selectBidList() {
-		logger.info("selectBidList");
+		logger.info("selectBidList()");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -200,8 +198,8 @@ public class BidRepository implements BidRepositoryInterface {
 	}
 
 	@Override
-	public void updatetBid(Integer id, Bid bid) {
-		logger.info("updatetBid");
+	public void updateBid(Integer id, Bid bid) {
+		logger.info("updateBid(" + id + "," + bid + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -225,7 +223,7 @@ public class BidRepository implements BidRepositoryInterface {
 
 	@Override
 	public void deleteBid(Integer id) {
-		logger.info("deleteBid");
+		logger.info("deleteBid(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         

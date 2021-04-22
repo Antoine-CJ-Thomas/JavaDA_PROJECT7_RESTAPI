@@ -12,7 +12,7 @@ public interface RuleRepositoryInterface {
 	
 	public ArrayList<Rule> selectRuleList();
 	
-	public void updatetRule(Integer id, Rule rule);
+	public void updateRule(Integer id, Rule rule);
 	
 	public void deleteRule(Integer id);
 }

@@ -6,7 +6,6 @@ import com.nnk.springboot.service.RatingServiceInterface;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,23 +18,20 @@ import javax.validation.Valid;
 
 @Controller
 public class RatingController {
-	// TODO: Inject Rating service
 
-	private static final Logger logger = LogManager.getLogger("RatingController");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-	@Autowired
 	private RatingServiceInterface ratingServiceInterface;
 
 	public RatingController() {
-		logger.info("RatingController");
+		logger.info("RatingController()");
 
 		ratingServiceInterface = new RatingService();
 	}
 
 	@RequestMapping("/rating/list")
 	public String home(Model model) {
-		logger.info("home");
-		// TODO: find all Rating, add to model
+		logger.info("home(" + model + ")");
 
 		model.addAttribute("ratingList", ratingServiceInterface.readRatingList());
 
@@ -44,15 +40,14 @@ public class RatingController {
 
 	@GetMapping("/rating/add")
 	public String addRatingForm(Rating rating) {
-		logger.info("addRatingForm");
+		logger.info("addRatingForm(" + rating + ")");
 
 		return "/rating/add.html";
 	}
 
 	@PostMapping("/rating/validate")
 	public String validate(@Valid Rating rating, BindingResult bindingResult, Model model) {
-		logger.info("validate");
-		// TODO: check data valid and save to db, after saving return Rating list
+		logger.info("validate(" + rating + "," + bindingResult + "," + model + ")");
 
 		if (bindingResult.hasErrors() == false) {
 
@@ -66,8 +61,7 @@ public class RatingController {
 
 	@GetMapping("/rating/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		logger.info("showUpdateForm");
-		// TODO: get Rating by Id and to model then show to the form
+		logger.info("showUpdateForm(" + id + "," + model + ")");
 
 		model.addAttribute("rating", ratingServiceInterface.readRating(id));
 
@@ -77,9 +71,7 @@ public class RatingController {
 	@PostMapping("/rating/update/{id}")
 	public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating, BindingResult bindingResult,
 			Model model) {
-		logger.info("updateRating");
-		// TODO: check required fields, if valid call service to update Rating and
-		// return Rating list
+		logger.info("updateRating(" + id + "," + rating + "," + bindingResult + "," + model + ")");
 
 		if (bindingResult.hasErrors() == false) {
 
@@ -93,8 +85,7 @@ public class RatingController {
 
 	@GetMapping("/rating/delete/{id}")
 	public String deleteRating(@PathVariable("id") Integer id, Model model) {
-		logger.info("deleteRating");
-		// TODO: Find Rating by Id and delete the Rating, return to Rating list
+		logger.info("deleteRating(" + id + "," + model + ")");
 
 		ratingServiceInterface.deleteRating(id);
 

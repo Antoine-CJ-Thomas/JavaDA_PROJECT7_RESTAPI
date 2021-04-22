@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
@@ -16,20 +15,19 @@ import com.nnk.springboot.domain.Trade;
 @Component
 public class TradeRepository implements TradeRepositoryInterface {
 
-	private static final Logger logger = LogManager.getLogger("TradeRepository");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-	@Autowired
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
 	
 	public TradeRepository() {
-		logger.info("TradeRepository");
+		logger.info("TradeRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
 
 	@Override
 	public void insertTrade(Trade trade) {
-		logger.info("insertTrade");
+		logger.info("insertTrade(" + trade + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -56,7 +54,7 @@ public class TradeRepository implements TradeRepositoryInterface {
 
 	@Override
 	public Trade selectTrade(Integer id) {
-		logger.info("selectTrade");
+		logger.info("selectTrade(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
 
@@ -125,7 +123,7 @@ public class TradeRepository implements TradeRepositoryInterface {
 
 	@Override
 	public ArrayList<Trade> selectTradeList() {
-		logger.info("selectTradeList");
+		logger.info("selectTradeList()");
 		
         ArrayList<String> queryList = new ArrayList<String>();
 
@@ -195,8 +193,8 @@ public class TradeRepository implements TradeRepositoryInterface {
 	}
 
 	@Override
-	public void updatetTrade(Integer id, Trade trade) {
-		logger.info("updatetTrade");
+	public void updateTrade(Integer id, Trade trade) {
+		logger.info("updateTrade(" + id + "," + trade + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
         
@@ -219,7 +217,7 @@ public class TradeRepository implements TradeRepositoryInterface {
 
 	@Override
 	public void deleteTrade(Integer id) {
-		logger.info("deleteTrade");
+		logger.info("deleteTrade(" + id + ")");
 		
         ArrayList<String> queryList = new ArrayList<String>();
 

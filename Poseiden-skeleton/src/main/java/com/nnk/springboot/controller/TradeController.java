@@ -6,7 +6,6 @@ import com.nnk.springboot.service.TradeServiceInterface;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,23 +18,20 @@ import javax.validation.Valid;
 
 @Controller
 public class TradeController {
-	// TODO: Inject Trade service
 
-	private static final Logger logger = LogManager.getLogger("TradeController");
+	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-	@Autowired
 	private TradeServiceInterface tradeServiceInterface;
 
 	public TradeController() {
-		logger.info("TradeController");
+		logger.info("TradeController()");
 
 		tradeServiceInterface = new TradeService();
 	}
 
 	@RequestMapping("/trade/list")
 	public String home(Model model) {
-		logger.info("home");
-		// TODO: find all Trade, add to model
+		logger.info("home(" + model + ")");
 
 		model.addAttribute("tradeList", tradeServiceInterface.readTradeList());
 
@@ -44,15 +40,14 @@ public class TradeController {
 
 	@GetMapping("/trade/add")
 	public String addTrade(Trade trade) {
-		logger.info("addTrade");
+		logger.info("addTrade(" + trade + ")");
 
 		return "/trade/add.html";
 	}
 
 	@PostMapping("/trade/validate")
 	public String validate(@Valid Trade trade, BindingResult bindingResult, Model model) {
-		logger.info("validate");
-		// TODO: check data valid and save to db, after saving return Trade list
+		logger.info("validate(" + trade + "," + bindingResult + "," + model + ")");
 
 		if (bindingResult.hasErrors() == false) {
 
@@ -66,8 +61,7 @@ public class TradeController {
 
 	@GetMapping("/trade/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-		logger.info("showUpdateForm");
-		// TODO: get Trade by Id and to model then show to the form
+		logger.info("showUpdateForm(" + id + "," + model + ")");
 
 		model.addAttribute("trade", tradeServiceInterface.readTrade(id));
 
@@ -75,10 +69,9 @@ public class TradeController {
 	}
 
 	@PostMapping("/trade/update/{id}")
-	public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade, BindingResult bindingResult, Model model) {
-		logger.info("updateTrade");
-		// TODO: check required fields, if valid call service to update Trade and return
-		// Trade list
+	public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade, BindingResult bindingResult,
+			Model model) {
+		logger.info("updateTrade(" + id + "," + trade + "," + bindingResult + "," + model + ")");
 
 		if (bindingResult.hasErrors() == false) {
 
@@ -92,8 +85,7 @@ public class TradeController {
 
 	@GetMapping("/trade/delete/{id}")
 	public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-		logger.info("deleteTrade");
-		// TODO: Find Trade by Id and delete the Trade, return to Trade list
+		logger.info("deleteTrade(" + id + "," + model + ")");
 
 		tradeServiceInterface.deleteTrade(id);
 

@@ -12,7 +12,7 @@ public interface RatingRepositoryInterface {
 	
 	public ArrayList<Rating> selectRatingList();
 	
-	public void updatetRating(Integer id, Rating rating);
+	public void updateRating(Integer id, Rating rating);
 	
 	public void deleteRating(Integer id);
 }

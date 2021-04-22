@@ -4,8 +4,10 @@ package com.nnk.springboot.domain;
 import java.sql.Timestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * This class stores the data of a bid
@@ -18,34 +20,36 @@ public class Bid {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer BidListId;
-    @NotBlank(message = "Account is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=16)
 	private String account;
-    @NotBlank(message = "Type is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=16)
 	private String type;
-    @NotNull(message = "Bid quantity is mandatory")
+    
+    @NotNull
+    @DecimalMin("0.01") 
 	private Double bidQuantity;
     
 	private Double askQuantity;
 	private Double bid;
-	
 	private Double ask;
 	private String benchmark;
 	private Timestamp bidListDate;
 	private String commentary;
 	private String security;
-	
 	private String status;
 	private String trader;
 	private String book;
 	private String creationName;
 	private Timestamp creationDate;
-	
 	private String revisionName;
 	private Timestamp revisionDate;
 	private String dealName;
 	private String dealType;
 	private String sourceListId;
-	
 	private String side;
 
 	public Bid() {

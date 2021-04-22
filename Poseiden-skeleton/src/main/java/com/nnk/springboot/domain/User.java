@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,13 +21,20 @@ public class User implements Serializable, UserDetails {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    @NotBlank(message = "Username is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=16)
     private String username;
-    @NotBlank(message = "Password is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=16)
     private String password;
-    @NotBlank(message = "FullName is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=32)
     private String fullname;
-    @NotBlank(message = "Role is mandatory")
+    
+    @NotBlank
     private String role;
 
 	public User() {

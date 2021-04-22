@@ -4,6 +4,8 @@ package com.nnk.springboot.domain;
 import java.sql.Timestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -17,13 +19,21 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer id;
-    @NotNull(message = "Curve ID is mandatory")
+    
+    @NotNull
+    @Min(1)
 	private Integer curveId;
+    
 	private Timestamp asOfDate;
-	@NotNull(message = "Term is mandatory")
+	
+	@NotNull
+    @DecimalMin("0.01") 
 	private Double term;
-    @NotNull(message = "Value is mandatory")
+	
+    @NotNull
+    @DecimalMin("0.01") 
 	private Double value;
+    
 	private Timestamp creationDate;
 
 	public CurvePoint() {

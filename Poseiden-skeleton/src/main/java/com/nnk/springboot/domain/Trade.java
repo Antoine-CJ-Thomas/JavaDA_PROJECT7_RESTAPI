@@ -4,8 +4,10 @@ package com.nnk.springboot.domain;
 import java.sql.Timestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * This class stores the data of a trade
@@ -19,27 +21,30 @@ public class Trade {
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer tradeId;
 
-    @NotBlank(message = "Account Part is mandatory")
+    @NotBlank
+    @Size(min=8, max=16)
 	private String account;
-    @NotBlank(message = "Type Part is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=16)
 	private String type;
-    @NotNull(message = "Buy Quantity Part is mandatory")
+    
+    @NotNull
+    @DecimalMin("0.01") 
 	private Double buyQuantity;
+    
 	private Double sellQuantity;
 	private Double buyPrice;
-	
 	private Double sellPrice;
 	private Timestamp tradeDate;
 	private String security;
 	private String status;
 	private String trader;
-	
 	private String benchmark;
 	private String book;
 	private String creationName;
 	private Timestamp creationDate;
 	private String revisionName;
-	
 	private Timestamp revisionDate;
 	private String dealName;
 	private String dealType;

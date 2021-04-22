@@ -2,6 +2,7 @@ package com.nnk.springboot.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  * This class stores the data of a rule
@@ -15,17 +16,28 @@ public class Rule {
     @GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer id;
 
-    @NotBlank(message = "Name is mandatory")
+    @NotBlank
+    @Size(min=8, max=16)
 	private String name;
-    @NotBlank(message = "Description is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=16)
 	private String description;
-    @NotBlank(message = "Json is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=16)
 	private String json;
-    @NotBlank(message = "Template is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=16)
 	private String template;
-    @NotBlank(message = "Sql Str is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=16)
 	private String sqlStr;
-    @NotBlank(message = "Sql Part is mandatory")
+    
+    @NotBlank
+    @Size(min=8, max=16)
 	private String sqlPart;
 
 	public Rule() {

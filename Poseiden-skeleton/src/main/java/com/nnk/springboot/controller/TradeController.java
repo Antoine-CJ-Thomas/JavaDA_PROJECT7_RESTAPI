@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * This class allows to intercept trade requests
+ */
 @Controller
 public class TradeController {
 

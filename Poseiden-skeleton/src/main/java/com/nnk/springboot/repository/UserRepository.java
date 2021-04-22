@@ -12,6 +12,9 @@ import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
 import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.User;
 
+/**
+ * This class allows to prepare queries for the user table and send them to the database configured
+ */
 @Component
 public class UserRepository implements UserRepositoryInterface {
 

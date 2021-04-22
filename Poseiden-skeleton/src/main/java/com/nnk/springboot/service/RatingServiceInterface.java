@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.nnk.springboot.domain.Rating;
 
+/**
+ * This interface allows to implement rating service methods
+*/
 public interface RatingServiceInterface {
 
 	public void createRating(Rating rating);

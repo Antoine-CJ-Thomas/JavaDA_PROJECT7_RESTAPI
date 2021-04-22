@@ -10,6 +10,9 @@ import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repository.TradeRepository;
 import com.nnk.springboot.repository.TradeRepositoryInterface;
 
+/**
+ * This class allows to interact with a trade repository
+ */
 @Service
 public class TradeService implements TradeServiceInterface {
 

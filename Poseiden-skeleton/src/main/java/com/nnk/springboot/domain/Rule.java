@@ -3,6 +3,9 @@ package com.nnk.springboot.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * This class stores the data of a rule
+ */
 @Entity
 @Table(name = "rulename")
 public class Rule {

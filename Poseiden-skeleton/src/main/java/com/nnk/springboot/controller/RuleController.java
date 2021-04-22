@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * This class allows to intercept rule requests
+ */
 @Controller
 public class RuleController {
 

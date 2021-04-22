@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.nnk.springboot.domain.User;
 
+/**
+ * This interface allows to implement user service methods
+*/
 public interface UserServiceInterface {
 
 	public void createUser(User user);

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.nnk.springboot.domain.CurvePoint;
 
+/**
+ * This interface allows to implement curve point service methods
+*/
 public interface CurvePointServiceInterface {
 
 	public void createCurvePoint(CurvePoint curvePoint);

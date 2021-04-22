@@ -7,6 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+/**
+ * This class stores the data of a bid
+ */
 @Entity
 @Table(name = "bidlist")
 public class Bid {

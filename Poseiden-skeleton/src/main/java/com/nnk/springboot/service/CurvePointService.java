@@ -10,6 +10,9 @@ import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.repository.CurvePointRepository;
 import com.nnk.springboot.repository.CurvePointRepositoryInterface;
 
+/**
+ * This class allows to interact with a curve point repository
+ */
 @Service
 public class CurvePointService implements CurvePointServiceInterface {
 

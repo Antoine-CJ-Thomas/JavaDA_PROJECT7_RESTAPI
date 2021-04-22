@@ -9,6 +9,9 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * This class stores the data of an user
+ */
 @Entity
 @Table(name = "users")
 @SuppressWarnings("serial")

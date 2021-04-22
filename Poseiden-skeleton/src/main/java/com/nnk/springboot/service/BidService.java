@@ -10,6 +10,9 @@ import com.nnk.springboot.domain.Bid;
 import com.nnk.springboot.repository.BidRepository;
 import com.nnk.springboot.repository.BidRepositoryInterface;
 
+/**
+ * This class allows to interact with a bid repository
+ */
 @Service
 public class BidService implements BidServiceInterface {
 

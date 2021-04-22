@@ -12,6 +12,9 @@ import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
 import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.Rating;
 
+/**
+ * This class allows to prepare queries for the rating table and send them to the database configured
+ */
 @Component
 public class RatingRepository implements RatingRepositoryInterface {
 

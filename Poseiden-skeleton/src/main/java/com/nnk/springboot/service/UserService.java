@@ -10,6 +10,9 @@ import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repository.UserRepository;
 import com.nnk.springboot.repository.UserRepositoryInterface;
 
+/**
+ * This class allows to interact with an user repository
+ */
 @Service
 public class UserService implements UserServiceInterface {
 

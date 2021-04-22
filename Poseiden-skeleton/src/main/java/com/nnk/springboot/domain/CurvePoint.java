@@ -6,6 +6,9 @@ import java.sql.Timestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ * This class stores the data of a curve point
+ */
 @Entity
 @Table(name = "curvepoint")
 public class CurvePoint {

@@ -12,6 +12,9 @@ import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
 import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.CurvePoint;
 
+/**
+ * This class allows to prepare queries for the curve point table and send them to the database configured
+ */
 @Component
 public class CurvePointRepository implements CurvePointRepositoryInterface {
 

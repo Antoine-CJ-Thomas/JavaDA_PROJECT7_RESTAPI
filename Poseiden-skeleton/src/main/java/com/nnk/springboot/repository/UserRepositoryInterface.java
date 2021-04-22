@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.nnk.springboot.domain.User;
 
+/**
+ * This interface allows to implement user repository methods
+*/
 public interface UserRepositoryInterface {
 
 	public void insertUser(User user);

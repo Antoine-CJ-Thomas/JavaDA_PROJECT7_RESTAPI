@@ -15,6 +15,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+/**
+ * This class allows to interact with a relational database management system of type MySQL
+*/
 @Component
 public class DataBaseConfigurationMySql implements DataBaseConfigurationInterface {
 

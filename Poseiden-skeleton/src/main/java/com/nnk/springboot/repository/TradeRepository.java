@@ -12,6 +12,9 @@ import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
 import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.Trade;
 
+/**
+ * This class allows to prepare queries for the trade table and send them to the database configured
+ */
 @Component
 public class TradeRepository implements TradeRepositoryInterface {
 

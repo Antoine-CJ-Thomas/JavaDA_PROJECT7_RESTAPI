@@ -12,6 +12,9 @@ import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
 import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.Bid;
 
+/**
+ * This class allows to prepare queries for the bid table and send them to the database configured
+ */
 @Component
 public class BidRepository implements BidRepositoryInterface {
 

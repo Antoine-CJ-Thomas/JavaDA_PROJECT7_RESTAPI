@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.nnk.springboot.domain.Bid;
 
+/**
+ * This interface allows to implement bid repository methods
+*/
 public interface BidRepositoryInterface {
 
 	public void insertBid(Bid bid);

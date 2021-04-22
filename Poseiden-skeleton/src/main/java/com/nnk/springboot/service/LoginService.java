@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import com.nnk.springboot.repository.UserRepository;
 import com.nnk.springboot.repository.UserRepositoryInterface;
 
+/**
+ * This class allows to interact with a user repository in order to login
+ */
 @Service
 public class LoginService implements UserDetailsService {
 

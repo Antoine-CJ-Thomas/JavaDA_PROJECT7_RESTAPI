@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.nnk.springboot.domain.Trade;
 
+/**
+ * This interface allows to implement trade service methods
+*/
 public interface TradeServiceInterface {
 
 	public void createTrade(Trade trade);

@@ -12,6 +12,9 @@ import com.nnk.springboot.configuration.DataBaseConfigurationInterface;
 import com.nnk.springboot.configuration.DataBaseConfigurationMySql;
 import com.nnk.springboot.domain.Rule;
 
+/**
+ * This class allows to prepare queries for the rule table and send them to the database configured
+ */
 @Component
 public class RuleRepository implements RuleRepositoryInterface {
 

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.nnk.springboot.domain.Rule;
 
+/**
+ * This interface allows to implement rule service methods
+*/
 public interface RuleServiceInterface {
 
 	public void createRule(Rule rule);

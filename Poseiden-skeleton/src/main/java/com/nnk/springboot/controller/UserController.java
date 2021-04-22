@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * This class allows to intercept user requests
+ */
 @Controller
 public class UserController {
 

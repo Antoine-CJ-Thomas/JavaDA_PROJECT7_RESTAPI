@@ -10,6 +10,9 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repository.RatingRepository;
 import com.nnk.springboot.repository.RatingRepositoryInterface;
 
+/**
+ * This class allows to interact with a rating repository
+ */
 @Service
 public class RatingService implements RatingServiceInterface {
 

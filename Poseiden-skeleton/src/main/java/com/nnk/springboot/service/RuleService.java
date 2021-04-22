@@ -10,6 +10,9 @@ import com.nnk.springboot.domain.Rule;
 import com.nnk.springboot.repository.RuleRepository;
 import com.nnk.springboot.repository.RuleRepositoryInterface;
 
+/**
+ * This class allows to interact with a rule repository
+ */
 @Service
 public class RuleService implements RuleServiceInterface {
 

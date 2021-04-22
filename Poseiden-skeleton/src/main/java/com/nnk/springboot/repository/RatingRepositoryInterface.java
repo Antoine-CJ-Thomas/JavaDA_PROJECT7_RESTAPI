@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.nnk.springboot.domain.Rating;
 
+/**
+ * This interface allows to implement rating repository methods
+*/
 public interface RatingRepositoryInterface {
 
 	public void insertRating(Rating rating);

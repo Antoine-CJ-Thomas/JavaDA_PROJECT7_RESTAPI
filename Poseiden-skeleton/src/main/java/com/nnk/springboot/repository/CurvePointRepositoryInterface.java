@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import com.nnk.springboot.domain.CurvePoint;
 
+/**
+ * This interface allows to implement curve point repository methods
+*/
 public interface CurvePointRepositoryInterface {
 
 	public void insertCurvePoint(CurvePoint curvePoint);

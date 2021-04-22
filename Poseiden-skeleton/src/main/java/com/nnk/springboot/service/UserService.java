@@ -26,6 +26,12 @@ public class UserService implements UserServiceInterface {
 		userRepositoryInterface = new UserRepository();
 	}
 
+	public UserService(UserRepositoryInterface userRepositoryInterface) {
+		logger.info("UserService(" + userRepositoryInterface + ")");
+
+		this.userRepositoryInterface = userRepositoryInterface;
+	}
+
 	@Override
 	public void createUser(User user) {
 		logger.info("createUser(" + user + ")");

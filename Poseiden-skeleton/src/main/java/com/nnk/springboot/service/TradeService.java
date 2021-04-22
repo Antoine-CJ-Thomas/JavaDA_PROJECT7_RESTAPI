@@ -26,6 +26,12 @@ public class TradeService implements TradeServiceInterface {
 		tradeRepositoryInterface = new TradeRepository();
 	}
 
+	public TradeService(TradeRepositoryInterface tradeRepositoryInterface) {
+		logger.info("TradeService(" + tradeRepositoryInterface + ")");
+
+		this.tradeRepositoryInterface = tradeRepositoryInterface;
+	}
+
 	@Override
 	public void createTrade(Trade trade) {
 		logger.info("createTrade(" + trade + ")");

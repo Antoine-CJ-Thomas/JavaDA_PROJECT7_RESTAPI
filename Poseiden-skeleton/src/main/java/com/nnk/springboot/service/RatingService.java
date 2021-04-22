@@ -26,6 +26,12 @@ public class RatingService implements RatingServiceInterface {
 		ratingRepositoryInterface = new RatingRepository();
 	}
 
+	public RatingService(RatingRepositoryInterface ratingRepositoryInterface) {
+		logger.info("RatingService(" + ratingRepositoryInterface + ")");
+
+		this.ratingRepositoryInterface = ratingRepositoryInterface;
+	}
+
 	@Override
 	public void createRating(Rating rating) {
 		logger.info("createRating(" + rating + ")");

@@ -26,6 +26,12 @@ public class CurvePointService implements CurvePointServiceInterface {
 		curvePointRepositoryInterface = new CurvePointRepository();
 	}
 
+	public CurvePointService(CurvePointRepositoryInterface curvePointRepositoryInterface) {
+		logger.info("CurvePointService(" + curvePointRepositoryInterface + ")");
+
+		this.curvePointRepositoryInterface = curvePointRepositoryInterface;
+	}
+
 	@Override
 	public void createCurvePoint(CurvePoint curvePoint) {
 		logger.info("createCurvePoint(" + curvePoint + ")");

@@ -26,6 +26,12 @@ public class BidService implements BidServiceInterface {
 		bidRepositoryInterface = new BidRepository();
 	}
 
+	public BidService(BidRepositoryInterface bidRepositoryInterface) {
+		logger.info("BidService(" + bidRepositoryInterface + ")");
+
+		this.bidRepositoryInterface = bidRepositoryInterface;
+	}
+
 	@Override
 	public void createBid(Bid bid) {
 		logger.info("createBid(" + bid + ")");

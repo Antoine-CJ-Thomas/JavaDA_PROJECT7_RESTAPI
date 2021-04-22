@@ -26,6 +26,12 @@ public class RuleService implements RuleServiceInterface {
 		ruleRepositoryInterface = new RuleRepository();
 	}
 
+	public RuleService(RuleRepositoryInterface ruleRepositoryInterface) {
+		logger.info("RuleService(" + ruleRepositoryInterface + ")");
+
+		this.ruleRepositoryInterface = ruleRepositoryInterface;
+	}
+
 	@Override
 	public void createRule(Rule rule) {
 		logger.info("createRule(" + rule + ")");

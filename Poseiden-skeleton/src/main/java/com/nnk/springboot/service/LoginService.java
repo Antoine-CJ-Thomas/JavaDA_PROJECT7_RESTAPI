@@ -26,6 +26,12 @@ public class LoginService implements UserDetailsService {
 		userRepositoryInterface = new UserRepository();
 	}
 
+	public LoginService(UserRepositoryInterface userRepositoryInterface) {
+		logger.info("LoginService(" + userRepositoryInterface + ")");
+
+		this.userRepositoryInterface = userRepositoryInterface;
+	}
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		logger.info("loadUserByUsername(" + username + ")");

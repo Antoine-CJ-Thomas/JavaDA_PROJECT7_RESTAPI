@@ -27,6 +27,12 @@ public class RuleRepository implements RuleRepositoryInterface {
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
+	
+	public RuleRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
+		logger.info("RuleRepository(" + dataBaseConfigurationInterface + ")");
+
+		this.dataBaseConfigurationInterface = dataBaseConfigurationInterface;
+	}
 
 	@Override
 	public void insertRule(Rule rule) {
@@ -73,11 +79,13 @@ public class RuleRepository implements RuleRepositoryInterface {
         
 		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
 		
-		Rule rule = new Rule();
+		Rule rule = null;
 		
     	try {
 
 			if (resultSet.next()) {
+				
+				rule = new Rule();
 
 				rule.setId(resultSet.getInt("Id"));
 				rule.setName(resultSet.getString("name"));
@@ -129,16 +137,18 @@ public class RuleRepository implements RuleRepositoryInterface {
     	try {
 
 			while (resultSet.next()) {
-				
-				ruleList.add(new Rule());
 
-				ruleList.get(ruleList.size()-1).setId(resultSet.getInt("Id"));
-				ruleList.get(ruleList.size()-1).setName(resultSet.getString("name"));
-				ruleList.get(ruleList.size()-1).setDescription(resultSet.getString("description"));
-				ruleList.get(ruleList.size()-1).setJson(resultSet.getString("json"));
-				ruleList.get(ruleList.size()-1).setTemplate(resultSet.getString("template"));
-				ruleList.get(ruleList.size()-1).setSqlStr(resultSet.getString("sqlStr"));
-				ruleList.get(ruleList.size()-1).setSqlPart(resultSet.getString("sqlPart"));
+				Rule rule = new Rule();
+
+				rule.setId(resultSet.getInt("Id"));
+				rule.setName(resultSet.getString("name"));
+				rule.setDescription(resultSet.getString("description"));
+				rule.setJson(resultSet.getString("json"));
+				rule.setTemplate(resultSet.getString("template"));
+				rule.setSqlStr(resultSet.getString("sqlStr"));
+				rule.setSqlPart(resultSet.getString("sqlPart"));
+				
+				ruleList.add(rule);
 			}
 
 		} catch (SQLException e) {

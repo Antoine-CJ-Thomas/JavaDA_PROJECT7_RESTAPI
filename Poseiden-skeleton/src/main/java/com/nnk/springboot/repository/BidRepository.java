@@ -27,6 +27,12 @@ public class BidRepository implements BidRepositoryInterface {
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
+	
+	public BidRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
+		logger.info("BidRepository(" + dataBaseConfigurationInterface + ")");
+
+		this.dataBaseConfigurationInterface = dataBaseConfigurationInterface;
+	}
 
 	@Override
 	public void insertBid(Bid bid) {
@@ -67,12 +73,14 @@ public class BidRepository implements BidRepositoryInterface {
         queryList.add(query);
         
 		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
-		
-		Bid bid = new Bid();
+
+		Bid bid = null;
 		
     	try {
 
 			if (resultSet.next()) {
+				
+				bid = new Bid();
 
 				bid.setBidListId(resultSet.getInt("BidListId"));
 				
@@ -145,35 +153,39 @@ public class BidRepository implements BidRepositoryInterface {
 
 			while (resultSet.next()) {
 				
-				bidList.add(new Bid());
+				Bid bid = new Bid();
 
-				bidList.get(bidList.size()-1).setBidListId(resultSet.getInt("BidListId"));
+				bid.setBidListId(resultSet.getInt("BidListId"));
 				
-				bidList.get(bidList.size()-1).setAccount(resultSet.getString("account"));
-				bidList.get(bidList.size()-1).setType(resultSet.getString("type"));
-				bidList.get(bidList.size()-1).setBidQuantity(resultSet.getDouble("bidQuantity"));
-				bidList.get(bidList.size()-1).setAskQuantity(resultSet.getDouble("askQuantity"));
-				bidList.get(bidList.size()-1).setBid(resultSet.getDouble("bid"));
+				bid.setBidListId(resultSet.getInt("BidListId"));
 				
-				bidList.get(bidList.size()-1).setAsk(resultSet.getDouble("ask"));
-				bidList.get(bidList.size()-1).setBenchmark(resultSet.getString("benchmark"));
-				bidList.get(bidList.size()-1).setBidListDate(resultSet.getTimestamp("bidListDate"));
-				bidList.get(bidList.size()-1).setCommentary(resultSet.getString("commentary"));
-				bidList.get(bidList.size()-1).setSecurity(resultSet.getString("security"));
+				bid.setAccount(resultSet.getString("account"));
+				bid.setType(resultSet.getString("type"));
+				bid.setBidQuantity(resultSet.getDouble("bidQuantity"));
+				bid.setAskQuantity(resultSet.getDouble("askQuantity"));
+				bid.setBid(resultSet.getDouble("bid"));
 				
-				bidList.get(bidList.size()-1).setStatus(resultSet.getString("status"));
-				bidList.get(bidList.size()-1).setTrader(resultSet.getString("trader"));
-				bidList.get(bidList.size()-1).setBook(resultSet.getString("book"));
-				bidList.get(bidList.size()-1).setCreationName(resultSet.getString("creationName"));
-				bidList.get(bidList.size()-1).setCreationDate(resultSet.getTimestamp("creationDate"));
+				bid.setAsk(resultSet.getDouble("ask"));
+				bid.setBenchmark(resultSet.getString("benchmark"));
+				bid.setBidListDate(resultSet.getTimestamp("bidListDate"));
+				bid.setCommentary(resultSet.getString("commentary"));
+				bid.setSecurity(resultSet.getString("security"));
 				
-				bidList.get(bidList.size()-1).setRevisionName(resultSet.getString("revisionName"));
-				bidList.get(bidList.size()-1).setRevisionDate(resultSet.getTimestamp("revisionDate"));
-				bidList.get(bidList.size()-1).setDealName(resultSet.getString("dealName"));
-				bidList.get(bidList.size()-1).setDealType(resultSet.getString("dealType"));
-				bidList.get(bidList.size()-1).setSourceListId(resultSet.getString("sourceListId"));
+				bid.setStatus(resultSet.getString("status"));
+				bid.setTrader(resultSet.getString("trader"));
+				bid.setBook(resultSet.getString("book"));
+				bid.setCreationName(resultSet.getString("creationName"));
+				bid.setCreationDate(resultSet.getTimestamp("creationDate"));
 				
-				bidList.get(bidList.size()-1).setSide(resultSet.getString("side"));
+				bid.setRevisionName(resultSet.getString("revisionName"));
+				bid.setRevisionDate(resultSet.getTimestamp("revisionDate"));
+				bid.setDealName(resultSet.getString("dealName"));
+				bid.setDealType(resultSet.getString("dealType"));
+				bid.setSourceListId(resultSet.getString("sourceListId"));
+				
+				bid.setSide(resultSet.getString("side"));
+				
+				bidList.add(bid);
 			}
 
 		} catch (SQLException e) {

@@ -27,6 +27,12 @@ public class RatingRepository implements RatingRepositoryInterface {
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
+	
+	public RatingRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
+		logger.info("RatingRepository(" + dataBaseConfigurationInterface + ")");
+
+		this.dataBaseConfigurationInterface = dataBaseConfigurationInterface;
+	}
 
 	@Override
 	public void insertRating(Rating rating) {
@@ -70,11 +76,13 @@ public class RatingRepository implements RatingRepositoryInterface {
         
 		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
 		
-		Rating rating = new Rating();
+		Rating rating = null;
 		
     	try {
 
 			if (resultSet.next()) {
+				
+				rating = new Rating();
 
 				rating.setId(resultSet.getInt("Id"));
 				rating.setMoodysRating(resultSet.getString("moodysRating"));
@@ -124,14 +132,16 @@ public class RatingRepository implements RatingRepositoryInterface {
     	try {
 
     		while (resultSet.next()) {
-				
-				ratingList.add(new Rating());
 
-				ratingList.get(ratingList.size()-1).setId(resultSet.getInt("Id"));
-				ratingList.get(ratingList.size()-1).setMoodysRating(resultSet.getString("moodysRating"));
-				ratingList.get(ratingList.size()-1).setSandPRating(resultSet.getString("sandPRating"));
-				ratingList.get(ratingList.size()-1).setFitchRating(resultSet.getString("fitchRating"));
-				ratingList.get(ratingList.size()-1).setOrderNumber(resultSet.getInt("orderNumber"));
+    			Rating rating = new Rating();
+
+				rating.setId(resultSet.getInt("Id"));
+				rating.setMoodysRating(resultSet.getString("moodysRating"));
+				rating.setSandPRating(resultSet.getString("sandPRating"));
+				rating.setFitchRating(resultSet.getString("fitchRating"));
+				rating.setOrderNumber(resultSet.getInt("orderNumber"));
+				
+				ratingList.add(rating);
 			}
 
 		} catch (SQLException e) {

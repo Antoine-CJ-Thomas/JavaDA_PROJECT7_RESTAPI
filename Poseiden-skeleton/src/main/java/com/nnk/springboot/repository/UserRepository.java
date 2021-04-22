@@ -27,6 +27,12 @@ public class UserRepository implements UserRepositoryInterface {
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
+	
+	public UserRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
+		logger.info("UserRepository(" + dataBaseConfigurationInterface + ")");
+
+		this.dataBaseConfigurationInterface = dataBaseConfigurationInterface;
+	}
 
 	@Override
 	public void insertUser(User user) {
@@ -69,11 +75,13 @@ public class UserRepository implements UserRepositoryInterface {
         
 		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
 		
-		User user = new User();
+		User user = null;
 		
     	try {
 
 			if (resultSet.next()) {
+				
+				user = new User();
 
 				user.setId(resultSet.getInt("id"));
 				user.setUsername(resultSet.getString("username"));
@@ -118,11 +126,13 @@ public class UserRepository implements UserRepositoryInterface {
         
 		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
 		
-		User user = new User();
+		User user = null;
 		
     	try {
 
 			if (resultSet.next()) {
+				
+				user = new User();
 
 				user.setId(resultSet.getInt("id"));
 				user.setUsername(resultSet.getString("username"));
@@ -172,14 +182,16 @@ public class UserRepository implements UserRepositoryInterface {
     	try {
 
 			while (resultSet.next()) {
-				
-				userList.add(new User());
 
-				userList.get(userList.size()-1).setId(resultSet.getInt("id"));
-				userList.get(userList.size()-1).setUsername(resultSet.getString("username"));
-				userList.get(userList.size()-1).setPassword(resultSet.getString("password"));
-				userList.get(userList.size()-1).setFullname(resultSet.getString("fullname"));
-				userList.get(userList.size()-1).setRole(resultSet.getString("role"));
+				User user = new User();
+
+				user.setId(resultSet.getInt("id"));
+				user.setUsername(resultSet.getString("username"));
+				user.setPassword(resultSet.getString("password"));
+				user.setFullname(resultSet.getString("fullname"));
+				user.setRole(resultSet.getString("role"));
+				
+				userList.add(user);
 			}
 
 		} catch (SQLException e) {

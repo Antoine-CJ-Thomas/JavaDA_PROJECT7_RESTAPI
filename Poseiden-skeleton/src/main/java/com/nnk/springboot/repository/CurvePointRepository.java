@@ -27,6 +27,12 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
+	
+	public CurvePointRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
+		logger.info("CurvePointRepository(" + dataBaseConfigurationInterface + ")");
+
+		this.dataBaseConfigurationInterface = dataBaseConfigurationInterface;
+	}
 
 	@Override
 	public void insertCurvePoint(CurvePoint curvePoint) {
@@ -68,11 +74,13 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
         
 		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
 		
-		CurvePoint curvePoint = new CurvePoint();
+		CurvePoint curvePoint = null;
 		
     	try {
 
 			if (resultSet.next()) {
+				
+				curvePoint = new CurvePoint();
 
 				curvePoint.setId(resultSet.getInt("Id"));
 				curvePoint.setCurveId(resultSet.getInt("CurveId"));
@@ -123,15 +131,17 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
     	try {
 
     		while (resultSet.next()) {
-				
-				curvePointList.add(new CurvePoint());
 
-				curvePointList.get(curvePointList.size()-1).setId(resultSet.getInt("Id"));
-				curvePointList.get(curvePointList.size()-1).setCurveId(resultSet.getInt("CurveId"));
-				curvePointList.get(curvePointList.size()-1).setAsOfDate(resultSet.getTimestamp("asOfDate"));
-				curvePointList.get(curvePointList.size()-1).setTerm(resultSet.getDouble("term"));
-				curvePointList.get(curvePointList.size()-1).setValue(resultSet.getDouble("value"));
-				curvePointList.get(curvePointList.size()-1).setCreationDate(resultSet.getTimestamp("creationDate"));
+				CurvePoint curvePoint = new CurvePoint();
+
+				curvePoint.setId(resultSet.getInt("Id"));
+				curvePoint.setCurveId(resultSet.getInt("CurveId"));
+				curvePoint.setAsOfDate(resultSet.getTimestamp("asOfDate"));
+				curvePoint.setTerm(resultSet.getDouble("term"));
+				curvePoint.setValue(resultSet.getDouble("value"));
+				curvePoint.setCreationDate(resultSet.getTimestamp("creationDate"));
+				
+				curvePointList.add(curvePoint);
 			}
 
 		} catch (SQLException e) {

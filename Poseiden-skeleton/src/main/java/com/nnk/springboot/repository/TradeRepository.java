@@ -27,6 +27,12 @@ public class TradeRepository implements TradeRepositoryInterface {
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
+	
+	public TradeRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
+		logger.info("TradeRepository(" + dataBaseConfigurationInterface + ")");
+
+		this.dataBaseConfigurationInterface = dataBaseConfigurationInterface;
+	}
 
 	@Override
 	public void insertTrade(Trade trade) {
@@ -67,11 +73,13 @@ public class TradeRepository implements TradeRepositoryInterface {
         
 		ResultSet resultSet = dataBaseConfigurationInterface.executeQuery(queryList);
 		
-		Trade trade = new Trade();
+		Trade trade = null;
 		
     	try {
 
 			if (resultSet.next()) {
+				
+				trade = new Trade();
 
 				trade.setTradeId(resultSet.getInt("TradeId"));
 				
@@ -141,34 +149,36 @@ public class TradeRepository implements TradeRepositoryInterface {
     	try {
 
     		while (resultSet.next()) {
-				
-				tradeList.add(new Trade());
 
-				tradeList.get(tradeList.size()-1).setTradeId(resultSet.getInt("TradeId"));
+    			Trade trade = new Trade();
+
+				trade.setTradeId(resultSet.getInt("TradeId"));
 				
-				tradeList.get(tradeList.size()-1).setAccount(resultSet.getString("account"));
-				tradeList.get(tradeList.size()-1).setType(resultSet.getString("type"));
-				tradeList.get(tradeList.size()-1).setBuyQuantity(resultSet.getDouble("buyQuantity"));
-				tradeList.get(tradeList.size()-1).setSellQuantity(resultSet.getDouble("sellQuantity"));
-				tradeList.get(tradeList.size()-1).setBuyPrice(resultSet.getDouble("buyPrice"));
+				trade.setAccount(resultSet.getString("account"));
+				trade.setType(resultSet.getString("type"));
+				trade.setBuyQuantity(resultSet.getDouble("buyQuantity"));
+				trade.setSellQuantity(resultSet.getDouble("sellQuantity"));
+				trade.setBuyPrice(resultSet.getDouble("buyPrice"));
 				
-				tradeList.get(tradeList.size()-1).setSellPrice(resultSet.getDouble("sellPrice"));
-				tradeList.get(tradeList.size()-1).setTradeDate(resultSet.getTimestamp("tradeDate"));
-				tradeList.get(tradeList.size()-1).setSecurity(resultSet.getString("security"));
-				tradeList.get(tradeList.size()-1).setStatus(resultSet.getString("status"));
-				tradeList.get(tradeList.size()-1).setTrader(resultSet.getString("trader"));
+				trade.setSellPrice(resultSet.getDouble("sellPrice"));
+				trade.setTradeDate(resultSet.getTimestamp("tradeDate"));
+				trade.setSecurity(resultSet.getString("security"));
+				trade.setStatus(resultSet.getString("status"));
+				trade.setTrader(resultSet.getString("trader"));
 				
-				tradeList.get(tradeList.size()-1).setBenchmark(resultSet.getString("benchmark"));
-				tradeList.get(tradeList.size()-1).setBook(resultSet.getString("book"));
-				tradeList.get(tradeList.size()-1).setCreationName(resultSet.getString("creationName"));
-				tradeList.get(tradeList.size()-1).setCreationDate(resultSet.getTimestamp("creationDate"));
-				tradeList.get(tradeList.size()-1).setRevisionName(resultSet.getString("revisionName"));
+				trade.setBenchmark(resultSet.getString("benchmark"));
+				trade.setBook(resultSet.getString("book"));
+				trade.setCreationName(resultSet.getString("creationName"));
+				trade.setCreationDate(resultSet.getTimestamp("creationDate"));
+				trade.setRevisionName(resultSet.getString("revisionName"));
 				
-				tradeList.get(tradeList.size()-1).setRevisionDate(resultSet.getTimestamp("revisionDate"));
-				tradeList.get(tradeList.size()-1).setDealName(resultSet.getString("dealName"));
-				tradeList.get(tradeList.size()-1).setDealType(resultSet.getString("dealType"));
-				tradeList.get(tradeList.size()-1).setSourceListId(resultSet.getString("sourceListId"));
-				tradeList.get(tradeList.size()-1).setSide(resultSet.getString("side"));
+				trade.setRevisionDate(resultSet.getTimestamp("revisionDate"));
+				trade.setDealName(resultSet.getString("dealName"));
+				trade.setDealType(resultSet.getString("dealType"));
+				trade.setSourceListId(resultSet.getString("sourceListId"));
+				trade.setSide(resultSet.getString("side"));
+				
+				tradeList.add(trade);
 			}
 
 		} catch (SQLException e) {

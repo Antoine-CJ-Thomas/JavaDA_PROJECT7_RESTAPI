@@ -1,5 +1,7 @@
 package com.nnk.springboot.domain;
 
+import java.sql.Timestamp;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -112,13 +114,21 @@ public class BidTest {
     	//THEN
     	Assert.assertTrue(bid.getBenchmark().equals("Benchmark"));
     }
-/*	
+	
     @Test
     public void setAndGetbidListDate() {
+		
+		//GIVEN
+		bid = new Bid();
+    	Timestamp bidListDate = new Timestamp(0);
+
+    	//WHEN
+    	bid.setBidListDate(bidListDate);
     	
+    	//THEN
+    	Assert.assertTrue(bid.getBidListDate() == bidListDate);
     }
-*/    
-	
+    
     @Test
     public void setAndGetCommentary() {
 		
@@ -196,12 +206,20 @@ public class BidTest {
     	//THEN
     	Assert.assertTrue(bid.getCreationName().equals("CreationName"));
     }
-/*	
+	
     @Test
     public void setAndCreationDate() {
+		
+		//GIVEN
+		bid = new Bid();
+    	Timestamp creationDate = new Timestamp(0);
+
+    	//WHEN
+    	bid.setCreationDate(creationDate);
     	
-    }
-*/    
+    	//THEN
+    	Assert.assertTrue(bid.getCreationDate() == creationDate);
+    }  
 	
     @Test
     public void setAndGetRevisionName() {
@@ -215,12 +233,20 @@ public class BidTest {
     	//THEN
     	Assert.assertTrue(bid.getRevisionName().equals("RevisionName"));
     }
-/*	
+	
     @Test
     public void setAndRevisionDate() {
+		
+		//GIVEN
+		bid = new Bid();
+    	Timestamp revisionDate = new Timestamp(0);
+
+    	//WHEN
+    	bid.setRevisionDate(revisionDate);
     	
-    }
-*/   
+    	//THEN
+    	Assert.assertTrue(bid.getRevisionDate() == revisionDate);
+    }   
 	
     @Test
     public void setAndGetDealName() {

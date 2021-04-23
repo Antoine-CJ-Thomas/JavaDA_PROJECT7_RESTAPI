@@ -1,5 +1,7 @@
 package com.nnk.springboot.domain;
 
+import java.sql.Timestamp;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -112,12 +114,20 @@ public class TradeTest {
     	//THEN
     	Assert.assertTrue(trade.getBenchmark().equals("Benchmark"));
     }
-/*	
+	
     @Test
     public void setAndGetTradeDate() {
+		
+		//GIVEN
+    	trade = new Trade();
+    	Timestamp tradeDate = new Timestamp(0);
+
+    	//WHEN
+    	trade.setTradeDate(tradeDate);
     	
+    	//THEN
+    	Assert.assertTrue(trade.getTradeDate() == tradeDate);
     }
-*/  
 	
     @Test
     public void setAndGetSecurity() {
@@ -185,6 +195,20 @@ public class TradeTest {
     }
 	
     @Test
+    public void setAndGetCreationDate() {
+		
+		//GIVEN
+    	trade = new Trade();
+    	Timestamp creationDate = new Timestamp(0);
+
+    	//WHEN
+    	trade.setCreationDate(creationDate);
+    	
+    	//THEN
+    	Assert.assertTrue(trade.getCreationDate() == creationDate);
+    }
+	
+    @Test
     public void setAndGetRevisionName() {
 		
 		//GIVEN
@@ -196,13 +220,21 @@ public class TradeTest {
     	//THEN
     	Assert.assertTrue(trade.getRevisionName().equals("RevisionName"));
     }
-/*	
+	
     @Test
     public void setAndGetRevisionDate() {
+		
+		//GIVEN
+    	trade = new Trade();
+    	Timestamp revisionDate = new Timestamp(0);
+
+    	//WHEN
+    	trade.setRevisionDate(revisionDate);
     	
+    	//THEN
+    	Assert.assertTrue(trade.getRevisionDate() == revisionDate);
     }
-*/  
-	
+  
     @Test
     public void setAndGetDealName() {
 		

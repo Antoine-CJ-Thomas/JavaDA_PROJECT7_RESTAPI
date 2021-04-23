@@ -73,4 +73,64 @@ public class UserTest {
     	//THEN
     	Assert.assertTrue(user.getRole().equals("Role"));
     }
+	
+    @Test
+    public void getAuthorities() {
+		
+		//GIVEN
+    	user = new User();
+
+    	//WHEN
+    	
+    	//THEN
+    	Assert.assertTrue(user.getAuthorities() == null);
+    }
+	
+    @Test
+    public void isAccountNonExpired() {
+		
+		//GIVEN
+    	user = new User();
+
+    	//WHEN
+    	
+    	//THEN
+    	Assert.assertTrue(user.isAccountNonExpired());
+    }
+	
+    @Test
+    public void isAccountNonLocked() {
+		
+		//GIVEN
+    	user = new User();
+
+    	//WHEN
+    	
+    	//THEN
+    	Assert.assertTrue(user.isAccountNonLocked());
+    }
+	
+    @Test
+    public void isCredentialsNonExpired() {
+		
+		//GIVEN
+    	user = new User();
+
+    	//WHEN
+    	
+    	//THEN
+    	Assert.assertTrue(user.isCredentialsNonExpired());
+    }
+	
+    @Test
+    public void isEnabled() {
+		
+		//GIVEN
+    	user = new User();
+
+    	//WHEN
+    	
+    	//THEN
+    	Assert.assertTrue(user.isEnabled());
+    }
 }

@@ -32,6 +32,12 @@ public class TradeController {
 		tradeServiceInterface = new TradeService();
 	}
 
+	public TradeController(TradeServiceInterface tradeServiceInterface) {
+		logger.info("TradeController(" + tradeServiceInterface + ")");
+
+		this.tradeServiceInterface = tradeServiceInterface;
+	}
+
 	@RequestMapping("/trade/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
@@ -42,8 +48,8 @@ public class TradeController {
 	}
 
 	@GetMapping("/trade/add")
-	public String addTrade(Trade trade) {
-		logger.info("addTrade(" + trade + ")");
+	public String addTradeForm(Trade trade) {
+		logger.info("addTradeForm(" + trade + ")");
 
 		return "/trade/add.html";
 	}

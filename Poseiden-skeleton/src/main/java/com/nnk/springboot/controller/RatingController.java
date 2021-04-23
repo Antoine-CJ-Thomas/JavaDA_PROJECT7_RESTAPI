@@ -32,6 +32,12 @@ public class RatingController {
 		ratingServiceInterface = new RatingService();
 	}
 
+	public RatingController(RatingServiceInterface ratingServiceInterface) {
+		logger.info("RatingController(" + ratingServiceInterface + ")");
+
+		this.ratingServiceInterface = ratingServiceInterface;
+	}
+
 	@RequestMapping("/rating/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");

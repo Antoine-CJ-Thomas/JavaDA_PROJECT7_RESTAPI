@@ -32,6 +32,12 @@ public class RuleController {
 		ruleServiceInterface = new RuleService();
 	}
 
+	public RuleController(RuleServiceInterface ruleServiceInterface) {
+		logger.info("RuleController(" + ruleServiceInterface + ")");
+
+		this.ruleServiceInterface = ruleServiceInterface;
+	}
+
 	@RequestMapping("/ruleName/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");

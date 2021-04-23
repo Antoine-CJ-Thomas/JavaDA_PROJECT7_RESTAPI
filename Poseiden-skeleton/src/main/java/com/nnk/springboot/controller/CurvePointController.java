@@ -32,6 +32,12 @@ public class CurvePointController {
 		curvePointServiceInterface = new CurvePointService();
 	}
 
+	public CurvePointController(CurvePointServiceInterface curvePointServiceInterface) {
+		logger.info("CurvePointController(" + curvePointServiceInterface + ")");
+
+		this.curvePointServiceInterface = curvePointServiceInterface;
+	}
+
 	@RequestMapping("/curvePoint/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");

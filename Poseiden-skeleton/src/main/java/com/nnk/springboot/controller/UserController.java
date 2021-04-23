@@ -33,6 +33,12 @@ public class UserController {
 		userServiceInterface = new UserService();
 	}
 
+	public UserController(UserServiceInterface userServiceInterface) {
+		logger.info("UserController(" + userServiceInterface + ")");
+
+		this.userServiceInterface = userServiceInterface;
+	}
+
 	@RequestMapping("/user/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
@@ -43,8 +49,8 @@ public class UserController {
 	}
 
 	@GetMapping("/user/add")
-	public String addUser(User user) {
-		logger.info("addUser(" + user + ")");
+	public String addUserForm(User user) {
+		logger.info("addUserForm(" + user + ")");
 
 		return "/user/add.html";
 	}

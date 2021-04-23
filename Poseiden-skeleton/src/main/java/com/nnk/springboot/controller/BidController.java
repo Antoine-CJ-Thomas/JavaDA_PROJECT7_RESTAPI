@@ -32,6 +32,12 @@ public class BidController {
 		bidServiceInterface = new BidService();
 	}
 
+	public BidController(BidServiceInterface bidServiceInterface) {
+		logger.info("BidController(" + bidServiceInterface + ")");
+
+		this.bidServiceInterface = bidServiceInterface;
+	}
+
 	@RequestMapping("/bidList/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");

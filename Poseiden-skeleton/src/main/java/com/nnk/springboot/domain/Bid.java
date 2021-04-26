@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "bidlist")
 public class Bid {
-	// TODO: Map columns in data table BIDLIST with corresponding java fields
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

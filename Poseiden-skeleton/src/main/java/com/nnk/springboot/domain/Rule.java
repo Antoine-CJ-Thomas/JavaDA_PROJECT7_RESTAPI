@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "rulename")
 public class Rule {
-	// TODO: Map columns in data table RULENAME with corresponding java fields
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

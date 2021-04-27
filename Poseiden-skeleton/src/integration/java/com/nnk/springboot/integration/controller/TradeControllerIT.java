@@ -17,11 +17,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.nnk.springboot.domain.Bid;
+import com.nnk.springboot.domain.Trade;
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
-public class BidControllerIT {
+public class TradeControllerIT {
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -29,19 +29,19 @@ public class BidControllerIT {
 	private MockMvc mockMvc;
 	private MvcResult mvcResult;
 	
-	static private Bid createdTestBid;
-	static private ArrayList<Bid> bidList;
+	static private Trade createdTestTrade;
+	static private ArrayList<Trade> tradeList;
 	
 	@Test
 	@Order(1)
 	@WithMockUser
-	void addBidForm() throws Exception {
+	void addTradeForm() throws Exception {
 
 		// GIVEN
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/add")).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/trade/add")).andReturn();
 
 		// THEN
 		assertEquals(200, mvcResult.getResponse().getStatus());
@@ -56,10 +56,10 @@ public class BidControllerIT {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN	
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/bidList/validate")
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/trade/validate")
 				.param("account", "aaaaaaaa")
 				.param("type", "bbbbbbbb")
-				.param("bidQuantity", "3.0")).andReturn();
+				.param("buyQuantity", "3.0")).andReturn();
 
 		// THEN
 		assertEquals(302, mvcResult.getResponse().getStatus());
@@ -75,10 +75,10 @@ public class BidControllerIT {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/list")).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/trade/list")).andReturn();
 		
-		bidList = ((ArrayList<Bid>) mvcResult.getModelAndView().getModel().get("bidList"));
-		createdTestBid = bidList.get(bidList.size()-1);
+		tradeList = ((ArrayList<Trade>) mvcResult.getModelAndView().getModel().get("tradeList"));
+		createdTestTrade = tradeList.get(tradeList.size()-1);
 		
 		// THEN
 		assertEquals(200, mvcResult.getResponse().getStatus());
@@ -93,7 +93,7 @@ public class BidControllerIT {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/update/" + createdTestBid.getBidListId())).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/trade/update/" + createdTestTrade.getTradeId())).andReturn();
 		
 		// THEN
 		assertEquals(200, mvcResult.getResponse().getStatus());
@@ -102,16 +102,16 @@ public class BidControllerIT {
 	@Test
 	@Order(5)
 	@WithMockUser
-	void updateBid() throws Exception {
+	void updateTrade() throws Exception {
 
 		// GIVEN
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/bidList/update/" + createdTestBid.getBidListId())
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/trade/update/" + createdTestTrade.getTradeId())
 				.param("account", "cccccccc")
 				.param("type", "dddddddd")
-				.param("bidQuantity", "3.0")).andReturn();
+				.param("buyQuantity", "6.0")).andReturn();
 		
 		// THEN
 		assertEquals(302, mvcResult.getResponse().getStatus());
@@ -120,13 +120,13 @@ public class BidControllerIT {
 	@Test
 	@Order(6)
 	@WithMockUser
-	void deleteBid() throws Exception {
+	void deleteTrade() throws Exception {
 
 		// GIVEN
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/delete/" + createdTestBid.getBidListId())).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/trade/delete/" + createdTestTrade.getTradeId())).andReturn();
 
 		// THEN
 		assertEquals(302, mvcResult.getResponse().getStatus());

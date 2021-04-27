@@ -17,11 +17,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.nnk.springboot.domain.Bid;
+import com.nnk.springboot.domain.Rating;
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
-public class BidControllerIT {
+public class RatingControllerIT {
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -29,19 +29,19 @@ public class BidControllerIT {
 	private MockMvc mockMvc;
 	private MvcResult mvcResult;
 	
-	static private Bid createdTestBid;
-	static private ArrayList<Bid> bidList;
+	static private Rating createdTestRating;
+	static private ArrayList<Rating> ratingList;
 	
 	@Test
 	@Order(1)
 	@WithMockUser
-	void addBidForm() throws Exception {
+	void addRatingForm() throws Exception {
 
 		// GIVEN
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/add")).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/rating/add")).andReturn();
 
 		// THEN
 		assertEquals(200, mvcResult.getResponse().getStatus());
@@ -56,10 +56,11 @@ public class BidControllerIT {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN	
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/bidList/validate")
-				.param("account", "aaaaaaaa")
-				.param("type", "bbbbbbbb")
-				.param("bidQuantity", "3.0")).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/rating/validate")
+				.param("moodysRating", "aaaaaaaa")
+				.param("sandPRating", "bbbbbbbb")
+				.param("fitchRating", "cccccccc")
+				.param("orderNumber", "1")).andReturn();
 
 		// THEN
 		assertEquals(302, mvcResult.getResponse().getStatus());
@@ -75,10 +76,10 @@ public class BidControllerIT {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/list")).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/rating/list")).andReturn();
 		
-		bidList = ((ArrayList<Bid>) mvcResult.getModelAndView().getModel().get("bidList"));
-		createdTestBid = bidList.get(bidList.size()-1);
+		ratingList = ((ArrayList<Rating>) mvcResult.getModelAndView().getModel().get("ratingList"));
+		createdTestRating = ratingList.get(ratingList.size()-1);
 		
 		// THEN
 		assertEquals(200, mvcResult.getResponse().getStatus());
@@ -93,7 +94,7 @@ public class BidControllerIT {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/update/" + createdTestBid.getBidListId())).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/rating/update/" + createdTestRating.getId())).andReturn();
 		
 		// THEN
 		assertEquals(200, mvcResult.getResponse().getStatus());
@@ -102,16 +103,17 @@ public class BidControllerIT {
 	@Test
 	@Order(5)
 	@WithMockUser
-	void updateBid() throws Exception {
+	void updateRating() throws Exception {
 
 		// GIVEN
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/bidList/update/" + createdTestBid.getBidListId())
-				.param("account", "cccccccc")
-				.param("type", "dddddddd")
-				.param("bidQuantity", "3.0")).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/rating/update/" + createdTestRating.getId())
+				.param("moodysRating", "dddddddd")
+				.param("sandPRating", "eeeeeeee")
+				.param("fitchRating", "ffffffff")
+				.param("orderNumber", "2")).andReturn();
 		
 		// THEN
 		assertEquals(302, mvcResult.getResponse().getStatus());
@@ -120,13 +122,13 @@ public class BidControllerIT {
 	@Test
 	@Order(6)
 	@WithMockUser
-	void deleteBid() throws Exception {
+	void deleteRating() throws Exception {
 
 		// GIVEN
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/delete/" + createdTestBid.getBidListId())).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/rating/delete/" + createdTestRating.getId())).andReturn();
 
 		// THEN
 		assertEquals(302, mvcResult.getResponse().getStatus());

@@ -17,11 +17,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.nnk.springboot.domain.Bid;
+import com.nnk.springboot.domain.Rule;
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
-public class BidControllerIT {
+public class RuleControllerIT {
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -29,19 +29,19 @@ public class BidControllerIT {
 	private MockMvc mockMvc;
 	private MvcResult mvcResult;
 	
-	static private Bid createdTestBid;
-	static private ArrayList<Bid> bidList;
+	static private Rule createdTestRule;
+	static private ArrayList<Rule> ruleList;
 	
 	@Test
 	@Order(1)
 	@WithMockUser
-	void addBidForm() throws Exception {
+	void addRuleForm() throws Exception {
 
 		// GIVEN
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/add")).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/ruleName/add")).andReturn();
 
 		// THEN
 		assertEquals(200, mvcResult.getResponse().getStatus());
@@ -56,10 +56,13 @@ public class BidControllerIT {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN	
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/bidList/validate")
-				.param("account", "aaaaaaaa")
-				.param("type", "bbbbbbbb")
-				.param("bidQuantity", "3.0")).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/ruleName/validate")
+				.param("name", "aaaaaaaa")
+				.param("description", "bbbbbbbb")
+				.param("json", "cccccccc")
+				.param("template", "dddddddd")
+				.param("sqlStr", "eeeeeeee")
+				.param("sqlPart", "ffffffff")).andReturn();
 
 		// THEN
 		assertEquals(302, mvcResult.getResponse().getStatus());
@@ -75,10 +78,10 @@ public class BidControllerIT {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/list")).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/ruleName/list")).andReturn();
 		
-		bidList = ((ArrayList<Bid>) mvcResult.getModelAndView().getModel().get("bidList"));
-		createdTestBid = bidList.get(bidList.size()-1);
+		ruleList = ((ArrayList<Rule>) mvcResult.getModelAndView().getModel().get("ruleList"));
+		createdTestRule = ruleList.get(ruleList.size()-1);
 		
 		// THEN
 		assertEquals(200, mvcResult.getResponse().getStatus());
@@ -93,7 +96,7 @@ public class BidControllerIT {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/update/" + createdTestBid.getBidListId())).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/ruleName/update/" + createdTestRule.getId())).andReturn();
 		
 		// THEN
 		assertEquals(200, mvcResult.getResponse().getStatus());
@@ -102,16 +105,19 @@ public class BidControllerIT {
 	@Test
 	@Order(5)
 	@WithMockUser
-	void updateBid() throws Exception {
+	void updateRule() throws Exception {
 
 		// GIVEN
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/bidList/update/" + createdTestBid.getBidListId())
-				.param("account", "cccccccc")
-				.param("type", "dddddddd")
-				.param("bidQuantity", "3.0")).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/ruleName/update/" + createdTestRule.getId())
+				.param("name", "gggggggg")
+				.param("description", "hhhhhhhh")
+				.param("json", "iiiiiiii")
+				.param("template", "jjjjjjjj")
+				.param("sqlStr", "kkkkkkkk")
+				.param("sqlPart", "llllllll")).andReturn();
 		
 		// THEN
 		assertEquals(302, mvcResult.getResponse().getStatus());
@@ -120,13 +126,13 @@ public class BidControllerIT {
 	@Test
 	@Order(6)
 	@WithMockUser
-	void deleteBid() throws Exception {
+	void deleteRule() throws Exception {
 
 		// GIVEN
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 		// WHEN
-		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/bidList/delete/" + createdTestBid.getBidListId())).andReturn();
+		mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/ruleName/delete/" + createdTestRule.getId())).andReturn();
 
 		// THEN
 		assertEquals(302, mvcResult.getResponse().getStatus());

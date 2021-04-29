@@ -20,12 +20,19 @@ public class RatingService implements RatingServiceInterface {
 
 	private RatingRepositoryInterface ratingRepositoryInterface;
 
+	/**
+	 * Creates a new RatingService
+	 */
 	public RatingService() {
 		logger.info("RatingService()");
 
 		ratingRepositoryInterface = new RatingRepository();
 	}
 
+	/**
+	 * Creates a new RatingService with the specified RatingRepositoryInterface
+	 * @param ratingRepositoryInterface : repository that this service will use
+	 */
 	public RatingService(RatingRepositoryInterface ratingRepositoryInterface) {
 		logger.info("RatingService(" + ratingRepositoryInterface + ")");
 

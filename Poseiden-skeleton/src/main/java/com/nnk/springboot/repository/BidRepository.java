@@ -21,13 +21,20 @@ public class BidRepository implements BidRepositoryInterface {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
-	
+
+	/**
+	 * Creates a new BidRepository
+	 */
 	public BidRepository() {
 		logger.info("BidRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
-	
+
+	/**
+	 * Creates a new BidRepository with the specified DataBaseConfigurationInterface
+	 * @param dataBaseConfigurationInterface : database configuration that this repository will use
+	 */
 	public BidRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
 		logger.info("BidRepository(" + dataBaseConfigurationInterface + ")");
 

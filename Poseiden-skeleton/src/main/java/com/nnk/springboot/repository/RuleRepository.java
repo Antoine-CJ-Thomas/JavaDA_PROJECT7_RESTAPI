@@ -21,13 +21,20 @@ public class RuleRepository implements RuleRepositoryInterface {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
-	
+
+	/**
+	 * Creates a new RuleRepository
+	 */
 	public RuleRepository() {
 		logger.info("RuleRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
-	
+
+	/**
+	 * Creates a new RuleRepository with the specified DataBaseConfigurationInterface
+	 * @param dataBaseConfigurationInterface : database configuration that this repository will use
+	 */
 	public RuleRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
 		logger.info("RuleRepository(" + dataBaseConfigurationInterface + ")");
 

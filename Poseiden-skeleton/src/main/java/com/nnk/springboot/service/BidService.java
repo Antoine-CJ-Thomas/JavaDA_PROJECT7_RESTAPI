@@ -12,6 +12,9 @@ import com.nnk.springboot.repository.BidRepositoryInterface;
 
 /**
  * This class allows to interact with a bid repository
+ * 
+ * @author Antoine Thomas
+ * @version 1.0
  */
 @Service
 public class BidService implements BidServiceInterface {
@@ -20,12 +23,19 @@ public class BidService implements BidServiceInterface {
 
 	private BidRepositoryInterface bidRepositoryInterface;
 
+	/**
+	 * Creates a new BidService
+	 */
 	public BidService() {
 		logger.info("BidService()");
 
 		bidRepositoryInterface = new BidRepository();
 	}
 
+	/**
+	 * Creates a new BidService with the specified BidRepositoryInterface
+	 * @param bidRepositoryInterface : repository that this service will use
+	 */
 	public BidService(BidRepositoryInterface bidRepositoryInterface) {
 		logger.info("BidService(" + bidRepositoryInterface + ")");
 

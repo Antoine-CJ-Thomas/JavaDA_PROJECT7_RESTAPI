@@ -30,7 +30,10 @@ public class DataBaseConfigurationMySql implements DataBaseConfigurationInterfac
 	private Connection connection;
 	private Statement statement;
 	private ResultSet resultSet;
-
+	
+	/**
+	 * Creates a new DataBaseConfigurationMySql
+	 */
 	public DataBaseConfigurationMySql() {
 		logger.info("DataBaseConfigurationMySql()");
 

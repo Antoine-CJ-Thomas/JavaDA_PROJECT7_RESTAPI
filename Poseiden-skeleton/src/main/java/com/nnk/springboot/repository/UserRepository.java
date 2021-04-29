@@ -21,13 +21,20 @@ public class UserRepository implements UserRepositoryInterface {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
-	
+
+	/**
+	 * Creates a new UserRepository
+	 */
 	public UserRepository() {
 		logger.info("UserRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
-	
+
+	/**
+	 * Creates a new UserRepository with the specified DataBaseConfigurationInterface
+	 * @param dataBaseConfigurationInterface : database configuration that this repository will use
+	 */
 	public UserRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
 		logger.info("UserRepository(" + dataBaseConfigurationInterface + ")");
 

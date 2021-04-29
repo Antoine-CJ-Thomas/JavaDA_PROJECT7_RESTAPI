@@ -26,19 +26,31 @@ public class UserController {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private UserServiceInterface userServiceInterface;
-
+	
+	/**
+	 * Creates a new UserController
+	 */
 	public UserController() {
 		logger.info("UserController()");
 
 		userServiceInterface = new UserService();
 	}
 
+	/**
+	 * Creates a new UserController with the specified UserServiceInterface
+	 * @param userServiceInterface : service that this controller will use
+	 */
 	public UserController(UserServiceInterface userServiceInterface) {
 		logger.info("UserController(" + userServiceInterface + ")");
 
 		this.userServiceInterface = userServiceInterface;
 	}
 
+	/**
+	 * Intercepts the request of the user list table
+	 * @param model : defines a holder for model attributes
+     * @return The user list template
+	 */
 	@RequestMapping("/user/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
@@ -48,6 +60,11 @@ public class UserController {
 		return "/user/list.html";
 	}
 
+	/**
+	 * Intercepts the get request of the user creation form
+	 * @param user : data of the User to create
+     * @return The user creation form template
+	 */
 	@GetMapping("/user/add")
 	public String addUserForm(User user) {
 		logger.info("addUserForm(" + user + ")");
@@ -55,6 +72,13 @@ public class UserController {
 		return "/user/add.html";
 	}
 
+	/**
+	 * Intercepts the post request of the user creation form
+	 * @param user : data of the User to create
+	 * @param bindingResult : serves as result holder
+	 * @param model : defines a holder for model attributes
+     * @return Return the user list template or redirect to the user creation form
+	 */
 	@PostMapping("/user/validate")
 	public String validate(@Valid User user, BindingResult bindingResult, Model model) {
 		logger.info("validate(" + user + "," + bindingResult + "," + model + ")");
@@ -71,6 +95,12 @@ public class UserController {
 		return "/user/add.html";
 	}
 
+	/**
+	 * Intercepts the get request of the user update form
+	 * @param id : id of the user to update
+	 * @param model : defines a holder for model attributes
+     * @return Return the user update form template
+	 */
 	@GetMapping("/user/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		logger.info("showUpdateForm(" + id + "," + model + ")");
@@ -80,6 +110,14 @@ public class UserController {
 		return "/user/update.html";
 	}
 
+	/**
+	 * Intercepts the post request of the user update form
+	 * @param id : id of the user to update
+	 * @param user : data of the User to update
+	 * @param bindingResult : serves as result holder
+	 * @param model : defines a holder for model attributes
+     * @return Return the user list template or redirect to the user update form
+	 */
 	@PostMapping("/user/update/{id}")
 	public String updateUser(@PathVariable("id") Integer id, @Valid User user, BindingResult bindingResult, Model model) {
 		logger.info("updateUser(" + id + "," + user + "," + bindingResult + "," + model + ")");
@@ -97,6 +135,12 @@ public class UserController {
 		return "/user/update.html";
 	}
 
+	/**
+	 * Intercepts the get request of the user delete
+	 * @param id : id of the user to delete
+	 * @param model : defines a holder for model attributes
+     * @return Return the user list template
+	 */
 	@GetMapping("/user/delete/{id}")
 	public String deleteUser(@PathVariable("id") Integer id, Model model) {
 		logger.info("deleteUser(" + id + "," + model + ")");

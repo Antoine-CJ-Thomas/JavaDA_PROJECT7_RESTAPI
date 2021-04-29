@@ -25,19 +25,30 @@ public class CurvePointController {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private CurvePointServiceInterface curvePointServiceInterface;
-
+	
+	/**
+	 * Creates a new CurvePointController
+	 */
 	public CurvePointController() {
 		logger.info("CurvePointController()");
 
 		curvePointServiceInterface = new CurvePointService();
 	}
-
+	/**
+	 * Creates a new CurvePointController with the specified CurvePointServiceInterface
+	 * @param curvePointServiceInterface : service that this controller will use
+	 */
 	public CurvePointController(CurvePointServiceInterface curvePointServiceInterface) {
 		logger.info("CurvePointController(" + curvePointServiceInterface + ")");
 
 		this.curvePointServiceInterface = curvePointServiceInterface;
 	}
 
+	/**
+	 * Intercepts the request of the curve point list table
+	 * @param model : defines a holder for model attributes
+     * @return The curve point list template
+	 */
 	@RequestMapping("/curvePoint/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
@@ -47,6 +58,11 @@ public class CurvePointController {
 		return "/curvePoint/list.html";
 	}
 
+	/**
+	 * Intercepts the get request of the curve point creation form
+	 * @param curvePoint : data of the CurvePoint to create
+     * @return The curve point creation form template
+	 */
 	@GetMapping("/curvePoint/add")
 	public String addCurvePointForm(CurvePoint curvePoint) {
 		logger.info("addCurvePointForm(" + curvePoint + ")");
@@ -54,6 +70,13 @@ public class CurvePointController {
 		return "/curvePoint/add.html";
 	}
 
+	/**
+	 * Intercepts the post request of the curve point creation form
+	 * @param curvePoint : data of the CurvePoint to create
+	 * @param bindingResult : serves as result holder
+	 * @param model : defines a holder for model attributes
+     * @return Return the curve point list template or redirect to the curve point creation form
+	 */
 	@PostMapping("/curvePoint/validate")
 	public String validate(@Valid CurvePoint curvePoint, BindingResult bindingResult, Model model) {
 		logger.info("validate(" + curvePoint + "," + bindingResult + "," + model + ")");
@@ -68,6 +91,12 @@ public class CurvePointController {
 		return "/curvePoint/add.html";
 	}
 
+	/**
+	 * Intercepts the get request of the curve point update form
+	 * @param id : id of the curve point to update
+	 * @param model : defines a holder for model attributes
+     * @return Return the curve point update form template
+	 */
 	@GetMapping("/curvePoint/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		logger.info("showUpdateForm(" + id + "," + model + ")");
@@ -77,6 +106,14 @@ public class CurvePointController {
 		return "/curvePoint/update.html";
 	}
 
+	/**
+	 * Intercepts the post request of the curve point update form
+	 * @param id : id of the curve point to update
+	 * @param curvePoint : data of the CurvePoint to update
+	 * @param bindingResult : serves as result holder
+	 * @param model : defines a holder for model attributes
+     * @return Return the curve point list template or redirect to the curve point update form
+	 */
 	@PostMapping("/curvePoint/update/{id}")
 	public String updateCurvePoint(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
 			BindingResult bindingResult, Model model) {
@@ -92,6 +129,12 @@ public class CurvePointController {
 		return "/curvePoint/update.html";
 	}
 
+	/**
+	 * Intercepts the get request of the curve point delete
+	 * @param id : id of the curve point to delete
+	 * @param model : defines a holder for model attributes
+     * @return Return the curve point list template
+	 */
 	@GetMapping("/curvePoint/delete/{id}")
 	public String deleteCurvePoint(@PathVariable("id") Integer id, Model model) {
 		logger.info("deleteCurvePoint(" + id + "," + model + ")");

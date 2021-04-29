@@ -14,6 +14,11 @@ public class HomeController {
 
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
+	/**
+	 * Intercepts the request of the home page
+	 * @param model : defines a holder for model attributes
+     * @return The home template
+	 */
 	@RequestMapping("/")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
@@ -21,6 +26,11 @@ public class HomeController {
 		return "/home.html";
 	}
 
+	/**
+	 * Intercepts the request of the administrator home page
+	 * @param model : defines a holder for model attributes
+     * @return The bid list template
+	 */
 	@RequestMapping("/admin/home")
 	public String adminHome(Model model) {
 		logger.info("adminHome(" + model + ")");

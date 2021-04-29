@@ -20,12 +20,19 @@ public class RuleService implements RuleServiceInterface {
 
 	private RuleRepositoryInterface ruleRepositoryInterface;
 
+	/**
+	 * Creates a new RuleService
+	 */
 	public RuleService() {
 		logger.info("RuleService()");
 
 		ruleRepositoryInterface = new RuleRepository();
 	}
 
+	/**
+	 * Creates a new RuleService with the specified RuleRepositoryInterface
+	 * @param ruleRepositoryInterface : repository that this service will use
+	 */
 	public RuleService(RuleRepositoryInterface ruleRepositoryInterface) {
 		logger.info("RuleService(" + ruleRepositoryInterface + ")");
 

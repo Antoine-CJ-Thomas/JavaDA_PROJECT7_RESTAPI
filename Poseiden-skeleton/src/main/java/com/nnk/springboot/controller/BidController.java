@@ -25,19 +25,31 @@ public class BidController {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private BidServiceInterface bidServiceInterface;
-
+	
+	/**
+	 * Creates a new BidController
+	 */
 	public BidController() {
 		logger.info("BidController()");
 
 		bidServiceInterface = new BidService();
 	}
 
+	/**
+	 * Creates a new BidController with the specified BidServiceInterface
+	 * @param bidServiceInterface : service that this controller will use
+	 */
 	public BidController(BidServiceInterface bidServiceInterface) {
 		logger.info("BidController(" + bidServiceInterface + ")");
 
 		this.bidServiceInterface = bidServiceInterface;
 	}
 
+	/**
+	 * Intercepts the request of the bid list table
+	 * @param model : defines a holder for model attributes
+     * @return The bid list template
+	 */
 	@RequestMapping("/bidList/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
@@ -47,6 +59,11 @@ public class BidController {
 		return "/bidList/list.html";
 	}
 
+	/**
+	 * Intercepts the get request of the bid creation form
+	 * @param bid : data of the Bid to create
+     * @return The bid creation form template
+	 */
 	@GetMapping("/bidList/add")
 	public String addBidForm(Bid bid) {
 		logger.info("addBidForm(" + bid + ")");
@@ -54,6 +71,13 @@ public class BidController {
 		return "/bidList/add.html";
 	}
 
+	/**
+	 * Intercepts the post request of the bid creation form
+	 * @param bid : data of the Bid to create
+	 * @param bindingResult : serves as result holder
+	 * @param model : defines a holder for model attributes
+     * @return Return the bid list template or redirect to the bid creation form
+	 */
 	@PostMapping("/bidList/validate")
 	public String validate(@Valid Bid bid, BindingResult bindingResult, Model model) {
 		logger.info("validate(" + bid + "," + bindingResult + "," + model + ")");
@@ -68,6 +92,12 @@ public class BidController {
 		return "/bidList/add.html";
 	}
 
+	/**
+	 * Intercepts the get request of the bid update form
+	 * @param id : id of the bid to update
+	 * @param model : defines a holder for model attributes
+     * @return Return the bid update form template
+	 */
 	@GetMapping("/bidList/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		logger.info("showUpdateForm(" + id + "," + model + ")");
@@ -77,6 +107,14 @@ public class BidController {
 		return "/bidList/update.html";
 	}
 
+	/**
+	 * Intercepts the post request of the bid update form
+	 * @param id : id of the bid to update
+	 * @param bid : data of the Bid to update
+	 * @param bindingResult : serves as result holder
+	 * @param model : defines a holder for model attributes
+     * @return Return the bid list template or redirect to the bid update form
+	 */
 	@PostMapping("/bidList/update/{id}")
 	public String updateBid(@PathVariable("id") Integer id, @Valid Bid bid, BindingResult bindingResult, Model model) {
 		logger.info("updateBid(" + id + "," + bid + "," + bindingResult + "," + model + ")");
@@ -91,6 +129,12 @@ public class BidController {
 		return "/bidList/update.html";
 	}
 
+	/**
+	 * Intercepts the get request of the bid delete
+	 * @param id : id of the bid to delete
+	 * @param model : defines a holder for model attributes
+     * @return Return the bid list template
+	 */
 	@GetMapping("/bidList/delete/{id}")
 	public String deleteBid(@PathVariable("id") Integer id, Model model) {
 		logger.info("deleteBid(" + id + "," + model + ")");

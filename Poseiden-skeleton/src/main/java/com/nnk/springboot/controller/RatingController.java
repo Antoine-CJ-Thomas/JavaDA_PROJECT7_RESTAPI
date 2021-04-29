@@ -25,19 +25,31 @@ public class RatingController {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private RatingServiceInterface ratingServiceInterface;
-
+	
+	/**
+	 * Creates a new RatingController
+	 */
 	public RatingController() {
 		logger.info("RatingController()");
 
 		ratingServiceInterface = new RatingService();
 	}
 
+	/**
+	 * Creates a new RatingController with the specified RatingServiceInterface
+	 * @param ratingServiceInterface : service that this controller will use
+	 */
 	public RatingController(RatingServiceInterface ratingServiceInterface) {
 		logger.info("RatingController(" + ratingServiceInterface + ")");
 
 		this.ratingServiceInterface = ratingServiceInterface;
 	}
 
+	/**
+	 * Intercepts the request of the rating list table
+	 * @param model : defines a holder for model attributes
+     * @return The rating list template
+	 */
 	@RequestMapping("/rating/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
@@ -47,6 +59,11 @@ public class RatingController {
 		return "/rating/list.html";
 	}
 
+	/**
+	 * Intercepts the get request of the rating creation form
+	 * @param rating : data of the Rating to create
+     * @return The rating creation form template
+	 */
 	@GetMapping("/rating/add")
 	public String addRatingForm(Rating rating) {
 		logger.info("addRatingForm(" + rating + ")");
@@ -54,6 +71,13 @@ public class RatingController {
 		return "/rating/add.html";
 	}
 
+	/**
+	 * Intercepts the post request of the rating creation form
+	 * @param rating : data of the Rating to create
+	 * @param bindingResult : serves as result holder
+	 * @param model : defines a holder for model attributes
+     * @return Return the rating list template or redirect to the rating creation form
+	 */
 	@PostMapping("/rating/validate")
 	public String validate(@Valid Rating rating, BindingResult bindingResult, Model model) {
 		logger.info("validate(" + rating + "," + bindingResult + "," + model + ")");
@@ -68,6 +92,12 @@ public class RatingController {
 		return "/rating/add.html";
 	}
 
+	/**
+	 * Intercepts the get request of the rating update form
+	 * @param id : id of the rating to update
+	 * @param model : defines a holder for model attributes
+     * @return Return the rating update form template
+	 */
 	@GetMapping("/rating/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		logger.info("showUpdateForm(" + id + "," + model + ")");
@@ -77,6 +107,14 @@ public class RatingController {
 		return "/rating/update.html";
 	}
 
+	/**
+	 * Intercepts the post request of the rating update form
+	 * @param id : id of the rating to update
+	 * @param rating : data of the Rating to update
+	 * @param bindingResult : serves as result holder
+	 * @param model : defines a holder for model attributes
+     * @return Return the rating list template or redirect to the rating update form
+	 */
 	@PostMapping("/rating/update/{id}")
 	public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating, BindingResult bindingResult,
 			Model model) {
@@ -92,6 +130,12 @@ public class RatingController {
 		return "/rating/update.html";
 	}
 
+	/**
+	 * Intercepts the get request of the rating delete
+	 * @param id : id of the rating to delete
+	 * @param model : defines a holder for model attributes
+     * @return Return the rating list template
+	 */
 	@GetMapping("/rating/delete/{id}")
 	public String deleteRating(@PathVariable("id") Integer id, Model model) {
 		logger.info("deleteRating(" + id + "," + model + ")");

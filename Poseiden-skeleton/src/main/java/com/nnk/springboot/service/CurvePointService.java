@@ -20,12 +20,19 @@ public class CurvePointService implements CurvePointServiceInterface {
 
 	private CurvePointRepositoryInterface curvePointRepositoryInterface;
 
+	/**
+	 * Creates a new CurvePointService
+	 */
 	public CurvePointService() {
 		logger.info("CurvePointService()");
 
 		curvePointRepositoryInterface = new CurvePointRepository();
 	}
 
+	/**
+	 * Creates a new CurvePointService with the specified CurvePointRepositoryInterface
+	 * @param curvePointRepositoryInterface : repository that this service will use
+	 */
 	public CurvePointService(CurvePointRepositoryInterface curvePointRepositoryInterface) {
 		logger.info("CurvePointService(" + curvePointRepositoryInterface + ")");
 

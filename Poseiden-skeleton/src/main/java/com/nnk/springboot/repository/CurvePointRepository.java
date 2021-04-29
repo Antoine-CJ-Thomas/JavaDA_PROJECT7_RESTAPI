@@ -21,13 +21,20 @@ public class CurvePointRepository implements CurvePointRepositoryInterface {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
-	
+
+	/**
+	 * Creates a new CurvePointRepository
+	 */
 	public CurvePointRepository() {
 		logger.info("CurvePointRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
-	
+
+	/**
+	 * Creates a new CurvePointRepository with the specified DataBaseConfigurationInterface
+	 * @param dataBaseConfigurationInterface : database configuration that this repository will use
+	 */
 	public CurvePointRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
 		logger.info("CurvePointRepository(" + dataBaseConfigurationInterface + ")");
 

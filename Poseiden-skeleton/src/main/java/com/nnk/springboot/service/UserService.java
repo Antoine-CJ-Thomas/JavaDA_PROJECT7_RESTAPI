@@ -20,12 +20,19 @@ public class UserService implements UserServiceInterface {
 
 	private UserRepositoryInterface userRepositoryInterface;
 
+	/**
+	 * Creates a new UserService
+	 */
 	public UserService() {
 		logger.info("UserService()");
 
 		userRepositoryInterface = new UserRepository();
 	}
 
+	/**
+	 * Creates a new UserService with the specified UserRepositoryInterface
+	 * @param userRepositoryInterface : repository that this service will use
+	 */
 	public UserService(UserRepositoryInterface userRepositoryInterface) {
 		logger.info("UserService(" + userRepositoryInterface + ")");
 

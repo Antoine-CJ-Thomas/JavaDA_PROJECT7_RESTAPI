@@ -25,19 +25,31 @@ public class RuleController {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private RuleServiceInterface ruleServiceInterface;
-
+	
+	/**
+	 * Creates a new RuleController
+	 */
 	public RuleController() {
 		logger.info("RuleController()");
 
 		ruleServiceInterface = new RuleService();
 	}
 
+	/**
+	 * Creates a new RuleController with the specified RuleServiceInterface
+	 * @param ruleServiceInterface : service that this controller will use
+	 */
 	public RuleController(RuleServiceInterface ruleServiceInterface) {
 		logger.info("RuleController(" + ruleServiceInterface + ")");
 
 		this.ruleServiceInterface = ruleServiceInterface;
 	}
 
+	/**
+	 * Intercepts the request of the rule list table
+	 * @param model : defines a holder for model attributes
+     * @return The rule list template
+	 */
 	@RequestMapping("/ruleName/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
@@ -47,6 +59,11 @@ public class RuleController {
 		return "/ruleName/list.html";
 	}
 
+	/**
+	 * Intercepts the get request of the rule creation form
+	 * @param rule : data of the Rule to create
+     * @return The rule creation form template
+	 */
 	@GetMapping("/ruleName/add")
 	public String addRuleForm(Rule rule) {
 		logger.info("addRuleForm(" + rule + ")");
@@ -54,6 +71,13 @@ public class RuleController {
 		return "/ruleName/add.html";
 	}
 
+	/**
+	 * Intercepts the post request of the rule creation form
+	 * @param rule : data of the Rule to create
+	 * @param bindingResult : serves as result holder
+	 * @param model : defines a holder for model attributes
+     * @return Return the rule list template or redirect to the rule creation form
+	 */
 	@PostMapping("/ruleName/validate")
 	public String validate(@Valid Rule rule, BindingResult bindingResult, Model model) {
 		logger.info("validate(" + rule + "," + bindingResult + "," + model + ")");
@@ -68,6 +92,12 @@ public class RuleController {
 		return "/ruleName/add.html";
 	}
 
+	/**
+	 * Intercepts the get request of the rule update form
+	 * @param id : id of the rule to update
+	 * @param model : defines a holder for model attributes
+     * @return Return the rule update form template
+	 */
 	@GetMapping("/ruleName/update/{id}")
 	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		logger.info("showUpdateForm(" + id + "," + model + ")");
@@ -77,6 +107,14 @@ public class RuleController {
 		return "/ruleName/update.html";
 	}
 
+	/**
+	 * Intercepts the post request of the rule update form
+	 * @param id : id of the rule to update
+	 * @param rule : data of the Rule to update
+	 * @param bindingResult : serves as result holder
+	 * @param model : defines a holder for model attributes
+     * @return Return the rule list template or redirect to the rule update form
+	 */
 	@PostMapping("/ruleName/update/{id}")
 	public String updateRule(@PathVariable("id") Integer id, @Valid Rule rule, BindingResult bindingResult,
 			Model model) {
@@ -92,6 +130,12 @@ public class RuleController {
 		return "/ruleName/update.html";
 	}
 
+	/**
+	 * Intercepts the get request of the rule delete
+	 * @param id : id of the rule to delete
+	 * @param model : defines a holder for model attributes
+     * @return Return the rule list template
+	 */
 	@GetMapping("/ruleName/delete/{id}")
 	public String deleteRule(@PathVariable("id") Integer id, Model model) {
 		logger.info("deleteRule(" + id + "," + model + ")");

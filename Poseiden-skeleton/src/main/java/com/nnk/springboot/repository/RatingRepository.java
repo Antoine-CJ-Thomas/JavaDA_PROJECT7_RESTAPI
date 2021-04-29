@@ -21,13 +21,20 @@ public class RatingRepository implements RatingRepositoryInterface {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
-	
+
+	/**
+	 * Creates a new RatingRepository
+	 */
 	public RatingRepository() {
 		logger.info("RatingRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
-	
+
+	/**
+	 * Creates a new RatingRepository with the specified DataBaseConfigurationInterface
+	 * @param dataBaseConfigurationInterface : database configuration that this repository will use
+	 */
 	public RatingRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
 		logger.info("RatingRepository(" + dataBaseConfigurationInterface + ")");
 

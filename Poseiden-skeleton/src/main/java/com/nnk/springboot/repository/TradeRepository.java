@@ -21,13 +21,20 @@ public class TradeRepository implements TradeRepositoryInterface {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private DataBaseConfigurationInterface dataBaseConfigurationInterface;
-	
+
+	/**
+	 * Creates a new TradeRepository
+	 */
 	public TradeRepository() {
 		logger.info("TradeRepository()");
 		
 		dataBaseConfigurationInterface = new DataBaseConfigurationMySql();
 	}
-	
+
+	/**
+	 * Creates a new TradeRepository with the specified DataBaseConfigurationInterface
+	 * @param dataBaseConfigurationInterface : database configuration that this repository will use
+	 */
 	public TradeRepository(DataBaseConfigurationInterface dataBaseConfigurationInterface) {
 		logger.info("TradeRepository(" + dataBaseConfigurationInterface + ")");
 

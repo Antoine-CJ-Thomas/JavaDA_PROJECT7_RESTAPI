@@ -21,12 +21,19 @@ public class LoginService implements UserDetailsService {
 
 	private UserRepositoryInterface userRepositoryInterface;
 
+	/**
+	 * Creates a new LoginService
+	 */
 	public LoginService() {
 		logger.info("LoginService()");
 
 		userRepositoryInterface = new UserRepository();
 	}
 
+	/**
+	 * Creates a new LoginService with the specified UserRepositoryInterface
+	 * @param userRepositoryInterface : repository that this service will use
+	 */
 	public LoginService(UserRepositoryInterface userRepositoryInterface) {
 		logger.info("LoginService(" + userRepositoryInterface + ")");
 

@@ -20,12 +20,19 @@ public class TradeService implements TradeServiceInterface {
 
 	private TradeRepositoryInterface tradeRepositoryInterface;
 
+	/**
+	 * Creates a new TradeService
+	 */
 	public TradeService() {
 		logger.info("TradeService()");
 
 		tradeRepositoryInterface = new TradeRepository();
 	}
 
+	/**
+	 * Creates a new TradeService with the specified TradeRepositoryInterface
+	 * @param tradeRepositoryInterface : repository that this service will use
+	 */
 	public TradeService(TradeRepositoryInterface tradeRepositoryInterface) {
 		logger.info("TradeService(" + tradeRepositoryInterface + ")");
 

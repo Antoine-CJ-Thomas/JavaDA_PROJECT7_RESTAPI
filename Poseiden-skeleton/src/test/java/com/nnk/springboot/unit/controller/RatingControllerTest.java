@@ -141,6 +141,6 @@ public class RatingControllerTest {
     	//WHEN
 		    	
     	//THEN
-    	Assert.assertTrue(RatingController.deleteRating(1, model).equals("/redirect:/rating/list"));
+    	Assert.assertTrue(RatingController.deleteRating(1, model).equals("redirect:/rating/list"));
     }
 }

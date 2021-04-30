@@ -42,7 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.formLogin()
 			.defaultSuccessUrl("/bidList/list", true);
-
+		
+		http.oauth2Login()
+			.defaultSuccessUrl("/bidList/list", true);
+		
 		http.logout()
 			.logoutUrl("/app-logout").logoutSuccessUrl("/").invalidateHttpSession(true);
 

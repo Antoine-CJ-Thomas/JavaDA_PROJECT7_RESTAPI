@@ -1,6 +1,8 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.domain.Rule;
+import com.nnk.springboot.service.LoginService;
+import com.nnk.springboot.service.LoginServiceInterface;
 import com.nnk.springboot.service.RuleService;
 import com.nnk.springboot.service.RuleServiceInterface;
 
@@ -25,6 +27,7 @@ public class RuleController {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private RuleServiceInterface ruleServiceInterface;
+	private LoginServiceInterface loginServiceInterface;
 	
 	/**
 	 * Creates a new RuleController
@@ -33,16 +36,19 @@ public class RuleController {
 		logger.info("RuleController()");
 
 		ruleServiceInterface = new RuleService();
+		loginServiceInterface = new LoginService();
 	}
 
 	/**
-	 * Creates a new RuleController with the specified RuleServiceInterface
-	 * @param ruleServiceInterface : service that this controller will use
+	 * Creates a new RuleController with the specified RuleServiceInterface and LoginServiceInterface
+	 * @param ruleServiceInterface : rule service that this controller will use
+	 * @param loginServiceInterface : login service that this controller will use
 	 */
-	public RuleController(RuleServiceInterface ruleServiceInterface) {
-		logger.info("RuleController(" + ruleServiceInterface + ")");
+	public RuleController(RuleServiceInterface ruleServiceInterface, LoginServiceInterface loginServiceInterface) {
+		logger.info("RuleController(" + ruleServiceInterface + "," + loginServiceInterface + ")");
 
 		this.ruleServiceInterface = ruleServiceInterface;
+		this.loginServiceInterface = loginServiceInterface;
 	}
 
 	/**
@@ -53,6 +59,8 @@ public class RuleController {
 	@RequestMapping("/ruleName/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
+
+		model.addAttribute("username", loginServiceInterface.getUsername());
 
 		model.addAttribute("ruleList", ruleServiceInterface.readRuleList());
 

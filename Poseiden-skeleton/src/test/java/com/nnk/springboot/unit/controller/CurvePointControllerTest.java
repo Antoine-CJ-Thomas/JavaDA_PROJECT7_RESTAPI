@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import com.nnk.springboot.controller.CurvePointController;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.service.CurvePointServiceInterface;
+import com.nnk.springboot.service.LoginServiceInterface;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
@@ -25,6 +26,9 @@ public class CurvePointControllerTest {
 	
 	@Mock
 	private CurvePointServiceInterface curvePointServiceInterface;
+	
+	@Mock
+	private LoginServiceInterface loginServiceInterface;
 	
 	@Mock
 	private BindingResult bindingResult;
@@ -42,7 +46,7 @@ public class CurvePointControllerTest {
     public void home() {
 		
 		//GIVEN
-    	curvePointController = new CurvePointController(curvePointServiceInterface);
+    	curvePointController = new CurvePointController(curvePointServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(curvePointServiceInterface.readCurvePointList()).thenReturn(curvePointList);
@@ -55,7 +59,7 @@ public class CurvePointControllerTest {
     public void addCurvePointForm() {
 		
 		//GIVEN
-    	curvePointController = new CurvePointController(curvePointServiceInterface);
+    	curvePointController = new CurvePointController(curvePointServiceInterface, loginServiceInterface);
 
     	//WHEN
 		    	
@@ -67,7 +71,7 @@ public class CurvePointControllerTest {
     public void validate_OK() {
 		
 		//GIVEN
-    	curvePointController = new CurvePointController(curvePointServiceInterface);
+    	curvePointController = new CurvePointController(curvePointServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -80,7 +84,7 @@ public class CurvePointControllerTest {
     public void validate_NOK() {
 		
 		//GIVEN
-    	curvePointController = new CurvePointController(curvePointServiceInterface);
+    	curvePointController = new CurvePointController(curvePointServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -93,7 +97,7 @@ public class CurvePointControllerTest {
     public void showUpdateForm() {
 		
 		//GIVEN
-    	curvePointController = new CurvePointController(curvePointServiceInterface);
+    	curvePointController = new CurvePointController(curvePointServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(curvePointServiceInterface.readCurvePoint(1)).thenReturn(curvePoint);
@@ -106,7 +110,7 @@ public class CurvePointControllerTest {
     public void updateCurvePoint_OK() {
 		
 		//GIVEN
-    	curvePointController = new CurvePointController(curvePointServiceInterface);
+    	curvePointController = new CurvePointController(curvePointServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -119,7 +123,7 @@ public class CurvePointControllerTest {
     public void updateCurvePoint_NOK() {
 		
 		//GIVEN
-    	curvePointController = new CurvePointController(curvePointServiceInterface);
+    	curvePointController = new CurvePointController(curvePointServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -132,7 +136,7 @@ public class CurvePointControllerTest {
     public void deleteCurvePoint() {
 		
 		//GIVEN
-    	curvePointController = new CurvePointController(curvePointServiceInterface);
+    	curvePointController = new CurvePointController(curvePointServiceInterface, loginServiceInterface);
 
     	//WHEN
 		    	

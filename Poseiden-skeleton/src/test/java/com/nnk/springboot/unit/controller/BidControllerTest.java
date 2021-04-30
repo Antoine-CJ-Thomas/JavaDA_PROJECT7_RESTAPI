@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import com.nnk.springboot.controller.BidController;
 import com.nnk.springboot.domain.Bid;
 import com.nnk.springboot.service.BidServiceInterface;
+import com.nnk.springboot.service.LoginServiceInterface;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
@@ -25,6 +26,9 @@ public class BidControllerTest {
 	
 	@Mock
 	private BidServiceInterface bidServiceInterface;
+	
+	@Mock
+	private LoginServiceInterface loginServiceInterface;
 	
 	@Mock
 	private BindingResult bindingResult;
@@ -42,7 +46,7 @@ public class BidControllerTest {
     public void home() {
 		
 		//GIVEN
-    	bidController = new BidController(bidServiceInterface);
+    	bidController = new BidController(bidServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bidServiceInterface.readBidList()).thenReturn(bidList);
@@ -55,7 +59,7 @@ public class BidControllerTest {
     public void addBidForm() {
 		
 		//GIVEN
-    	bidController = new BidController(bidServiceInterface);
+    	bidController = new BidController(bidServiceInterface, loginServiceInterface);
 
     	//WHEN
 		    	
@@ -67,7 +71,7 @@ public class BidControllerTest {
     public void validate_OK() {
 		
 		//GIVEN
-    	bidController = new BidController(bidServiceInterface);
+    	bidController = new BidController(bidServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -80,7 +84,7 @@ public class BidControllerTest {
     public void validate_NOK() {
 		
 		//GIVEN
-    	bidController = new BidController(bidServiceInterface);
+    	bidController = new BidController(bidServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -93,7 +97,7 @@ public class BidControllerTest {
     public void showUpdateForm() {
 		
 		//GIVEN
-    	bidController = new BidController(bidServiceInterface);
+    	bidController = new BidController(bidServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bidServiceInterface.readBid(1)).thenReturn(bid);
@@ -106,7 +110,7 @@ public class BidControllerTest {
     public void updateBid_OK() {
 		
 		//GIVEN
-    	bidController = new BidController(bidServiceInterface);
+    	bidController = new BidController(bidServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -119,7 +123,7 @@ public class BidControllerTest {
     public void updateBid_NOK() {
 		
 		//GIVEN
-    	bidController = new BidController(bidServiceInterface);
+    	bidController = new BidController(bidServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -132,7 +136,7 @@ public class BidControllerTest {
     public void deleteBid() {
 		
 		//GIVEN
-    	bidController = new BidController(bidServiceInterface);
+    	bidController = new BidController(bidServiceInterface, loginServiceInterface);
 
     	//WHEN
 		    	

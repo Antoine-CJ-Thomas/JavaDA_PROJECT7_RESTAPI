@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 
 import com.nnk.springboot.controller.RatingController;
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.service.LoginServiceInterface;
 import com.nnk.springboot.service.RatingServiceInterface;
 
 @SpringBootTest
@@ -25,6 +26,9 @@ public class RatingControllerTest {
 	
 	@Mock
 	private RatingServiceInterface ratingServiceInterface;
+	
+	@Mock
+	private LoginServiceInterface loginServiceInterface;
 	
 	@Mock
 	private BindingResult bindingResult;
@@ -42,7 +46,7 @@ public class RatingControllerTest {
     public void home() {
 		
 		//GIVEN
-    	RatingController = new RatingController(ratingServiceInterface);
+    	RatingController = new RatingController(ratingServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(ratingServiceInterface.readRatingList()).thenReturn(ratingList);
@@ -55,7 +59,7 @@ public class RatingControllerTest {
     public void addRatingForm() {
 		
 		//GIVEN
-    	RatingController = new RatingController(ratingServiceInterface);
+    	RatingController = new RatingController(ratingServiceInterface, loginServiceInterface);
 
     	//WHEN
 		    	
@@ -67,7 +71,7 @@ public class RatingControllerTest {
     public void validate_OK() {
 		
 		//GIVEN
-    	RatingController = new RatingController(ratingServiceInterface);
+    	RatingController = new RatingController(ratingServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -80,7 +84,7 @@ public class RatingControllerTest {
     public void validate_NOK() {
 		
 		//GIVEN
-    	RatingController = new RatingController(ratingServiceInterface);
+    	RatingController = new RatingController(ratingServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -93,7 +97,7 @@ public class RatingControllerTest {
     public void showUpdateForm() {
 		
 		//GIVEN
-    	RatingController = new RatingController(ratingServiceInterface);
+    	RatingController = new RatingController(ratingServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(ratingServiceInterface.readRating(1)).thenReturn(rating);
@@ -106,7 +110,7 @@ public class RatingControllerTest {
     public void updateRating_OK() {
 		
 		//GIVEN
-    	RatingController = new RatingController(ratingServiceInterface);
+    	RatingController = new RatingController(ratingServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -119,7 +123,7 @@ public class RatingControllerTest {
     public void updateRating_NOK() {
 		
 		//GIVEN
-    	RatingController = new RatingController(ratingServiceInterface);
+    	RatingController = new RatingController(ratingServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -132,7 +136,7 @@ public class RatingControllerTest {
     public void deleteRating() {
 		
 		//GIVEN
-    	RatingController = new RatingController(ratingServiceInterface);
+    	RatingController = new RatingController(ratingServiceInterface, loginServiceInterface);
 
     	//WHEN
 		    	

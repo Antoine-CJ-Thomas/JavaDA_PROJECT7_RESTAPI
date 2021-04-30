@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 
 import com.nnk.springboot.controller.RuleController;
 import com.nnk.springboot.domain.Rule;
+import com.nnk.springboot.service.LoginServiceInterface;
 import com.nnk.springboot.service.RuleServiceInterface;
 
 @SpringBootTest
@@ -25,6 +26,9 @@ public class RuleControllerTest {
 	
 	@Mock
 	private RuleServiceInterface RuleServiceInterface;
+	
+	@Mock
+	private LoginServiceInterface loginServiceInterface;
 	
 	@Mock
 	private BindingResult bindingResult;
@@ -42,7 +46,7 @@ public class RuleControllerTest {
     public void home() {
 		
 		//GIVEN
-    	RuleController = new RuleController(RuleServiceInterface);
+    	RuleController = new RuleController(RuleServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(RuleServiceInterface.readRuleList()).thenReturn(RuleList);
@@ -55,7 +59,7 @@ public class RuleControllerTest {
     public void addRuleForm() {
 		
 		//GIVEN
-    	RuleController = new RuleController(RuleServiceInterface);
+    	RuleController = new RuleController(RuleServiceInterface, loginServiceInterface);
 
     	//WHEN
 		    	
@@ -67,7 +71,7 @@ public class RuleControllerTest {
     public void validate_OK() {
 		
 		//GIVEN
-    	RuleController = new RuleController(RuleServiceInterface);
+    	RuleController = new RuleController(RuleServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -80,7 +84,7 @@ public class RuleControllerTest {
     public void validate_NOK() {
 		
 		//GIVEN
-    	RuleController = new RuleController(RuleServiceInterface);
+    	RuleController = new RuleController(RuleServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -93,7 +97,7 @@ public class RuleControllerTest {
     public void showUpdateForm() {
 		
 		//GIVEN
-    	RuleController = new RuleController(RuleServiceInterface);
+    	RuleController = new RuleController(RuleServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(RuleServiceInterface.readRule(1)).thenReturn(Rule);
@@ -106,7 +110,7 @@ public class RuleControllerTest {
     public void updateRule_OK() {
 		
 		//GIVEN
-    	RuleController = new RuleController(RuleServiceInterface);
+    	RuleController = new RuleController(RuleServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -119,7 +123,7 @@ public class RuleControllerTest {
     public void updateRule_NOK() {
 		
 		//GIVEN
-    	RuleController = new RuleController(RuleServiceInterface);
+    	RuleController = new RuleController(RuleServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -132,7 +136,7 @@ public class RuleControllerTest {
     public void deleteRule() {
 		
 		//GIVEN
-    	RuleController = new RuleController(RuleServiceInterface);
+    	RuleController = new RuleController(RuleServiceInterface, loginServiceInterface);
 
     	//WHEN
 		    	

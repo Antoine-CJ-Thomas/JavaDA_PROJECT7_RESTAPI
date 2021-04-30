@@ -3,6 +3,8 @@ package com.nnk.springboot.controller;
 import com.nnk.springboot.domain.Bid;
 import com.nnk.springboot.service.BidService;
 import com.nnk.springboot.service.BidServiceInterface;
+import com.nnk.springboot.service.LoginService;
+import com.nnk.springboot.service.LoginServiceInterface;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,8 +25,9 @@ import javax.validation.Valid;
 public class BidController {
 
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
-
+	
 	private BidServiceInterface bidServiceInterface;
+	private LoginServiceInterface loginServiceInterface;
 	
 	/**
 	 * Creates a new BidController
@@ -33,16 +36,19 @@ public class BidController {
 		logger.info("BidController()");
 
 		bidServiceInterface = new BidService();
+		loginServiceInterface = new LoginService();
 	}
 
 	/**
-	 * Creates a new BidController with the specified BidServiceInterface
-	 * @param bidServiceInterface : service that this controller will use
+	 * Creates a new BidController with the specified BidServiceInterface and LoginServiceInterface
+	 * @param bidServiceInterface : bid service that this controller will use
+	 * @param loginServiceInterface : login service that this controller will use
 	 */
-	public BidController(BidServiceInterface bidServiceInterface) {
-		logger.info("BidController(" + bidServiceInterface + ")");
+	public BidController(BidServiceInterface bidServiceInterface, LoginServiceInterface loginServiceInterface) {
+		logger.info("BidController(" + bidServiceInterface + "," + loginServiceInterface + ")");
 
 		this.bidServiceInterface = bidServiceInterface;
+		this.loginServiceInterface = loginServiceInterface;
 	}
 
 	/**
@@ -53,6 +59,8 @@ public class BidController {
 	@RequestMapping("/bidList/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
+
+		model.addAttribute("username", loginServiceInterface.getUsername());
 
 		model.addAttribute("bidList", bidServiceInterface.readBidList());
 

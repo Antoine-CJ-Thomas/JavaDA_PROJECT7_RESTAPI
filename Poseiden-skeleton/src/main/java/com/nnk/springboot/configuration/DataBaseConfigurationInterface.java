@@ -11,7 +11,6 @@ public interface DataBaseConfigurationInterface {
 	/**
 	 * Execute all updates from a query list
 	 * @param queryList : list of the queries to execute
-     * @return The ResultSet of executed updates
 	 */
     public void executeUpdate(ArrayList<String> queryList);
 	

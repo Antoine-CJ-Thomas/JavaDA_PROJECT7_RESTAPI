@@ -1,6 +1,8 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.service.LoginService;
+import com.nnk.springboot.service.LoginServiceInterface;
 import com.nnk.springboot.service.RatingService;
 import com.nnk.springboot.service.RatingServiceInterface;
 
@@ -25,6 +27,7 @@ public class RatingController {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private RatingServiceInterface ratingServiceInterface;
+	private LoginServiceInterface loginServiceInterface;
 	
 	/**
 	 * Creates a new RatingController
@@ -33,16 +36,19 @@ public class RatingController {
 		logger.info("RatingController()");
 
 		ratingServiceInterface = new RatingService();
+		loginServiceInterface = new LoginService();
 	}
 
 	/**
-	 * Creates a new RatingController with the specified RatingServiceInterface
-	 * @param ratingServiceInterface : service that this controller will use
+	 * Creates a new RatingController with the specified RatingServiceInterface and LoginServiceInterface
+	 * @param ratingServiceInterface : rating service that this controller will use
+	 * @param loginServiceInterface : login service that this controller will use
 	 */
-	public RatingController(RatingServiceInterface ratingServiceInterface) {
-		logger.info("RatingController(" + ratingServiceInterface + ")");
+	public RatingController(RatingServiceInterface ratingServiceInterface, LoginServiceInterface loginServiceInterface) {
+		logger.info("RatingController(" + ratingServiceInterface + "," + loginServiceInterface + ")");
 
 		this.ratingServiceInterface = ratingServiceInterface;
+		this.loginServiceInterface = loginServiceInterface;
 	}
 
 	/**
@@ -53,6 +59,8 @@ public class RatingController {
 	@RequestMapping("/rating/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
+
+		model.addAttribute("username", loginServiceInterface.getUsername());
 
 		model.addAttribute("ratingList", ratingServiceInterface.readRatingList());
 

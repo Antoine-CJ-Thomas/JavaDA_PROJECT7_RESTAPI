@@ -3,6 +3,8 @@ package com.nnk.springboot.controller;
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.service.CurvePointService;
 import com.nnk.springboot.service.CurvePointServiceInterface;
+import com.nnk.springboot.service.LoginService;
+import com.nnk.springboot.service.LoginServiceInterface;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +27,7 @@ public class CurvePointController {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private CurvePointServiceInterface curvePointServiceInterface;
+	private LoginServiceInterface loginServiceInterface;
 	
 	/**
 	 * Creates a new CurvePointController
@@ -33,15 +36,18 @@ public class CurvePointController {
 		logger.info("CurvePointController()");
 
 		curvePointServiceInterface = new CurvePointService();
+		loginServiceInterface = new LoginService();
 	}
 	/**
-	 * Creates a new CurvePointController with the specified CurvePointServiceInterface
-	 * @param curvePointServiceInterface : service that this controller will use
+	 * Creates a new CurvePointController with the specified CurvePointServiceInterface and LoginServiceInterface
+	 * @param curvePointServiceInterface : curve point service that this controller will use
+	 * @param loginServiceInterface : login service that this controller will use
 	 */
-	public CurvePointController(CurvePointServiceInterface curvePointServiceInterface) {
-		logger.info("CurvePointController(" + curvePointServiceInterface + ")");
+	public CurvePointController(CurvePointServiceInterface curvePointServiceInterface, LoginServiceInterface loginServiceInterface) {
+		logger.info("CurvePointController(" + curvePointServiceInterface + "," + loginServiceInterface + ")");
 
 		this.curvePointServiceInterface = curvePointServiceInterface;
+		this.loginServiceInterface = loginServiceInterface;
 	}
 
 	/**
@@ -52,6 +58,8 @@ public class CurvePointController {
 	@RequestMapping("/curvePoint/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
+
+		model.addAttribute("username", loginServiceInterface.getUsername());
 
 		model.addAttribute("curvePointList", curvePointServiceInterface.readCurvePointList());
 

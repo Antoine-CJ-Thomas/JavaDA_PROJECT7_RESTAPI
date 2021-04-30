@@ -1,6 +1,8 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.service.LoginService;
+import com.nnk.springboot.service.LoginServiceInterface;
 import com.nnk.springboot.service.TradeService;
 import com.nnk.springboot.service.TradeServiceInterface;
 
@@ -25,6 +27,7 @@ public class TradeController {
 	private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
 	private TradeServiceInterface tradeServiceInterface;
+	private LoginServiceInterface loginServiceInterface;
 	
 	/**
 	 * Creates a new TradeController
@@ -33,16 +36,19 @@ public class TradeController {
 		logger.info("TradeController()");
 
 		tradeServiceInterface = new TradeService();
+		loginServiceInterface = new LoginService();
 	}
 
 	/**
-	 * Creates a new TradeController with the specified TradeServiceInterface
-	 * @param tradeServiceInterface : service that this controller will use
+	 * Creates a new TradeController with the specified TradeServiceInterface and LoginServiceInterface
+	 * @param tradeServiceInterface : trade service that this controller will use
+	 * @param loginServiceInterface : login service that this controller will use
 	 */
-	public TradeController(TradeServiceInterface tradeServiceInterface) {
-		logger.info("TradeController(" + tradeServiceInterface + ")");
+	public TradeController(TradeServiceInterface tradeServiceInterface, LoginServiceInterface loginServiceInterface) {
+		logger.info("TradeController(" + tradeServiceInterface + "," + loginServiceInterface + ")");
 
 		this.tradeServiceInterface = tradeServiceInterface;
+		this.loginServiceInterface = loginServiceInterface;
 	}
 
 	/**
@@ -53,6 +59,8 @@ public class TradeController {
 	@RequestMapping("/trade/list")
 	public String home(Model model) {
 		logger.info("home(" + model + ")");
+
+		model.addAttribute("username", loginServiceInterface.getUsername());
 
 		model.addAttribute("tradeList", tradeServiceInterface.readTradeList());
 

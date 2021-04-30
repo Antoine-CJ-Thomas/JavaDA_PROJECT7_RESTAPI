@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 
 import com.nnk.springboot.controller.TradeController;
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.service.LoginServiceInterface;
 import com.nnk.springboot.service.TradeServiceInterface;
 
 @SpringBootTest
@@ -25,6 +26,9 @@ public class TradeControllerTest {
 	
 	@Mock
 	private TradeServiceInterface tradeServiceInterface;
+	
+	@Mock
+	private LoginServiceInterface loginServiceInterface;
 	
 	@Mock
 	private BindingResult bindingResult;
@@ -42,7 +46,7 @@ public class TradeControllerTest {
     public void home() {
 		
 		//GIVEN
-    	tradeController = new TradeController(tradeServiceInterface);
+    	tradeController = new TradeController(tradeServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(tradeServiceInterface.readTradeList()).thenReturn(tradeList);
@@ -55,7 +59,7 @@ public class TradeControllerTest {
     public void addTradeForm() {
 		
 		//GIVEN
-    	tradeController = new TradeController(tradeServiceInterface);
+    	tradeController = new TradeController(tradeServiceInterface, loginServiceInterface);
 
     	//WHEN
 		    	
@@ -67,7 +71,7 @@ public class TradeControllerTest {
     public void validate_OK() {
 		
 		//GIVEN
-    	tradeController = new TradeController(tradeServiceInterface);
+    	tradeController = new TradeController(tradeServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -80,7 +84,7 @@ public class TradeControllerTest {
     public void validate_NOK() {
 		
 		//GIVEN
-    	tradeController = new TradeController(tradeServiceInterface);
+    	tradeController = new TradeController(tradeServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -93,7 +97,7 @@ public class TradeControllerTest {
     public void showUpdateForm() {
 		
 		//GIVEN
-    	tradeController = new TradeController(tradeServiceInterface);
+    	tradeController = new TradeController(tradeServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(tradeServiceInterface.readTrade(1)).thenReturn(trade);
@@ -106,7 +110,7 @@ public class TradeControllerTest {
     public void updateTrade_OK() {
 		
 		//GIVEN
-    	tradeController = new TradeController(tradeServiceInterface);
+    	tradeController = new TradeController(tradeServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -119,7 +123,7 @@ public class TradeControllerTest {
     public void updateTrade_NOK() {
 		
 		//GIVEN
-    	tradeController = new TradeController(tradeServiceInterface);
+    	tradeController = new TradeController(tradeServiceInterface, loginServiceInterface);
 
     	//WHEN
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -132,7 +136,7 @@ public class TradeControllerTest {
     public void deleteTrade() {
 		
 		//GIVEN
-    	tradeController = new TradeController(tradeServiceInterface);
+    	tradeController = new TradeController(tradeServiceInterface, loginServiceInterface);
 
     	//WHEN
 		    	
